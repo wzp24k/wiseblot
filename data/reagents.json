@@ -1,0 +1,3838 @@
+[
+ {
+  "id": "r-lysis-ripa",
+  "name": "RIPA Lysis Buffer",
+  "zh": "RIPA 裂解液",
+  "aliases": [
+   "RIPA buffer",
+   "RIPA 缓冲液"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Beyotime",
+   "Thermo Scientific",
+   "Sigma-Aldrich",
+   "Cell Signaling Technology"
+  ],
+  "catalogs": [
+   "P0013B",
+   "89900",
+   "R0278",
+   "9806"
+  ],
+  "storage": "2–8 °C",
+  "composition": "50 mM Tris-HCl pH 7.4; 150 mM NaCl; 1% NP-40; 0.5% sodium deoxycholate; 0.1% SDS",
+  "note": "经典强裂解液，适合常规 WB；含 0.1% SDS，不适合免疫共沉淀(IP)。使用前现加蛋白酶/磷酸酶抑制剂。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-lysis-np40",
+  "name": "NP-40 Lysis Buffer",
+  "zh": "NP-40 温和裂解液",
+  "aliases": [
+   "NP40 lysis buffer"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Beyotime",
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "P0013F",
+   "85132"
+  ],
+  "storage": "2–8 °C",
+  "composition": "20 mM Tris-HCl pH 7.5; 150 mM NaCl; 1% NP-40",
+  "note": "温和裂解，保留蛋白互作，适合 IP/Co-IP 与 WB。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-lysis-cst9803",
+  "name": "Cell Lysis Buffer (CST)",
+  "zh": "CST 细胞裂解液",
+  "aliases": [
+   "CST 9803"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Cell Signaling Technology"
+  ],
+  "catalogs": [
+   "9803"
+  ],
+  "storage": "-20 °C",
+  "composition": "20 mM Tris-HCl pH 7.5; 150 mM NaCl; 1 mM Na2EDTA; 1 mM EGTA; 1% Triton X-100; 2.5 mM sodium pyrophosphate; 1 mM beta-glycerophosphate; 1 mM Na3VO4; 1 ug/mL leupeptin",
+  "note": "CST 推荐 WB/IP 裂解液，含 Triton 与多种抑制剂成分。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-lysis-laemmli",
+  "name": "Laemmli Sample Buffer (2x)",
+  "zh": "Laemmli 上样缓冲液 2x",
+  "aliases": [
+   "Laemmli buffer"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Bio-Rad",
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "1610737",
+   "39001"
+  ],
+  "storage": "RT (密封)",
+  "composition": "4% SDS; 20% glycerol; 0.004% bromophenol blue; 125 mM Tris-HCl pH 6.8",
+  "note": "含 SDS、甘油、溴酚蓝；需按说明书加 DTT/β-ME。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-lysis-loading-4x",
+  "name": "SDS Loading Buffer (4x/5x)",
+  "zh": "SDS 蛋白上样缓冲液",
+  "aliases": [
+   "SDS sample buffer",
+   "loading buffer"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Beyotime",
+   "NEB"
+  ],
+  "catalogs": [
+   "P0015",
+   "B7703"
+  ],
+  "storage": "RT",
+  "composition": "SDS; glycerol; Tris-HCl; bromophenol blue; DTT(还原型)",
+  "note": "常规 WB 上样缓冲液，含 SDS 与示踪染料。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-lysis-nuclear",
+  "name": "Nuclear & Cytoplasmic Extraction Kit",
+  "zh": "核/胞浆蛋白提取试剂盒",
+  "aliases": [
+   "核蛋白提取试剂盒"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Beyotime"
+  ],
+  "catalogs": [
+   "P0027"
+  ],
+  "storage": "RT (kit)",
+  "composition": "Cytoplasmic buffer + nuclear buffer",
+  "note": "核蛋白 WB 前需核质分离；避免核蛋白丢失。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-lysis-membrane",
+  "name": "Membrane Protein Extraction Kit",
+  "zh": "膜蛋白提取试剂盒",
+  "aliases": [
+   "膜蛋白提取试剂盒"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Beyotime"
+  ],
+  "catalogs": [
+   "P0033"
+  ],
+  "storage": "RT (kit)",
+  "composition": "含表面活性剂的分步提取缓冲液",
+  "note": "膜蛋白 WB 推荐；可配合温和去垢剂。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-lysis-mito",
+  "name": "Mitochondrial Extraction Kit",
+  "zh": "线粒体蛋白提取试剂盒",
+  "aliases": [
+   "线粒体提取"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Beyotime"
+  ],
+  "catalogs": [
+   "C3601"
+  ],
+  "storage": "RT (kit)",
+  "composition": "细胞匀浆 + 差速离心缓冲液",
+  "note": "线粒体蛋白 WB 前富集线粒体。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-lysis-triton",
+  "name": "Triton X-100 Lysis Buffer",
+  "zh": "Triton X-100 裂解液",
+  "aliases": [
+   "Triton buffer"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Beyotime"
+  ],
+  "catalogs": [
+   "T8787",
+   "ST797"
+  ],
+  "storage": "RT",
+  "composition": "1% Triton X-100 in Tris/NaCl buffer",
+  "note": "温和裂解，适合可溶性蛋白与膜蛋白轻度提取。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-lysis-sds",
+  "name": "SDS (1%) Boiling Lysis Buffer",
+  "zh": "SDS 煮沸裂解液",
+  "aliases": [
+   "SDS lysis"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [],
+  "catalogs": [],
+  "storage": "RT",
+  "composition": "1% SDS; 10 mM Tris-HCl pH 7.4; 1 mM EDTA",
+  "note": "强变性裂解，用于难溶蛋白或磷酸化状态快速固定；需冰浴超声。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-lysis-chaps",
+  "name": "CHAPS Lysis Buffer",
+  "zh": "CHAPS 裂解液",
+  "aliases": [
+   "CHAPS"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "C3023"
+  ],
+  "storage": "RT",
+  "composition": "1% CHAPS in Tris buffer",
+  "note": "两性去垢剂，适合膜蛋白与蛋白复合物。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-lysis-urea",
+  "name": "Urea Lysis Buffer",
+  "zh": "尿素裂解液",
+  "aliases": [
+   "尿素裂解"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "U5378"
+  ],
+  "storage": "RT",
+  "composition": "8 M urea; 2% CHAPS; 50 mM Tris pH 8.0",
+  "note": "含 8 M 尿素，用于难溶/聚集蛋白；变性条件下 WB。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-pmsf",
+  "name": "PMSF",
+  "zh": "PMSF（丝氨酸蛋白酶抑制剂）",
+  "aliases": [
+   "phenylmethylsulfonyl fluoride"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Beyotime",
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "P7626",
+   "ST506",
+   "36978"
+  ],
+  "storage": "2–8 °C",
+  "composition": "1 mM in lysis buffer",
+  "note": "现配现用，水溶液 30 min 内失效；常用 1 mM。有毒，注意防护。",
+  "chem": {
+   "cid": 4784,
+   "mw": "174.19",
+   "smiles": "",
+   "inchi_key": "YBYRMVIVWMBXKQ-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-pic",
+  "name": "Protease Inhibitor Cocktail",
+  "zh": "蛋白酶抑制剂混合物",
+  "aliases": [
+   "protease cocktail",
+   "蛋白酶抑制剂"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Roche",
+   "Thermo Scientific",
+   "Beyotime"
+  ],
+  "catalogs": [
+   "P8340",
+   "11836170001",
+   "87786",
+   "P1005"
+  ],
+  "storage": "-20 °C",
+  "composition": "AEBSF/EDTA/leupeptin/pepstatin 等混合物",
+  "note": "广谱蛋白酶抑制剂，覆盖丝氨酸/半胱氨酸/天冬氨酸蛋白酶。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-phos",
+  "name": "Phosphatase Inhibitor Cocktail",
+  "zh": "磷酸酶抑制剂混合物",
+  "aliases": [
+   "phosphatase cocktail",
+   "磷酸酶抑制剂"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Thermo Scientific",
+   "Roche",
+   "Beyotime"
+  ],
+  "catalogs": [
+   "78420",
+   "4906845001",
+   "P1081"
+  ],
+  "storage": "2–8 °C",
+  "composition": "NaF; Na3VO4; beta-glycerophosphate; okadaic acid",
+  "note": "磷酸化 WB 必需；含 NaF、Na3VO4、β-甘油磷酸、钼酸盐等。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-halt",
+  "name": "Halt Protease & Phosphatase Cocktail (100x)",
+  "zh": "Halt 蛋白酶/磷酸酶抑制剂",
+  "aliases": [
+   "Halt"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "78442"
+  ],
+  "storage": "2–8 °C",
+  "composition": "100x concentrated",
+  "note": "单管同时抑制蛋白酶与磷酸酶，WB/IP 常用。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-edta",
+  "name": "EDTA",
+  "zh": "EDTA",
+  "aliases": [
+   "ethylenediaminetetraacetic acid"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Beyotime"
+  ],
+  "catalogs": [
+   "EDS",
+   "ST066"
+  ],
+  "storage": "RT",
+  "composition": "5 mM",
+  "note": "金属蛋白酶抑制剂；5 mM 常用。注意会螯合金属离子。",
+  "chem": {
+   "cid": 6049,
+   "mw": "292.24",
+   "smiles": "",
+   "inchi_key": "KCXVZYZYPLLWCC-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-egta",
+  "name": "EGTA",
+  "zh": "EGTA",
+  "aliases": [
+   "ethylene glycol-bis(2-aminoethylether)"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "E4378"
+  ],
+  "storage": "RT",
+  "composition": "1 mM",
+  "note": "优先螯合 Ca2+；1 mM 常用。",
+  "chem": {
+   "cid": 6207,
+   "mw": "380.35",
+   "smiles": "",
+   "inchi_key": "DEFVIWRASFVYLL-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-navo3",
+  "name": "Sodium Orthovanadate (Na3VO4)",
+  "zh": "原钒酸钠",
+  "aliases": [
+   "vanadate",
+   "钒酸钠"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Beyotime"
+  ],
+  "catalogs": [
+   "S6508",
+   "S1873"
+  ],
+  "storage": "RT",
+  "composition": "1 mM (activated)",
+  "note": "酪氨酸磷酸酶抑制剂；需活化（调 pH、煮沸）后使用，1 mM。",
+  "chem": {
+   "cid": 61671,
+   "mw": "183.908",
+   "smiles": "",
+   "inchi_key": "IHIXIJGXTJIKRB-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-naf",
+  "name": "Sodium Fluoride (NaF)",
+  "zh": "氟化钠",
+  "aliases": [
+   "fluoride"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "S7920"
+  ],
+  "storage": "RT",
+  "composition": "10–50 mM",
+  "note": "丝氨酸/苏氨酸磷酸酶(PP1/PP2A)抑制剂；10–50 mM。",
+  "chem": {
+   "cid": 5235,
+   "mw": "41.9881724",
+   "smiles": "",
+   "inchi_key": "PUZPDOWCWNUUKD-UHFFFAOYSA-M"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-mg132",
+  "name": "MG132",
+  "zh": "MG132（蛋白酶体抑制剂）",
+  "aliases": [
+   "MG-132",
+   "蛋白酶体抑制剂"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich",
+   "MedChemExpress",
+   "Beyotime",
+   "Cell Signaling Technology"
+  ],
+  "catalogs": [
+   "M7449",
+   "HY-13259",
+   "S1748",
+   "2194"
+  ],
+  "storage": "-20 °C (避光)",
+  "composition": "10–20 µM in DMSO",
+  "note": "26S 蛋白酶体抑制剂；研究短半衰期/泛素化蛋白时使用，常用 10–20 µM 处理 4–6 h。",
+  "chem": {
+   "cid": 462382,
+   "mw": "475.6",
+   "smiles": "",
+   "inchi_key": "TZYWCYJVHRLUCT-VABKMULXSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-leupeptin",
+  "name": "Leupeptin",
+  "zh": "亮肽素",
+  "aliases": [
+   "leupeptin hemisulfate"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "L2884"
+  ],
+  "storage": "-20 °C",
+  "composition": "1–10 µg/mL",
+  "note": "丝氨酸/半胱氨酸蛋白酶抑制剂；1–10 µg/mL。",
+  "chem": {
+   "cid": 72429,
+   "mw": "426.6",
+   "smiles": "",
+   "inchi_key": "GDBQQVLCIARPGH-ULQDDVLXSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-pepstatin",
+  "name": "Pepstatin A",
+  "zh": "胃蛋白酶抑制剂 A",
+  "aliases": [
+   "pepstatin"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "P5318"
+  ],
+  "storage": "-20 °C",
+  "composition": "1 µg/mL",
+  "note": "天冬氨酸蛋白酶抑制剂；1 µg/mL。",
+  "chem": {
+   "cid": 5478883,
+   "mw": "685.9",
+   "smiles": "",
+   "inchi_key": "FAXGPCHRFPCXOO-LXTPJMTPSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-aprotinin",
+  "name": "Aprotinin",
+  "zh": "抑肽酶",
+  "aliases": [
+   "trypsin inhibitor"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "A6279"
+  ],
+  "storage": "2–8 °C",
+  "composition": "0.5–2 µg/mL",
+  "note": "广谱丝氨酸蛋白酶抑制剂；0.5–2 µg/mL。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-dtt",
+  "name": "DTT",
+  "zh": "DTT（二硫苏糖醇）",
+  "aliases": [
+   "dithiothreitol"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Thermo Scientific",
+   "Beyotime"
+  ],
+  "catalogs": [
+   "D0632",
+   "R0861",
+   "ST040"
+  ],
+  "storage": "2–8 °C (干燥避光)",
+  "composition": "50–100 mM in loading buffer",
+  "note": "还原剂，切断二硫键；上样缓冲液中 50–100 mM。",
+  "chem": {
+   "cid": 439196,
+   "mw": "154.3",
+   "smiles": "",
+   "inchi_key": "VHJLVAABSRFDPM-IMJSIDKUSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-bme",
+  "name": "β-Mercaptoethanol",
+  "zh": "β-巯基乙醇",
+  "aliases": [
+   "2-mercaptoethanol",
+   "2-ME"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Thermo Scientific",
+   "Beyotime"
+  ],
+  "catalogs": [
+   "M6250",
+   "21985023",
+   "ST835"
+  ],
+  "storage": "RT (通风)",
+  "composition": "1–5% in loading buffer",
+  "note": "还原剂；上样缓冲液中 1–5%。气味大，注意通风。",
+  "chem": {
+   "cid": 1567,
+   "mw": "78.14",
+   "smiles": "",
+   "inchi_key": "DGVVWUTYPXICAM-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-aebsf",
+  "name": "AEBSF",
+  "zh": "AEBSF（丝氨酸蛋白酶抑制剂）",
+  "aliases": [
+   "4-(2-aminoethyl)benzenesulfonyl fluoride"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "A8456"
+  ],
+  "storage": "2–8 °C",
+  "composition": "0.1–1 mM",
+  "note": "水溶性 PMSF 替代品；0.1–1 mM，毒性更低。",
+  "chem": {
+   "cid": 186136,
+   "mw": "239.70",
+   "smiles": "",
+   "inchi_key": "WRDABNWSWOHGMS-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-tlck",
+  "name": "TLCK",
+  "zh": "TLCK（胰蛋白酶样抑制剂）",
+  "aliases": [
+   "tosyl-lysyl-chloromethane"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "T7254"
+  ],
+  "storage": "-20 °C",
+  "composition": "50–100 µM",
+  "note": "胰蛋白酶样丝氨酸蛋白酶抑制剂；50–100 µM。",
+  "chem": {
+   "cid": 73094,
+   "mw": "332.8",
+   "smiles": "",
+   "inchi_key": "RDFCSSHDJSZMTQ-ZDUSSCGKSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-iodoacetamide",
+  "name": "Iodoacetamide",
+  "zh": "碘乙酰胺",
+  "aliases": [
+   "IAM"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "I1149"
+  ],
+  "storage": "2–8 °C (避光)",
+  "composition": "50–100 mM",
+  "note": "烷基化游离巯基，防止二硫键重排；50–100 mM。",
+  "chem": {
+   "cid": 3727,
+   "mw": "184.96",
+   "smiles": "",
+   "inchi_key": "PGLTVOMIXTUURA-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-sdc",
+  "name": "Sodium Deoxycholate",
+  "zh": "脱氧胆酸钠",
+  "aliases": [
+   "deoxycholate"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "D6750"
+  ],
+  "storage": "RT",
+  "composition": "0.5%",
+  "note": "离子去垢剂；RIPA 成分之一，也可用于膜蛋白增溶。",
+  "chem": {
+   "cid": 23668196,
+   "mw": "414.6",
+   "smiles": "",
+   "inchi_key": "FHHPUSMSKHSNKW-SMOYURAASA-M"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-glycerol",
+  "name": "Glycerol",
+  "zh": "甘油",
+  "aliases": [
+   "glycerin"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "G5516"
+  ],
+  "storage": "RT",
+  "composition": "10–20%",
+  "note": "提高缓冲液密度/保护酶活；上样缓冲液及储存缓冲液常见成分。",
+  "chem": {
+   "cid": 753,
+   "mw": "92.09",
+   "smiles": "",
+   "inchi_key": "PEDCQBHIVMGVHV-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-dmso",
+  "name": "DMSO",
+  "zh": "DMSO",
+  "aliases": [
+   "dimethyl sulfoxide"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "D2650"
+  ],
+  "storage": "RT",
+  "composition": "溶剂",
+  "note": "溶解 MG132 等疏水小分子抑制剂。",
+  "chem": {
+   "cid": 679,
+   "mw": "78.14",
+   "smiles": "",
+   "inchi_key": "IAZDPXIOMUYVGZ-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-quant-bca",
+  "name": "BCA Protein Assay Kit",
+  "zh": "BCA 蛋白定量试剂盒",
+  "aliases": [
+   "BCA assay"
+  ],
+  "category": "quant",
+  "category_zh": "蛋白定量",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Thermo Scientific",
+   "Beyotime",
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "23225",
+   "P0010",
+   "BCA1-1KT"
+  ],
+  "storage": "RT",
+  "composition": "BCA reagent A/B + BSA standard",
+  "note": "去垢剂兼容性好（≤5% SDS）；标准曲线 0–2000 µg/mL。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-quant-bradford",
+  "name": "Bradford Reagent",
+  "zh": "Bradford 蛋白定量试剂",
+  "aliases": [
+   "Bradford assay"
+  ],
+  "category": "quant",
+  "category_zh": "蛋白定量",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Bio-Rad",
+   "Sigma-Aldrich",
+   "Thermo Scientific",
+   "Beyotime"
+  ],
+  "catalogs": [
+   "5000006",
+   "B6916",
+   "23200",
+   "P0006"
+  ],
+  "storage": "2–8 °C",
+  "composition": "Coomassie G-250 in phosphoric acid/methanol",
+  "note": "快速；不耐去垢剂（SDS 干扰），适合低去垢剂样品。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-quant-bsa-std",
+  "name": "BSA Standard (2 mg/mL)",
+  "zh": "BSA 标准品",
+  "aliases": [
+   "BSA standard"
+  ],
+  "category": "quant",
+  "category_zh": "蛋白定量",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Thermo Scientific",
+   "Beyotime"
+  ],
+  "catalogs": [
+   "23209",
+   "P0012"
+  ],
+  "storage": "2–8 °C",
+  "composition": "2 mg/mL BSA in 0.9% NaCl + NaN3",
+  "note": "定量标准曲线用；与样品使用相同缓冲液稀释。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-quant-lowry",
+  "name": "Lowry Protein Assay Kit",
+  "zh": "Lowry 蛋白定量试剂盒",
+  "aliases": [
+   "Lowry"
+  ],
+  "category": "quant",
+  "category_zh": "蛋白定量",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [],
+  "storage": "2–8 °C",
+  "composition": "Folin-Ciocalteu reagent",
+  "note": "经典方法；灵敏度高于 Bradford，操作略繁琐。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-acry",
+  "name": "Acrylamide (40%)",
+  "zh": "丙烯酰胺 40%",
+  "aliases": [
+   "acrylamide"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "A3553",
+   "1610140"
+  ],
+  "storage": "RT (避光)",
+  "composition": "40% acrylamide solution",
+  "note": "神经毒性，称量/操作戴手套。配胶浓度由 30:1~37.5:1 比例决定。",
+  "chem": {
+   "cid": 6579,
+   "mw": "71.08",
+   "smiles": "",
+   "inchi_key": "HRPVXLWXLXDGHG-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-bis",
+  "name": "Bis-acrylamide",
+  "zh": "甲叉双丙烯酰胺",
+  "aliases": [
+   "N,N-methylenebisacrylamide"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "M7279",
+   "1610201"
+  ],
+  "storage": "RT (避光)",
+  "composition": "2% bis-acrylamide",
+  "note": "交联剂；与丙烯酰胺配合使用。",
+  "chem": {
+   "cid": 8041,
+   "mw": "154.17",
+   "smiles": "",
+   "inchi_key": "ZIUHHBKFKCYYJD-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-temed",
+  "name": "TEMED",
+  "zh": "TEMED",
+  "aliases": [
+   "tetramethylethylenediamine"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "T9281",
+   "1610800"
+  ],
+  "storage": "RT (避光)",
+  "composition": "polymerization accelerator",
+  "note": "凝胶聚合催化剂；用量 1–5 µL/10 mL 胶液。",
+  "chem": {
+   "cid": 8037,
+   "mw": "116.20",
+   "smiles": "",
+   "inchi_key": "KWYHDKDOAIKMQN-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-aps",
+  "name": "Ammonium Persulfate (APS)",
+  "zh": "过硫酸铵",
+  "aliases": [
+   "APS"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "A3678",
+   "1610700"
+  ],
+  "storage": "RT (干燥)",
+  "composition": "10% APS solution",
+  "note": "凝胶聚合引发剂；10% 溶液现配，4 °C 避光保存 ≤1 周。",
+  "chem": {
+   "cid": 62648,
+   "mw": "228.21",
+   "smiles": "",
+   "inchi_key": "ROOXNKNUYICQNP-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-sds",
+  "name": "SDS",
+  "zh": "十二烷基硫酸钠",
+  "aliases": [
+   "sodium dodecyl sulfate",
+   "lauryl sulfate"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "L3771",
+   "1610416"
+  ],
+  "storage": "RT",
+  "composition": "anionic detergent",
+  "note": "变性剂，使蛋白带负电荷；电泳/上样缓冲液组分。",
+  "chem": {
+   "cid": 3423265,
+   "mw": "288.38",
+   "smiles": "",
+   "inchi_key": "DBMJMQXJHONAFJ-UHFFFAOYSA-M"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-tris",
+  "name": "Tris Base",
+  "zh": "Tris 碱",
+  "aliases": [
+   "Tris"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "T1503",
+   "1610719"
+  ],
+  "storage": "RT",
+  "composition": "tris(hydroxymethyl)aminomethane",
+  "note": "常用缓冲盐；配胶/电泳/转膜缓冲液基础成分。",
+  "chem": {
+   "cid": 6503,
+   "mw": "121.14",
+   "smiles": "",
+   "inchi_key": "LENZDBCJOHFCAS-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-glycine",
+  "name": "Glycine",
+  "zh": "甘氨酸",
+  "aliases": [
+   "glycine"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "G8898",
+   "1610718"
+  ],
+  "storage": "RT",
+  "composition": "amino acid running buffer component",
+  "note": "SDS-PAGE 电泳/转膜缓冲液成分（Tris-Glycine 体系）。",
+  "chem": {
+   "cid": 750,
+   "mw": "75.07",
+   "smiles": "",
+   "inchi_key": "DHMQDGOQFOQNFH-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-tris88",
+  "name": "Tris-HCl 1.5 M pH 8.8",
+  "zh": "Tris-HCl 1.5 M pH 8.8（分离胶缓冲液）",
+  "aliases": [
+   "separating gel buffer"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Beyotime",
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "ST789",
+   "1610798"
+  ],
+  "storage": "RT",
+  "composition": "1.5 M Tris-HCl pH 8.8",
+  "note": "配分离胶用。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-tris68",
+  "name": "Tris-HCl 1.0 M pH 6.8",
+  "zh": "Tris-HCl 1.0 M pH 6.8（浓缩胶缓冲液）",
+  "aliases": [
+   "stacking gel buffer"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Beyotime",
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "ST768",
+   "1610799"
+  ],
+  "storage": "RT",
+  "composition": "1.0 M Tris-HCl pH 6.8",
+  "note": "配浓缩胶用。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-running",
+  "name": "Tris-Glycine-SDS Running Buffer (10x)",
+  "zh": "SDS-PAGE 电泳缓冲液 10x",
+  "aliases": [
+   "running buffer",
+   "电泳液"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Beyotime",
+   "Bio-Rad",
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "P0014A",
+   "1610732",
+   "28380"
+  ],
+  "storage": "RT",
+  "composition": "25 mM Tris; 192 mM glycine; 0.1% SDS",
+  "note": "电泳外槽缓冲液；使用前稀释为 1x。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-precast",
+  "name": "Precast Gel (10%)",
+  "zh": "预制胶 10%",
+  "aliases": [
+   "precast gel",
+   "预制胶"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Bio-Rad",
+   "Thermo Scientific",
+   "Beyotime"
+  ],
+  "catalogs": [
+   "4561036",
+   "NP0321BOX",
+   "P0050A"
+  ],
+  "storage": "2–8 °C",
+  "composition": "Tris-Glycine 10% gel",
+  "note": "高重复性，免配胶；10% 适合 20–100 kDa 蛋白。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-gradient",
+  "name": "Precast Gradient Gel (4-20%)",
+  "zh": "预制梯度胶 4-20%",
+  "aliases": [
+   "gradient gel",
+   "梯度胶"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Bio-Rad",
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "4561094",
+   "XP04200BOX"
+  ],
+  "storage": "2–8 °C",
+  "composition": "4-20% gradient gel",
+  "note": "宽分子量范围（10–250 kDa）一次分离，适合未知 MW 蛋白。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-kit",
+  "name": "SDS-PAGE Gel Preparation Kit",
+  "zh": "SDS-PAGE 凝胶配制试剂盒",
+  "aliases": [
+   "配胶试剂盒"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Beyotime"
+  ],
+  "catalogs": [
+   "P0012A"
+  ],
+  "storage": "RT (kit)",
+  "composition": "分离胶/浓缩胶缓冲液 + APS + TEMED",
+  "note": "含配胶所需缓冲液与催化剂，按比例灌胶。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-tricine",
+  "name": "Tricine-SDS-PAGE Kit",
+  "zh": "Tricine-SDS-PAGE 试剂盒",
+  "aliases": [
+   "Tricine gel"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Beyotime"
+  ],
+  "catalogs": [],
+  "storage": "RT",
+  "composition": "Tricine buffer system",
+  "note": "低分子量蛋白（<15 kDa）推荐 Tricine 体系。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-marker-pageruler",
+  "name": "PageRuler Prestained Ladder (10-180 kDa)",
+  "zh": "PageRuler 预染蛋白 Marker",
+  "aliases": [
+   "protein ladder",
+   "预染 Marker"
+  ],
+  "category": "marker",
+  "category_zh": "蛋白 Marker",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "26616"
+  ],
+  "storage": "4 °C (避光)",
+  "composition": "10–180 kDa, 12 bands (10-180)",
+  "note": "WB 常用预染 ladder；含 10 条带，用于分子量定位与转膜监测。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-marker-pageruler-plus",
+  "name": "PageRuler Plus Prestained Ladder (10-250 kDa)",
+  "zh": "PageRuler Plus 预染 Marker",
+  "aliases": [
+   "PageRuler Plus"
+  ],
+  "category": "marker",
+  "category_zh": "蛋白 Marker",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "26619"
+  ],
+  "storage": "4 °C (避光)",
+  "composition": "10–250 kDa",
+  "note": "10–250 kDa，适合高分子量蛋白。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-marker-beyo",
+  "name": "Color Prestained Protein Marker",
+  "zh": "彩色预染蛋白 Marker",
+  "aliases": [
+   "彩色预染Marker"
+  ],
+  "category": "marker",
+  "category_zh": "蛋白 Marker",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Beyotime",
+   "NEB"
+  ],
+  "catalogs": [
+   "P0060",
+   "P7712"
+  ],
+  "storage": "-20 °C",
+  "composition": "10–180 kDa 或 11–190 kDa",
+  "note": "国产常用预染 marker。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-marker-biorad",
+  "name": "Precision Plus Dual Color Standard",
+  "zh": "Precision Plus 双色 Marker",
+  "aliases": [
+   "Dual Color"
+  ],
+  "category": "marker",
+  "category_zh": "蛋白 Marker",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "1610374"
+  ],
+  "storage": "4 °C",
+  "composition": "10–250 kDa",
+  "note": "10–250 kDa 双色预染标准。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-marker-unstained",
+  "name": "Unstained Protein Ladder",
+  "zh": "非预染蛋白 Marker",
+  "aliases": [
+   "unstained ladder"
+  ],
+  "category": "marker",
+  "category_zh": "蛋白 Marker",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "26610"
+  ],
+  "storage": "4 °C",
+  "composition": "10–200 kDa",
+  "note": "考染/银染用，含 10–200 kDa 条带。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-transfer-pvdf45",
+  "name": "PVDF Membrane 0.45 µm",
+  "zh": "PVDF 膜 0.45 µm",
+  "aliases": [
+   "Immobilon-P",
+   "PVDF"
+  ],
+  "category": "transfer",
+  "category_zh": "转膜",
+  "step": 3,
+  "step_zh": "转膜",
+  "vendors": [
+   "Millipore",
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "IPVH00010",
+   "1620177"
+  ],
+  "storage": "RT (干燥)",
+  "composition": "PVDF, 0.45 µm",
+  "note": "通用 WB 膜；需甲醇活化，蛋白结合能力强；0.45 µm 适合 ≥20 kDa。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-transfer-pvdf22",
+  "name": "PVDF Membrane 0.22 µm",
+  "zh": "PVDF 膜 0.22 µm",
+  "aliases": [
+   "Immobilon-PSQ",
+   "低分子量PVDF"
+  ],
+  "category": "transfer",
+  "category_zh": "转膜",
+  "step": 3,
+  "step_zh": "转膜",
+  "vendors": [
+   "Millipore",
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "ISEQ00010",
+   "1620176"
+  ],
+  "storage": "RT (干燥)",
+  "composition": "PVDF, 0.2 µm",
+  "note": "低分子量蛋白（<20 kDa）推荐 0.22 µm，减少穿膜丢失。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-transfer-nc45",
+  "name": "Nitrocellulose Membrane 0.45 µm",
+  "zh": "NC 膜 0.45 µm",
+  "aliases": [
+   "nitrocellulose"
+  ],
+  "category": "transfer",
+  "category_zh": "转膜",
+  "step": 3,
+  "step_zh": "转膜",
+  "vendors": [
+   "Millipore",
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "HAHY00010",
+   "1620115"
+  ],
+  "storage": "RT",
+  "composition": "NC, 0.45 µm",
+  "note": "无需活化，背景低；机械强度低于 PVDF，易脆。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-transfer-nc22",
+  "name": "Nitrocellulose Membrane 0.2 µm",
+  "zh": "NC 膜 0.2 µm",
+  "aliases": [
+   "nitrocellulose 0.2"
+  ],
+  "category": "transfer",
+  "category_zh": "转膜",
+  "step": 3,
+  "step_zh": "转膜",
+  "vendors": [
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "1620112"
+  ],
+  "storage": "RT",
+  "composition": "NC, 0.2 µm",
+  "note": "低分子量蛋白推荐。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-transfer-buffer",
+  "name": "Transfer Buffer (10x)",
+  "zh": "转膜缓冲液 10x",
+  "aliases": [
+   "转膜液",
+   "blotting buffer"
+  ],
+  "category": "transfer",
+  "category_zh": "转膜",
+  "step": 3,
+  "step_zh": "转膜",
+  "vendors": [
+   "Bio-Rad",
+   "Thermo Scientific",
+   "Cell Signaling Technology"
+  ],
+  "catalogs": [
+   "1610733",
+   "28358",
+   "12533"
+  ],
+  "storage": "RT",
+  "composition": "25 mM Tris; 192 mM glycine; 10–20% methanol",
+  "note": "湿转/半干转通用；稀释为 1x 后加 10–20% 甲醇。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-transfer-paper",
+  "name": "Blotting Filter Paper",
+  "zh": "转膜滤纸",
+  "aliases": [
+   "3MM",
+   "滤纸"
+  ],
+  "category": "transfer",
+  "category_zh": "转膜",
+  "step": 3,
+  "step_zh": "转膜",
+  "vendors": [
+   "Bio-Rad",
+   "Whatman"
+  ],
+  "catalogs": [
+   "1703932",
+   "3030-917"
+  ],
+  "storage": "RT",
+  "composition": "thick blot paper",
+  "note": "厚滤纸用于湿转/半干转夹层；3MM 常用。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-transfer-methanol",
+  "name": "Methanol",
+  "zh": "甲醇",
+  "aliases": [
+   "甲醇"
+  ],
+  "category": "transfer",
+  "category_zh": "转膜",
+  "step": 3,
+  "step_zh": "转膜",
+  "vendors": [],
+  "catalogs": [],
+  "storage": "RT (通风)",
+  "composition": "10–20% in transfer buffer",
+  "note": "PVDF 活化与转膜缓冲液添加剂；易燃，注意通风。",
+  "chem": {
+   "cid": 887,
+   "mw": "32.042",
+   "smiles": "",
+   "inchi_key": "OKKJLVBELUTLKV-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-block-bsa",
+  "name": "BSA (Fraction V)",
+  "zh": "BSA 牛血清白蛋白",
+  "aliases": [
+   "albumin",
+   "牛血清白蛋白"
+  ],
+  "category": "block",
+  "category_zh": "封闭与洗涤",
+  "step": 4,
+  "step_zh": "封闭与检测",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Beyotime",
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "A7906",
+   "ST023",
+   "23208"
+  ],
+  "storage": "2–8 °C",
+  "composition": "5% BSA in TBST",
+  "note": "封闭液（1–5%）；检测磷酸化蛋白时优先 BSA（避免牛奶碱性磷酸酶背景）。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-block-milk",
+  "name": "Skim Milk Powder",
+  "zh": "脱脂奶粉",
+  "aliases": [
+   "milk",
+   "脱脂奶粉"
+  ],
+  "category": "block",
+  "category_zh": "封闭与洗涤",
+  "step": 4,
+  "step_zh": "封闭与检测",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "70166",
+   "1706404"
+  ],
+  "storage": "RT (干燥)",
+  "composition": "5% milk in TBST",
+  "note": "常用封闭剂（5%）；含酪蛋白，不适合磷酸化抗体检测。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-block-tween",
+  "name": "Tween-20",
+  "zh": "Tween-20（吐温-20）",
+  "aliases": [
+   "polysorbate 20",
+   "吐温20"
+  ],
+  "category": "block",
+  "category_zh": "封闭与洗涤",
+  "step": 4,
+  "step_zh": "封闭与检测",
+  "vendors": [
+   "Sigma-Aldrich",
+   "Bio-Rad",
+   "Beyotime",
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "P1379",
+   "1706531",
+   "ST825",
+   "28320"
+  ],
+  "storage": "RT",
+  "composition": "0.05–0.1% in TBS/PBS",
+  "note": "洗涤缓冲液表面活性剂；常用 0.05–0.1%。",
+  "chem": {
+   "cid": 443314,
+   "mw": "522.7",
+   "smiles": "",
+   "inchi_key": "HMFKFHLTUCJZJO-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-block-tbst",
+  "name": "TBS with Tween-20 (10x)",
+  "zh": "TBST 洗涤缓冲液 10x",
+  "aliases": [
+   "TBST"
+  ],
+  "category": "block",
+  "category_zh": "封闭与洗涤",
+  "step": 4,
+  "step_zh": "封闭与检测",
+  "vendors": [
+   "Cell Signaling Technology",
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "9997",
+   "28360"
+  ],
+  "storage": "RT",
+  "composition": "10 mM Tris; 150 mM NaCl; 0.1% Tween-20",
+  "note": "WB 洗涤标准缓冲液；稀释 1x 使用。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-block-pbs",
+  "name": "PBS (10x)",
+  "zh": "PBS 磷酸盐缓冲液 10x",
+  "aliases": [
+   "PBS"
+  ],
+  "category": "block",
+  "category_zh": "封闭与洗涤",
+  "step": 4,
+  "step_zh": "封闭与检测",
+  "vendors": [
+   "Cell Signaling Technology",
+   "Beyotime"
+  ],
+  "catalogs": [
+   "9808",
+   "ST476"
+  ],
+  "storage": "RT",
+  "composition": "137 mM NaCl; 2.7 mM KCl; 10 mM Na2HPO4; 1.8 mM KH2PO4",
+  "note": "通用缓冲液；可配 PBST 洗涤。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-block-strip",
+  "name": "Western Blot Stripping Buffer",
+  "zh": "WB 抗体剥离液",
+  "aliases": [
+   "stripping buffer",
+   "剥离液"
+  ],
+  "category": "block",
+  "category_zh": "封闭与洗涤",
+  "step": 4,
+  "step_zh": "封闭与检测",
+  "vendors": [
+   "Thermo Scientific",
+   "Beyotime"
+  ],
+  "catalogs": [
+   "46430",
+   "P0025"
+  ],
+  "storage": "RT",
+  "composition": "mild stripping buffer",
+  "note": "膜上抗体剥离后重新杂交；注意膜处理次数。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-block-ponceau",
+  "name": "Ponceau S Staining Solution",
+  "zh": "丽春红 S 染色液",
+  "aliases": [
+   "Ponceau S",
+   "丽春红"
+  ],
+  "category": "block",
+  "category_zh": "封闭与洗涤",
+  "step": 4,
+  "step_zh": "封闭与检测",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "P7170"
+  ],
+  "storage": "RT",
+  "composition": "0.1% Ponceau S in 5% acetic acid",
+  "note": "转膜后快速总蛋白染色，确认转膜效果。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-det-pico",
+  "name": "SuperSignal West Pico ECL",
+  "zh": "ECL 化学发光底物（标准）",
+  "aliases": [
+   "ECL",
+   "化学发光底物"
+  ],
+  "category": "detection",
+  "category_zh": "显影检测",
+  "step": 6,
+  "step_zh": "结果与量化",
+  "vendors": [
+   "Thermo Scientific",
+   "Beyotime",
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "34080",
+   "P0018",
+   "1705061"
+  ],
+  "storage": "RT (避光)",
+  "composition": "luminol-based chemiluminescent substrate",
+  "note": "常规灵敏度 ECL；适合中高丰度蛋白。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-det-femto",
+  "name": "SuperSignal West Femto ECL",
+  "zh": "超敏 ECL 底物（Femto）",
+  "aliases": [
+   "Femto",
+   "超敏ECL"
+  ],
+  "category": "detection",
+  "category_zh": "显影检测",
+  "step": 6,
+  "step_zh": "结果与量化",
+  "vendors": [
+   "Thermo Scientific",
+   "Beyotime"
+  ],
+  "catalogs": [
+   "34095",
+   "P0018FS"
+  ],
+  "storage": "2–8 °C (避光)",
+  "composition": "high-sensitivity substrate",
+  "note": "低丰度/弱信号蛋白推荐；灵敏度约为 Pico 的 100 倍。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-det-pico-plus",
+  "name": "SuperSignal West Pico PLUS",
+  "zh": "ECL Plus 底物",
+  "aliases": [
+   "Pico PLUS"
+  ],
+  "category": "detection",
+  "category_zh": "显影检测",
+  "step": 6,
+  "step_zh": "结果与量化",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "34577"
+  ],
+  "storage": "RT (避光)",
+  "composition": "enhanced chemiluminescent substrate",
+  "note": "Pico 增强版，灵敏度高、信号持续更久。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-det-immobilon",
+  "name": "Immobilon Western ECL",
+  "zh": "Immobilon Western 底物",
+  "aliases": [
+   "Immobilon"
+  ],
+  "category": "detection",
+  "category_zh": "显影检测",
+  "step": 6,
+  "step_zh": "结果与量化",
+  "vendors": [
+   "Millipore"
+  ],
+  "catalogs": [
+   "WBKLS0100"
+  ],
+  "storage": "RT (避光)",
+  "composition": "luminol/enhancer + peroxide",
+  "note": "Merck 经典 ECL；灵敏度适中，成本较低。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-det-film",
+  "name": "X-ray Film",
+  "zh": "医用 X 光胶片",
+  "aliases": [
+   "胶片",
+   "film"
+  ],
+  "category": "detection",
+  "category_zh": "显影检测",
+  "step": 6,
+  "step_zh": "结果与量化",
+  "vendors": [
+   "Fuji",
+   "Kodak"
+  ],
+  "catalogs": [
+   "Super RX-N",
+   "X-Omat BT"
+  ],
+  "storage": "RT (避光)",
+  "composition": "blue-sensitive film",
+  "note": "传统化学发光显影；需暗房与显影/定影液。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-det-luminol",
+  "name": "Luminol + p-Coumaric Acid (homemade ECL)",
+  "zh": "自配 ECL（鲁米诺+对香豆酸）",
+  "aliases": [
+   "homemade ECL",
+   "自制ECL"
+  ],
+  "category": "detection",
+  "category_zh": "显影检测",
+  "step": 6,
+  "step_zh": "结果与量化",
+  "vendors": [],
+  "catalogs": [],
+  "storage": "RT (避光)",
+  "composition": "100 mM Tris pH 8.5; 1.25 mM luminol; 0.2 mM p-coumaric acid; 0.02% H2O2",
+  "note": "自配 ECL 配方，成本低；需自行配制并与 H2O2 混合。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-stain-coomassie",
+  "name": "Coomassie Brilliant Blue R-250",
+  "zh": "考马斯亮蓝 R-250",
+  "aliases": [
+   "Coomassie R-250",
+   "考染"
+  ],
+  "category": "stain",
+  "category_zh": "染色",
+  "step": 6,
+  "step_zh": "结果与量化",
+  "vendors": [
+   "Bio-Rad",
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "1610436",
+   "20278"
+  ],
+  "storage": "RT",
+  "composition": "0.1% R-250 in methanol/acetic acid",
+  "note": "凝胶总蛋白染色；配合脱色液（甲醇/乙酸）。",
+  "chem": {
+   "cid": 61363,
+   "mw": "854.0",
+   "smiles": "",
+   "inchi_key": "RWVGQQGBQSJDQV-UHFFFAOYSA-M"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-stain-instantblue",
+  "name": "InstantBlue Protein Stain",
+  "zh": "InstantBlue 快速染液",
+  "aliases": [
+   "InstantBlue"
+  ],
+  "category": "stain",
+  "category_zh": "染色",
+  "step": 6,
+  "step_zh": "结果与量化",
+  "vendors": [
+   "Abcam"
+  ],
+  "catalogs": [
+   "ab119211"
+  ],
+  "storage": "RT",
+  "composition": "ready-to-use Coomassie stain",
+  "note": "免脱色考染，15 min 完成，适合灵敏度要求一般的样品。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-stain-silver",
+  "name": "Silver Stain Kit",
+  "zh": "银染试剂盒",
+  "aliases": [
+   "银染"
+  ],
+  "category": "stain",
+  "category_zh": "染色",
+  "step": 6,
+  "step_zh": "结果与量化",
+  "vendors": [
+   "Thermo Scientific",
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "24612",
+   "1610443"
+  ],
+  "storage": "RT",
+  "composition": "silver nitrate-based kit",
+  "note": "灵敏度高于考染（ng 级）；适合微量蛋白。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-hrp-rb",
+  "name": "HRP Anti-Rabbit IgG (Secondary)",
+  "zh": "HRP 标记抗兔二抗",
+  "aliases": [
+   "anti-rabbit HRP",
+   "抗兔二抗"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Cell Signaling Technology",
+   "Abcam",
+   "Thermo Scientific",
+   "Beyotime"
+  ],
+  "catalogs": [
+   "7074",
+   "ab6721",
+   "31460",
+   "A0208"
+  ],
+  "storage": "2–8 °C",
+  "composition": "HRP-conjugated goat anti-rabbit IgG",
+  "note": "与兔源一抗配对；使用前离心，按 1:1000–1:10000 稀释。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-hrp-ms",
+  "name": "HRP Anti-Mouse IgG (Secondary)",
+  "zh": "HRP 标记抗鼠二抗",
+  "aliases": [
+   "anti-mouse HRP",
+   "抗鼠二抗"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Cell Signaling Technology",
+   "Abcam",
+   "Thermo Scientific",
+   "Beyotime"
+  ],
+  "catalogs": [
+   "7076",
+   "ab6789",
+   "31430",
+   "A0216"
+  ],
+  "storage": "2–8 °C",
+  "composition": "HRP-conjugated goat anti-mouse IgG",
+  "note": "与鼠源一抗配对。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-hrp-rat",
+  "name": "HRP Anti-Rat IgG (Secondary)",
+  "zh": "HRP 标记抗大鼠二抗",
+  "aliases": [
+   "anti-rat HRP"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Cell Signaling Technology",
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "7077",
+   "31470"
+  ],
+  "storage": "2–8 °C",
+  "composition": "HRP-conjugated anti-rat IgG",
+  "note": "与大鼠源一抗配对。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-hrp-goat",
+  "name": "HRP Anti-Goat IgG (Secondary)",
+  "zh": "HRP 标记抗山羊二抗",
+  "aliases": [
+   "anti-goat HRP"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "31402"
+  ],
+  "storage": "2–8 °C",
+  "composition": "HRP-conjugated donkey anti-goat IgG",
+  "note": "与山羊源一抗配对。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-irdye800",
+  "name": "IRDye 800CW Anti-Rabbit",
+  "zh": "IRDye 800CW 荧光抗兔二抗",
+  "aliases": [
+   "near-IR secondary",
+   "荧光二抗"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "LI-COR"
+  ],
+  "catalogs": [
+   "926-32211"
+  ],
+  "storage": "4 °C (避光)",
+  "composition": "IRDye 800CW goat anti-rabbit",
+  "note": "近红外荧光二抗；双色荧光 WB（800 通道）使用。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-irdye680",
+  "name": "IRDye 680RD Anti-Mouse",
+  "zh": "IRDye 680RD 荧光抗鼠二抗",
+  "aliases": [
+   "near-IR 680"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "LI-COR"
+  ],
+  "catalogs": [
+   "926-68070"
+  ],
+  "storage": "4 °C (避光)",
+  "composition": "IRDye 680RD goat anti-mouse",
+  "note": "近红外荧光二抗（680 通道），与 800CW 搭配双色检测。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-alexa488",
+  "name": "Alexa Fluor 488 Anti-Rabbit",
+  "zh": "Alexa 488 荧光抗兔二抗",
+  "aliases": [
+   "Alexa 488"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "A-11008"
+  ],
+  "storage": "4 °C (避光)",
+  "composition": "Alexa Fluor 488 goat anti-rabbit",
+  "note": "绿色荧光二抗；用于荧光 WB 或 IF。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-normal-ig",
+  "name": "Normal IgG (Control)",
+  "zh": "同型对照 IgG",
+  "aliases": [
+   "isotype control",
+   "IgG对照"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Cell Signaling Technology"
+  ],
+  "catalogs": [
+   "2729"
+  ],
+  "storage": "-20 °C",
+  "composition": "rabbit normal IgG",
+  "note": "IP/Co-IP 同型对照；与一抗同种属同亚型。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-goat-serum",
+  "name": "Normal Goat Serum (Blocking)",
+  "zh": "山羊血清（封闭）",
+  "aliases": [
+   "goat serum"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "16210064"
+  ],
+  "storage": "-20 °C",
+  "composition": "normal goat serum",
+  "note": "免疫组化/免疫荧光封闭；WB 偶用于降低背景。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-diluent",
+  "name": "Antibody Dilution Buffer",
+  "zh": "抗体稀释液",
+  "aliases": [
+   "antibody diluent",
+   "抗体稀释液"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Beyotime"
+  ],
+  "catalogs": [
+   "P0023A"
+  ],
+  "storage": "RT",
+  "composition": "TBS + carrier protein + preservative",
+  "note": "一抗/二抗稀释用，含蛋白稳定剂；可按需加 BSA。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-other-tca",
+  "name": "Trichloroacetic Acid (TCA)",
+  "zh": "三氯乙酸",
+  "aliases": [
+   "TCA"
+  ],
+  "category": "precip",
+  "category_zh": "沉淀与其它",
+  "step": 0,
+  "step_zh": "样本与处理",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "T6399"
+  ],
+  "storage": "RT (腐蚀性)",
+  "composition": "10–20% TCA",
+  "note": "蛋白沉淀浓缩（10–20% TCA）；去垢剂/盐污染样品可用。",
+  "chem": {
+   "cid": 6421,
+   "mw": "163.38",
+   "smiles": "",
+   "inchi_key": "YNJBWRMUSHSURL-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-other-acetone",
+  "name": "Acetone",
+  "zh": "丙酮",
+  "aliases": [
+   "丙酮"
+  ],
+  "category": "precip",
+  "category_zh": "沉淀与其它",
+  "step": 0,
+  "step_zh": "样本与处理",
+  "vendors": [],
+  "catalogs": [],
+  "storage": "RT (易燃)",
+  "composition": "4 vol acetone",
+  "note": "蛋白沉淀与脂类去除。",
+  "chem": {
+   "cid": 180,
+   "mw": "58.08",
+   "smiles": "",
+   "inchi_key": "CSCPPACGZOOCGX-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-other-bromophenol",
+  "name": "Bromophenol Blue",
+  "zh": "溴酚蓝",
+  "aliases": [
+   "BPB"
+  ],
+  "category": "precip",
+  "category_zh": "沉淀与其它",
+  "step": 0,
+  "step_zh": "样本与处理",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "B0126"
+  ],
+  "storage": "RT",
+  "composition": "0.004%",
+  "note": "上样缓冲液示踪染料（电泳前沿指示）。",
+  "chem": {
+   "cid": 8272,
+   "mw": "670.0",
+   "smiles": "",
+   "inchi_key": "UDSAIICHUKSCKT-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-other-xylene",
+  "name": "Xylene Cyanol FF",
+  "zh": "二甲苯青 FF",
+  "aliases": [
+   "xylene cyanol"
+  ],
+  "category": "precip",
+  "category_zh": "沉淀与其它",
+  "step": 0,
+  "step_zh": "样本与处理",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "X4126"
+  ],
+  "storage": "RT",
+  "composition": "0.004%",
+  "note": "较大分子量示踪染料。",
+  "chem": {
+   "cid": 56841133,
+   "mw": "555.6",
+   "smiles": "",
+   "inchi_key": "ACZRDWVARWLTRG-QJJJQDATSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-other-nan3",
+  "name": "Sodium Azide",
+  "zh": "叠氮化钠",
+  "aliases": [
+   "NaN3",
+   "叠氮钠"
+  ],
+  "category": "precip",
+  "category_zh": "沉淀与其它",
+  "step": 0,
+  "step_zh": "样本与处理",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "S2002"
+  ],
+  "storage": "RT (有毒)",
+  "composition": "0.02–0.1%",
+  "note": "抗体保存防腐剂（0.02–0.1%）；注意：抑制 HRP，勿用于 HRP 偶联物。",
+  "chem": {
+   "cid": 33557,
+   "mw": "65.010",
+   "smiles": "",
+   "inchi_key": "PXIPVTKHYLBLMZ-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-other-urea",
+  "name": "Urea",
+  "zh": "尿素",
+  "aliases": [
+   "urea"
+  ],
+  "category": "precip",
+  "category_zh": "沉淀与其它",
+  "step": 0,
+  "step_zh": "样本与处理",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "U5378"
+  ],
+  "storage": "RT",
+  "composition": "8 M",
+  "note": "变性剂，8 M 尿素溶解难溶蛋白。",
+  "chem": {
+   "cid": 1176,
+   "mw": "60.056",
+   "smiles": "",
+   "inchi_key": "XSQUKJJJFZCRTK-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-other-guanidine",
+  "name": "Guanidine Hydrochloride",
+  "zh": "盐酸胍",
+  "aliases": [
+   "guanidine HCl"
+  ],
+  "category": "precip",
+  "category_zh": "沉淀与其它",
+  "step": 0,
+  "step_zh": "样本与处理",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "G3272"
+  ],
+  "storage": "RT",
+  "composition": "6 M",
+  "note": "强变性剂，6 M 溶解包涵体/难溶蛋白。",
+  "chem": {
+   "cid": 5742,
+   "mw": "95.53",
+   "smiles": "",
+   "inchi_key": "PJJJBBJSCAKJQF-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-lysis-mper",
+  "name": "M-PER Mammalian Protein Extraction Reagent",
+  "zh": "M-PER 哺乳动物蛋白提取试剂",
+  "aliases": [
+   "M-PER"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "78501"
+  ],
+  "storage": "RT",
+  "composition": "proprietary detergent buffer",
+  "note": "温和去垢剂裂解，适合常规 WB/IP；兼容 Halt 抑制剂。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-lysis-ripa-ready",
+  "name": "RIPA Buffer with Halt Inhibitors",
+  "zh": "含抑制剂的 RIPA 裂解液",
+  "aliases": [
+   "89901"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "89901"
+  ],
+  "storage": "2–8 °C",
+  "composition": "RIPA + Halt",
+  "note": "RIPA + Halt 蛋白酶/磷酸酶抑制剂预混，开盖即用。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-lysis-tper",
+  "name": "T-PER Tissue Protein Extraction Reagent",
+  "zh": "T-PER 组织蛋白提取试剂",
+  "aliases": [
+   "T-PER"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "78510"
+  ],
+  "storage": "RT",
+  "composition": "proprietary tissue lysis buffer",
+  "note": "组织样本 WB 推荐；配合匀浆/超声。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-lysis-celllytic",
+  "name": "Cell_ytic M Cell Lysis Reagent",
+  "zh": "Cell_ytic M 细胞裂解试剂",
+  "aliases": [
+   "Cellytic M"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "C2978"
+  ],
+  "storage": "RT",
+  "composition": "proprietary mild lysis buffer",
+  "note": "温和裂解，不使蛋白变性；适合酶活与 WB。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-lysis-ripa-weak",
+  "name": "RIPA Lysis Buffer (Medium/Weak)",
+  "zh": "RIPA 裂解液（中/弱）",
+  "aliases": [
+   "RIPA 中/弱"
+  ],
+  "category": "lysis",
+  "category_zh": "裂解液",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Beyotime"
+  ],
+  "catalogs": [
+   "P0013C",
+   "P0013D"
+  ],
+  "storage": "2–8 °C",
+  "composition": "NP-40/deoxycholate 浓度递减",
+  "note": "去垢剂强度低于强 RIPA，适合较温和的蛋白提取。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-e64",
+  "name": "E-64",
+  "zh": "E-64（半胱氨酸蛋白酶抑制剂）",
+  "aliases": [
+   "E64"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "E3132"
+  ],
+  "storage": "-20 °C",
+  "composition": "10 µM",
+  "note": "不可逆半胱氨酸蛋白酶抑制剂；10 µM 常用。",
+  "chem": {
+   "cid": 123985,
+   "mw": "357.41",
+   "smiles": "",
+   "inchi_key": "LTLYEAJONXGNFG-DCAQKATOSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-bestatin",
+  "name": "Bestatin",
+  "zh": "贝他定（氨肽酶抑制剂）",
+  "aliases": [
+   "ubenimex"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "B8385"
+  ],
+  "storage": "2–8 °C",
+  "composition": "40 µM",
+  "note": "氨肽酶 B/N 抑制剂；40 µM 常用。",
+  "chem": {
+   "cid": 72172,
+   "mw": "308.37",
+   "smiles": "",
+   "inchi_key": "VGGGPCQERPFHOB-RDBSUJKOSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-benzamidine",
+  "name": "Benzamidine",
+  "zh": "苯甲脒（丝氨酸蛋白酶抑制剂）",
+  "aliases": [
+   "benzamidine HCl"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "B6506"
+  ],
+  "storage": "RT",
+  "composition": "1–4 mM",
+  "note": "胰蛋白酶样蛋白酶抑制剂；1–4 mM。",
+  "chem": {
+   "cid": 2332,
+   "mw": "120.15",
+   "smiles": "",
+   "inchi_key": "PXXJHWLDUBFPOL-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-chymostatin",
+  "name": "Chymostatin",
+  "zh": "胰凝乳蛋白酶抑制剂",
+  "aliases": [
+   "chymostatin"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "C7268"
+  ],
+  "storage": "-20 °C",
+  "composition": "60 µg/mL",
+  "note": "胰凝乳蛋白酶抑制剂；60 µg/mL。",
+  "chem": {
+   "cid": 443119,
+   "mw": "607.7",
+   "smiles": "",
+   "inchi_key": "MRXDGVXSWIXTQL-HYHFHBMOSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-antipain",
+  "name": "Antipain",
+  "zh": "抗痛素",
+  "aliases": [
+   "antipain dihydrochloride"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "A6191"
+  ],
+  "storage": "-20 °C",
+  "composition": "74 µM",
+  "note": "胰蛋白酶/木瓜蛋白酶抑制剂；74 µM。",
+  "chem": {
+   "cid": 37817,
+   "mw": "604.7",
+   "smiles": "",
+   "inchi_key": "SDNYTAYICBFYFH-TUFLPTIASA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-lactacystin",
+  "name": "Lactacystin",
+  "zh": "乳胞素（蛋白酶体抑制剂）",
+  "aliases": [
+   "lactacystin"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "L6785"
+  ],
+  "storage": "-20 °C",
+  "composition": "5–10 µM",
+  "note": "选择性 20S 蛋白酶体抑制剂；5–10 µM。",
+  "chem": {
+   "cid": 6610292,
+   "mw": "376.4",
+   "smiles": "",
+   "inchi_key": "DAQAKHDKYAWHCG-RWTHQLGUSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-bortezomib",
+  "name": "Bortezomib (PS-341)",
+  "zh": "硼替佐米（蛋白酶体抑制剂）",
+  "aliases": [
+   "PS-341",
+   "Velcade"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "MedChemExpress",
+   "Selleck"
+  ],
+  "catalogs": [
+   "HY-10227",
+   "S1013"
+  ],
+  "storage": "-20 °C",
+  "composition": "20–100 nM",
+  "note": "临床蛋白酶体抑制剂；泛素化/降解实验常用，20–100 nM。",
+  "chem": {
+   "cid": 387447,
+   "mw": "384.2",
+   "smiles": "",
+   "inchi_key": "GXJABQQUPOEUTA-RDJZCZTQSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-epoxomicin",
+  "name": "Epoxomicin",
+  "zh": "埃博霉素（蛋白酶体抑制剂）",
+  "aliases": [
+   "epoxomicin"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich",
+   "MedChemExpress"
+  ],
+  "catalogs": [
+   "E3652",
+   "HY-13273"
+  ],
+  "storage": "-20 °C",
+  "composition": "50–500 nM",
+  "note": "不可逆蛋白酶体抑制剂；50–500 nM。",
+  "chem": {
+   "cid": 11226684,
+   "mw": "554.7",
+   "smiles": "",
+   "inchi_key": "DOGIDQKFVLKMLQ-JTHVHQAWSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-baf",
+  "name": "Bafilomycin A1",
+  "zh": "巴弗洛霉素 A1（自噬抑制剂）",
+  "aliases": [
+   "BafA1"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich",
+   "MedChemExpress"
+  ],
+  "catalogs": [
+   "B1793",
+   "HY-100558"
+  ],
+  "storage": "-20 °C",
+  "composition": "100 nM",
+  "note": "V-ATPase 抑制剂，阻断自噬流；100 nM 处理。",
+  "chem": {
+   "cid": 6436223,
+   "mw": "622.8",
+   "smiles": "",
+   "inchi_key": "XDHNQDDQEHDUTM-JQWOJBOSSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-cq",
+  "name": "Chloroquine",
+  "zh": "氯喹（自噬抑制剂）",
+  "aliases": [
+   "CQ"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "C6628"
+  ],
+  "storage": "RT (避光)",
+  "composition": "10–50 µM",
+  "note": "抑制溶酶体酸化阻断自噬；10–50 µM。",
+  "chem": {
+   "cid": 2719,
+   "mw": "319.9",
+   "smiles": "",
+   "inchi_key": "WHTVZRBIWZFKQO-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-rapa",
+  "name": "Rapamycin",
+  "zh": "雷帕霉素（mTOR 抑制剂）",
+  "aliases": [
+   "sirolimus"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich",
+   "MedChemExpress"
+  ],
+  "catalogs": [
+   "R0395",
+   "HY-10219"
+  ],
+  "storage": "-20 °C",
+  "composition": "100 nM",
+  "note": "mTORC1 抑制剂，研究磷酸化-mTOR/自噬；100 nM。",
+  "chem": {
+   "cid": 5284616,
+   "mw": "914.2",
+   "smiles": "",
+   "inchi_key": "QFJCIRLUMZQUOT-HPLJOQBZSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-bgp",
+  "name": "β-Glycerophosphate",
+  "zh": "β-甘油磷酸（磷酸酶抑制剂）",
+  "aliases": [
+   "glycerol 2-phosphate"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "G5422"
+  ],
+  "storage": "RT",
+  "composition": "10–50 mM",
+  "note": "丝氨酸/苏氨酸磷酸酶抑制剂；10–50 mM。",
+  "chem": {
+   "cid": 2526,
+   "mw": "172.07",
+   "smiles": "",
+   "inchi_key": "DHCLVCXQIBBOPH-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-ppi",
+  "name": "Sodium Pyrophosphate",
+  "zh": "焦磷酸钠（磷酸酶抑制剂）",
+  "aliases": [
+   "NaPPi"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "P8010"
+  ],
+  "storage": "RT",
+  "composition": "2.5 mM",
+  "note": "磷酸酶抑制剂；2.5 mM 常用（CST 裂解液成分）。",
+  "chem": {
+   "cid": 24403,
+   "mw": "265.90",
+   "smiles": "",
+   "inchi_key": "FQENQNTWSFEDLI-UHFFFAOYSA-J"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-inh-nem",
+  "name": "N-Ethylmaleimide (NEM)",
+  "zh": "N-乙基马来酰亚胺",
+  "aliases": [
+   "NEM"
+  ],
+  "category": "inhibitor",
+  "category_zh": "抑制剂",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "E3876"
+  ],
+  "storage": "2–8 °C",
+  "composition": "10–20 mM",
+  "note": "烷基化游离巯基，抑制去泛素化酶；10–20 mM。",
+  "chem": {
+   "cid": 4362,
+   "mw": "125.13",
+   "smiles": "",
+   "inchi_key": "HDFGOPSGAURCEO-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-quant-660",
+  "name": "Pierce 660 nm Protein Assay",
+  "zh": "Pierce 660 nm 蛋白定量",
+  "aliases": [
+   "660 nm assay"
+  ],
+  "category": "quant",
+  "category_zh": "蛋白定量",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "22660"
+  ],
+  "storage": "RT",
+  "composition": "dye-based 660 nm assay",
+  "note": "去垢剂兼容性极好（≤5% SDS/1% Triton），标准曲线 100–2000 µg/mL。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-quant-dc",
+  "name": "DC Protein Assay",
+  "zh": "DC 蛋白定量试剂盒（去垢剂兼容）",
+  "aliases": [
+   "DC assay"
+  ],
+  "category": "quant",
+  "category_zh": "蛋白定量",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "5000116"
+  ],
+  "storage": "RT",
+  "composition": "Lowry-based, detergent compatible",
+  "note": "改良 Lowry，兼容 SDS/Triton，适合 WB 裂解液。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-quant-gelcode",
+  "name": "GelCode Blue (Colloidal Coomassie)",
+  "zh": "GelCode Blue 考染液",
+  "aliases": [
+   "GelCode Blue"
+  ],
+  "category": "quant",
+  "category_zh": "蛋白定量",
+  "step": 1,
+  "step_zh": "裂解与定量",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "24590"
+  ],
+  "storage": "RT",
+  "composition": "colloidal Coomassie G-250",
+  "note": "免脱色胶内总蛋白半定量/染色。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-acry30",
+  "name": "Acrylamide/Bis 30% (37.5:1)",
+  "zh": "30% 丙烯酰胺/甲叉溶液",
+  "aliases": [
+   "30% acrylamide"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "1610158"
+  ],
+  "storage": "2–8 °C (避光)",
+  "composition": "30% acrylamide/bis 37.5:1",
+  "note": "预配 30% 制胶母液，直接稀释配胶。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-nupage",
+  "name": "NuPAGE Bis-Tris Precast Gel (4-12%)",
+  "zh": "NuPAGE Bis-Tris 预制胶 4-12%",
+  "aliases": [
+   "NuPAGE"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "NP0321BOX"
+  ],
+  "storage": "2–8 °C",
+  "composition": "4-12% Bis-Tris gel",
+  "note": "MOPS/MES 体系，中性 pH 上样，蛋白修饰保持更好。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-mes",
+  "name": "NuPAGE MES SDS Running Buffer (20x)",
+  "zh": "MES 电泳缓冲液 20x",
+  "aliases": [
+   "MES running buffer"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "NP0002"
+  ],
+  "storage": "RT",
+  "composition": "MES-SDS buffer",
+  "note": "NuPAGE/Bolt Bis-Tris 胶配套；MES 适合中低分子量。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-mops",
+  "name": "NuPAGE MOPS SDS Running Buffer (20x)",
+  "zh": "MOPS 电泳缓冲液 20x",
+  "aliases": [
+   "MOPS running buffer"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "NP0001"
+  ],
+  "storage": "RT",
+  "composition": "MOPS-SDS buffer",
+  "note": "Bis-Tris 胶配套；MOPS 适合中高分子量，条带更锐。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-lds",
+  "name": "NuPAGE LDS Sample Buffer (4x)",
+  "zh": "LDS 上样缓冲液 4x",
+  "aliases": [
+   "LDS buffer"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "NP0007"
+  ],
+  "storage": "RT",
+  "composition": "LDS; glycerol; pH 8.4",
+  "note": "NuPAGE 体系上样缓冲液；含 LDS 与示踪染料。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-gel-reducing",
+  "name": "NuPAGE Sample Reducing Agent (DTT 10x)",
+  "zh": "NuPAGE 还原剂 10x",
+  "aliases": [
+   "reducing agent"
+  ],
+  "category": "gel",
+  "category_zh": "电泳",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "NP0004"
+  ],
+  "storage": "RT",
+  "composition": "500 mM DTT",
+  "note": "上样时加入还原剂，打断二硫键。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-marker-blueplus",
+  "name": "Blue Plus II Protein Marker",
+  "zh": "Blue Plus II 蛋白 Marker",
+  "aliases": [
+   "全式金 Marker"
+  ],
+  "category": "marker",
+  "category_zh": "蛋白 Marker",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "TransGen Biotech"
+  ],
+  "catalogs": [
+   "DM111"
+  ],
+  "storage": "-20 °C",
+  "composition": "11 bands",
+  "note": "国产常用预染 marker，11 条带。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-marker-spectra",
+  "name": "Spectra Multicolor Broad Range",
+  "zh": "Spectra 多彩蛋白 Marker",
+  "aliases": [
+   "Spectra"
+  ],
+  "category": "marker",
+  "category_zh": "蛋白 Marker",
+  "step": 2,
+  "step_zh": "电泳",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "26634"
+  ],
+  "storage": "4 °C (避光)",
+  "composition": "10–260 kDa",
+  "note": "10–260 kDa 宽范围多彩 marker，含 3 条参考带。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-transfer-lfpvdf",
+  "name": "Low-Fluorescence PVDF (LF-PVDF)",
+  "zh": "低荧光 PVDF 膜",
+  "aliases": [
+   "LF PVDF"
+  ],
+  "category": "transfer",
+  "category_zh": "转膜",
+  "step": 3,
+  "step_zh": "转膜",
+  "vendors": [
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "1620264"
+  ],
+  "storage": "RT",
+  "composition": "low-fluorescence PVDF",
+  "note": "荧光 WB（IRDye/Alexa）专用，背景更低。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-transfer-iblot",
+  "name": "iBlot 2 Transfer Stacks (PVDF)",
+  "zh": "iBlot 2 转膜耗材（PVDF）",
+  "aliases": [
+   "iBlot stack"
+  ],
+  "category": "transfer",
+  "category_zh": "转膜",
+  "step": 3,
+  "step_zh": "转膜",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "IB301001"
+  ],
+  "storage": "RT",
+  "composition": "pre-assembled transfer stack",
+  "note": "iBlot 2 干转系统专用转膜叠层。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-transfer-buffer-dry",
+  "name": "Semi-Dry Transfer Buffer (5x)",
+  "zh": "半干转缓冲液 5x",
+  "aliases": [
+   "semi-dry buffer"
+  ],
+  "category": "transfer",
+  "category_zh": "转膜",
+  "step": 3,
+  "step_zh": "转膜",
+  "vendors": [
+   "Bio-Rad"
+  ],
+  "catalogs": [
+   "1704273"
+  ],
+  "storage": "RT",
+  "composition": "Tris/glycine, low methanol",
+  "note": "半干转用；含甲醇浓度较低。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-block-odyssey",
+  "name": "Odyssey Blocking Buffer (TBS)",
+  "zh": "Odyssey 封闭液",
+  "aliases": [
+   "LI-COR blocking"
+  ],
+  "category": "block",
+  "category_zh": "封闭与洗涤",
+  "step": 4,
+  "step_zh": "封闭与检测",
+  "vendors": [
+   "LI-COR"
+  ],
+  "catalogs": [
+   "927-40000"
+  ],
+  "storage": "4 °C",
+  "composition": "proprietary blocking buffer",
+  "note": "近红外荧光 WB 推荐封闭液，避免高背景。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-block-casein",
+  "name": "Casein Blocking Buffer",
+  "zh": "酪蛋白封闭液",
+  "aliases": [
+   "casein"
+  ],
+  "category": "block",
+  "category_zh": "封闭与洗涤",
+  "step": 4,
+  "step_zh": "封闭与检测",
+  "vendors": [],
+  "catalogs": [],
+  "storage": "2–8 °C",
+  "composition": "1% casein in TBS",
+  "note": "酪蛋白封闭可降低磷酸化抗体背景。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-block-fastgreen",
+  "name": "Fast Green FCF (total protein stain)",
+  "zh": "快绿 FCF 总蛋白染色",
+  "aliases": [
+   "Fast Green"
+  ],
+  "category": "block",
+  "category_zh": "封闭与洗涤",
+  "step": 4,
+  "step_zh": "封闭与检测",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "F7252"
+  ],
+  "storage": "RT",
+  "composition": "0.1% Fast Green in 7% acetic acid",
+  "note": "转膜后总蛋白染色（比 Ponceau 更易洗脱）。",
+  "chem": {
+   "cid": 16887,
+   "mw": "808.9",
+   "smiles": "",
+   "inchi_key": "RZSYLLSAWYUBPE-UHFFFAOYSA-L"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-det-luminata",
+  "name": "Luminata Forte Western HRP Substrate",
+  "zh": "Luminata Forte 增强型 ECL",
+  "aliases": [
+   "Luminata Forte"
+  ],
+  "category": "detection",
+  "category_zh": "显影检测",
+  "step": 6,
+  "step_zh": "结果与量化",
+  "vendors": [
+   "Millipore"
+  ],
+  "catalogs": [
+   "WBLUF0100"
+  ],
+  "storage": "2–8 °C (避光)",
+  "composition": "enhanced luminol substrate",
+  "note": "高灵敏度增强型底物，适合中低丰度。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-det-dura",
+  "name": "SuperSignal West Dura",
+  "zh": "SuperSignal Dura ECL",
+  "aliases": [
+   "Dura"
+  ],
+  "category": "detection",
+  "category_zh": "显影检测",
+  "step": 6,
+  "step_zh": "结果与量化",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "34075"
+  ],
+  "storage": "2–8 °C (避光)",
+  "composition": "extended-duration substrate",
+  "note": "长时间信号稳定性好，适合多次曝光。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-det-signalfire",
+  "name": "SignalFire ECL Reagent",
+  "zh": "SignalFire ECL 底物",
+  "aliases": [
+   "SignalFire"
+  ],
+  "category": "detection",
+  "category_zh": "显影检测",
+  "step": 6,
+  "step_zh": "结果与量化",
+  "vendors": [
+   "Cell Signaling Technology"
+  ],
+  "catalogs": [
+   "6883"
+  ],
+  "storage": "2–8 °C (避光)",
+  "composition": "luminol/peroxide",
+  "note": "CST 推荐 ECL，与 CST 抗体体系配合。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-det-dab",
+  "name": "DAB Peroxidase Substrate Kit",
+  "zh": "DAB 显色底物试剂盒",
+  "aliases": [
+   "DAB"
+  ],
+  "category": "detection",
+  "category_zh": "显影检测",
+  "step": 6,
+  "step_zh": "结果与量化",
+  "vendors": [
+   "Vector Laboratories"
+  ],
+  "catalogs": [
+   "SK-4100"
+  ],
+  "storage": "2–8 °C (避光)",
+  "composition": "DAB + H2O2 + buffer",
+  "note": "HRP 显色（棕色不溶性产物），适合免疫组化/膜显色。",
+  "chem": {
+   "cid": 7071,
+   "mw": "214.27",
+   "smiles": "",
+   "inchi_key": "HSTOKWSFWGCZMH-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-det-nbtbcip",
+  "name": "NBT/BCIP Substrate (AP)",
+  "zh": "NBT/BCIP 显色底物",
+  "aliases": [
+   "NBT/BCIP"
+  ],
+  "category": "detection",
+  "category_zh": "显影检测",
+  "step": 6,
+  "step_zh": "结果与量化",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "34042"
+  ],
+  "storage": "2–8 °C (避光)",
+  "composition": "NBT + BCIP",
+  "note": "碱性磷酸酶(AP)显色底物（蓝紫色）。",
+  "chem": {
+   "cid": 9282,
+   "mw": "746.7",
+   "smiles": "",
+   "inchi_key": "JPXMTWWFLBLUCD-UHFFFAOYSA-N"
+  },
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-stain-sypro",
+  "name": "SYPRO Ruby Protein Gel Stain",
+  "zh": "SYPRO Ruby 荧光胶染",
+  "aliases": [
+   "SYPRO Ruby"
+  ],
+  "category": "stain",
+  "category_zh": "染色",
+  "step": 6,
+  "step_zh": "结果与量化",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "S12000"
+  ],
+  "storage": "RT (避光)",
+  "composition": "ruthenium-based fluorescent stain",
+  "note": "高灵敏度荧光总蛋白染色，兼容质谱。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-stain-fastgreen-gel",
+  "name": "Fast Green (gel stain)",
+  "zh": "快绿凝胶染色",
+  "aliases": [
+   "fast green gel"
+  ],
+  "category": "stain",
+  "category_zh": "染色",
+  "step": 6,
+  "step_zh": "结果与量化",
+  "vendors": [
+   "Sigma-Aldrich"
+  ],
+  "catalogs": [
+   "F7252"
+  ],
+  "storage": "RT",
+  "composition": "0.1% Fast Green",
+  "note": "温和总蛋白胶染，可逆。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-hrp-chick",
+  "name": "HRP Anti-Chicken IgG (Secondary)",
+  "zh": "HRP 标记抗鸡二抗",
+  "aliases": [
+   "anti-chicken HRP"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "31401"
+  ],
+  "storage": "2–8 °C",
+  "composition": "HRP-conjugated anti-chicken IgY",
+  "note": "与鸡源一抗配对。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-trueblot",
+  "name": "TrueBlot Anti-Rabbit IgG HRP",
+  "zh": "TrueBlot 抗兔二抗（重组，不识别重链）",
+  "aliases": [
+   "TrueBlot"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Rockland"
+  ],
+  "catalogs": [
+   "18-8816-33"
+  ],
+  "storage": "2–8 °C",
+  "composition": "recombinant anti-rabbit IgG (H+L)",
+  "note": "IP/WB 重组二抗，避免识别一抗重链干扰。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-biotin-rb",
+  "name": "Biotinylated Anti-Rabbit IgG",
+  "zh": "生物素化抗兔二抗",
+  "aliases": [
+   "biotin secondary"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Vector Laboratories"
+  ],
+  "catalogs": [
+   "BA-1000"
+  ],
+  "storage": "2–8 °C",
+  "composition": "biotinylated goat anti-rabbit",
+  "note": "与链霉亲和素-HRP 联用放大信号。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-strep-hrp",
+  "name": "Streptavidin-HRP",
+  "zh": "链霉亲和素-HRP",
+  "aliases": [
+   "SA-HRP"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "21130"
+  ],
+  "storage": "2–8 °C",
+  "composition": "streptavidin-HRP conjugate",
+  "note": "与生物素化二抗/抗体联用，信号放大。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-prota-hrp",
+  "name": "Protein A-HRP",
+  "zh": "蛋白 A-HRP",
+  "aliases": [
+   "ProtA-HRP"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "32400"
+  ],
+  "storage": "2–8 °C",
+  "composition": "Protein A-HRP conjugate",
+  "note": "结合兔/人 IgG Fc；用于 Fc 融合蛋白检测。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-protg-hrp",
+  "name": "Protein G-HRP",
+  "zh": "蛋白 G-HRP",
+  "aliases": [
+   "ProtG-HRP"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "32460"
+  ],
+  "storage": "2–8 °C",
+  "composition": "Protein G-HRP conjugate",
+  "note": "结合多种种属 IgG；比 Protein A 谱更广。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-gapdh-hrp",
+  "name": "GAPDH Antibody (HRP-conjugated)",
+  "zh": "GAPDH 内参抗体（HRP 直标）",
+  "aliases": [
+   "HRP GAPDH"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Abcam"
+  ],
+  "catalogs": [
+   "ab9482"
+  ],
+  "storage": "2–8 °C",
+  "composition": "HRP-conjugated rabbit anti-GAPDH",
+  "note": "HRP 直标内参一抗，免二抗步骤。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-actb-hrp",
+  "name": "β-actin Antibody (HRP-conjugated)",
+  "zh": "β-actin 内参抗体（HRP 直标）",
+  "aliases": [
+   "HRP actin"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Abcam"
+  ],
+  "catalogs": [
+   "ab49900"
+  ],
+  "storage": "2–8 °C",
+  "composition": "HRP-conjugated anti-beta actin",
+  "note": "HRP 直标内参一抗。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-ab-ms-igg",
+  "name": "Normal Mouse IgG (Control)",
+  "zh": "小鼠同型对照 IgG",
+  "aliases": [
+   "mouse IgG control"
+  ],
+  "category": "antibody",
+  "category_zh": "抗体",
+  "step": 5,
+  "step_zh": "抗体",
+  "vendors": [
+   "Cell Signaling Technology"
+  ],
+  "catalogs": [
+   "5415"
+  ],
+  "storage": "-20 °C",
+  "composition": "mouse normal IgG",
+  "note": "鼠源一抗的同型对照。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-other-concentrator",
+  "name": "Pierce Protein Concentrator PES 10K",
+  "zh": "蛋白浓缩管 PES 10K",
+  "aliases": [
+   "concentrator",
+   "浓缩管"
+  ],
+  "category": "precip",
+  "category_zh": "沉淀与其它",
+  "step": 0,
+  "step_zh": "样本与处理",
+  "vendors": [
+   "Thermo Scientific"
+  ],
+  "catalogs": [
+   "88513"
+  ],
+  "storage": "RT",
+  "composition": "10K MWCO PES concentrator",
+  "note": "低丰度样品浓缩/脱盐后 WB。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ },
+ {
+  "id": "r-other-ap201",
+  "name": "Alkaline Phosphatase (AP) Conjugate Buffer",
+  "zh": "AP 偶联缓冲液",
+  "aliases": [
+   "AP buffer"
+  ],
+  "category": "precip",
+  "category_zh": "沉淀与其它",
+  "step": 0,
+  "step_zh": "样本与处理",
+  "vendors": [],
+  "catalogs": [],
+  "storage": "RT",
+  "composition": "Tris/NaCl/MgCl2 buffer",
+  "note": "AP 体系二抗稀释/洗涤缓冲液。",
+  "chem": null,
+  "source": "公开品牌目录 + PubChem(2026-08)"
+ }
+]
