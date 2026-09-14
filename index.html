@@ -536,6 +536,157 @@ input[type=range] { flex: 1 1 auto; accent-color: var(--acc); min-width: 0; }
 .src-tag.self { background: #f1f1f3; color: #6b6b70; }
 .plan .d-controls label { min-width: 150px; }
 
+
+/* ==================== AI 助教（对话式教学智能体） ==================== */
+.agent { display: flex; flex-direction: column; gap: 12px; max-width: 1100px; margin: 0 auto; }
+
+.ag-notice {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 12px; padding: 10px 14px; font-size: 12.5px; color: var(--ink); line-height: 1.65;
+}
+.ag-privacy { display: block; margin-top: 4px; color: var(--mut); }
+
+.ag-head { display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap; }
+.ag-head-l { flex: 1 1 320px; min-width: 260px; }
+.ag-title { margin: 0; font-size: 18px; font-weight: 800; }
+.ag-lead { margin: 4px 0 0; font-size: 13px; color: var(--mut); line-height: 1.6; }
+.ag-head-r { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+.ag-roles { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--card); }
+.ag-role {
+  appearance: none; border: 0; background: transparent; color: var(--mut);
+  padding: 7px 16px; font-size: 13px; font-family: inherit; cursor: pointer; transition: background .15s, color .15s;
+}
+.ag-role + .ag-role { border-left: 1px solid var(--line); }
+.ag-role:hover { color: var(--acc); }
+.ag-role.active { background: var(--acc); color: #fff; font-weight: 700; }
+
+.ag-status { font-size: 12px; padding: 6px 12px; border-radius: 999px; align-self: flex-start; border: 1px solid var(--line); background: #fafbfc; color: var(--mut); }
+.ag-status.ag-ok { background: #f2fbf5; border-color: #bfe6cc; color: #1f7a45; }
+.ag-status.ag-warn { background: var(--warn-bg); border-color: var(--warn-line); color: #96551f; }
+.ag-status.ag-bad { background: #fdf3f3; border-color: #f0c9c8; color: var(--danger); }
+
+.ag-hint { margin: 0; font-size: 12.5px; color: var(--mut); line-height: 1.6; }
+
+.ag-list {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: 14px; min-height: 300px; max-height: 58vh; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.ag-empty { color: var(--mut); font-size: 13px; text-align: center; margin: auto 0; padding: 40px 12px; line-height: 1.7; }
+
+.ag-msg { display: flex; gap: 10px; align-items: flex-start; }
+.ag-av {
+  flex: 0 0 30px; width: 30px; height: 30px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; background: var(--info-bg); color: var(--acc); border: 1px solid var(--info-line);
+}
+.ag-msg.ag-user .ag-av { background: #eef1f5; color: var(--mut); border-color: var(--line); }
+.ag-body { flex: 1 1 auto; min-width: 0; }
+.ag-text { font-size: 13.5px; line-height: 1.75; color: var(--ink); word-wrap: break-word; }
+.ag-text p { margin: 0 0 8px; }
+.ag-text p:last-child { margin-bottom: 0; }
+.ag-li { position: relative; padding-left: 14px; margin: 3px 0; }
+.ag-li::before { content: ''; position: absolute; left: 3px; top: .68em; width: 4px; height: 4px; border-radius: 50%; background: var(--acc); }
+.ag-msg.ag-user .ag-text { background: #f6f8fb; border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; }
+
+.ag-cursor { display: inline-block; width: 7px; height: 14px; background: var(--acc); vertical-align: -2px; animation: agBlink 1s steps(2, start) infinite; }
+@keyframes agBlink { to { visibility: hidden; } }
+
+.ag-src { margin-top: 8px; font-size: 11.5px; color: var(--mut); display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+.ag-src-t { color: var(--mut); }
+.ag-src-i { background: var(--info-bg); border: 1px solid var(--info-line); color: var(--acc); border-radius: 999px; padding: 1px 9px; }
+
+.ag-copy { margin-top: 7px; appearance: none; border: 1px solid var(--line); background: #fff; color: var(--mut); border-radius: 7px; padding: 2px 10px; font-size: 11.5px; font-family: inherit; cursor: pointer; }
+.ag-copy:hover { border-color: var(--acc); color: var(--acc); }
+
+.ag-ex-t { font-size: 12px; color: var(--mut); margin-bottom: 7px; }
+.ag-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+
+.ag-bar { display: flex; gap: 9px; align-items: flex-end; }
+.ag-input {
+  flex: 1 1 auto; border: 1px solid var(--line); border-radius: 12px; padding: 10px 13px;
+  font-size: 13.5px; font-family: inherit; color: var(--ink); background: var(--card);
+  resize: vertical; min-height: 46px; line-height: 1.6;
+}
+.ag-input:focus { outline: none; border-color: var(--acc); box-shadow: 0 0 0 3px rgba(47,111,237,.12); }
+.ag-send { flex: 0 0 auto; min-width: 92px; padding: 11px 18px; }
+
+@media (max-width: 720px) {
+  .ag-head-r { width: 100%; }
+  .ag-bar { flex-wrap: wrap; }
+  .ag-send { width: 100%; }
+}
+
+
+/* ---------- AI 助教：入口门 / 表单 / 教师看板 ---------- */
+.ag-gate { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 28px 24px; text-align: center; }
+.ag-gate .ag-title { font-size: 20px; }
+.ag-gate .ag-lead { max-width: 620px; margin: 6px auto 0; }
+.ag-gate-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin: 24px 0 14px; }
+.ag-big {
+  appearance: none; cursor: pointer; font-family: inherit;
+  width: 240px; padding: 22px 18px; border-radius: 16px;
+  border: 1.5px solid var(--line); background: #fff; color: var(--ink);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  transition: border-color .15s, box-shadow .15s, transform .15s;
+}
+.ag-big:hover { border-color: var(--acc); box-shadow: 0 6px 18px rgba(47,111,237,.12); transform: translateY(-2px); }
+.ag-big-alt:hover { border-color: #7a5cf0; box-shadow: 0 6px 18px rgba(122,92,240,.14); }
+.ag-big-i { font-size: 30px; line-height: 1; }
+.ag-big-t { font-size: 15px; font-weight: 700; }
+
+.ag-form { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; max-width: 520px; margin: 0 auto; }
+.ag-form .ag-title { font-size: 17px; }
+.ag-form .ag-lead { margin-bottom: 16px; }
+.ag-field { margin-bottom: 14px; }
+.ag-lbl { display: block; font-size: 12.5px; font-weight: 600; color: var(--mut); margin-bottom: 6px; }
+.ag-in { width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 10px 13px; font-size: 14px; font-family: inherit; color: var(--ink); background: #fff; }
+.ag-in:focus { outline: none; border-color: var(--acc); box-shadow: 0 0 0 3px rgba(47,111,237,.12); }
+.ag-form-bar { display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px; }
+.ag-err { background: #fdf3f3; border: 1px solid #f0c9c8; color: var(--danger); border-radius: 10px; padding: 9px 12px; font-size: 12.5px; margin-top: 12px; }
+.ag-wait { background: #fafbfc; }
+
+.ag-app { display: flex; flex-direction: column; gap: 12px; }
+.ag-idbar { display: flex; align-items: center; gap: 8px; }
+.ag-idchip { background: var(--info-bg); border: 1px solid var(--info-line); color: var(--acc); border-radius: 999px; padding: 5px 14px; font-size: 12.5px; font-weight: 700; }
+.ag-subtabs { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--card); align-self: flex-start; }
+.ag-subtab { appearance: none; border: 0; background: transparent; color: var(--mut); padding: 7px 18px; font-size: 13px; font-family: inherit; cursor: pointer; }
+.ag-subtab + .ag-subtab { border-left: 1px solid var(--line); }
+.ag-subtab:hover { color: var(--acc); }
+.ag-subtab.active { background: var(--acc); color: #fff; font-weight: 700; }
+
+.ag-recs { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.ag-sub-title { margin: 0; font-size: 15px; font-weight: 700; }
+.ag-recs-bar { display: flex; gap: 9px; flex-wrap: wrap; }
+.ag-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.ag-table th { text-align: left; font-size: 11.5px; color: var(--mut); font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.ag-table td { padding: 9px 10px; border-bottom: 1px solid #f1f4f8; vertical-align: middle; }
+.ag-table tr:hover td { background: #fafbfd; }
+.ag-mono { font-family: ui-monospace, Consolas, monospace; font-weight: 600; }
+.ag-num { font-variant-numeric: tabular-nums; text-align: center; }
+.ag-dim { color: var(--mut); font-size: 12px; white-space: nowrap; }
+.ag-act { white-space: nowrap; }
+.ag-mini { appearance: none; border: 1px solid var(--line); background: #fff; color: var(--mut); border-radius: 7px; padding: 3px 10px; font-size: 11.5px; font-family: inherit; cursor: pointer; margin-right: 5px; }
+.ag-mini:hover { border-color: var(--acc); color: var(--acc); }
+.ag-mini:disabled { opacity: .5; cursor: not-allowed; }
+.ag-mini-danger:hover { border-color: var(--danger); color: var(--danger); }
+
+.ag-rec { border: 1px solid var(--line); border-radius: 11px; padding: 11px 13px; background: #fcfdfe; }
+.ag-rec-hd { display: flex; align-items: center; gap: 9px; margin-bottom: 6px; }
+.ag-rec-time { font-size: 11.5px; color: var(--mut); font-variant-numeric: tabular-nums; }
+.ag-tag-bad { font-size: 11px; background: #fdf3f3; border: 1px solid #f0c9c8; color: var(--danger); border-radius: 999px; padding: 1px 9px; }
+.ag-rec-q { font-size: 13.5px; line-height: 1.65; margin-bottom: 6px; }
+.ag-rec-q strong, .ag-rec-a strong { color: var(--mut); font-weight: 600; }
+.ag-rec-a { font-size: 12.5px; line-height: 1.7; color: #38455a; white-space: pre-wrap; }
+.ag-rec-src { margin-top: 6px; font-size: 11px; color: var(--mut); }
+
+@media (max-width: 720px) {
+  .ag-big { width: 100%; }
+  .ag-table { font-size: 12px; }
+  .ag-table th:nth-child(5), .ag-table td:nth-child(5) { display: none; }
+}
+
 </style>
 </head>
 <body>
@@ -559,6 +710,7 @@ input[type=range] { flex: 1 1 auto; accent-color: var(--acc); min-width: 0; }
     </header>
 
     <nav class="tabs" role="tablist">
+            <button class="tab" id="tab-agent" role="tab" data-i18n="tab_agent">AI 助教</button>
       <button class="tab active" id="tab-sim" role="tab" data-i18n="tab_sim">模拟器</button>
       <button class="tab" id="tab-demo" role="tab" data-i18n="tab_demo">演示</button>
       <button class="tab" id="tab-assist" role="tab" data-i18n="tab_assist">蛋白助手</button>
@@ -575,6 +727,10 @@ input[type=range] { flex: 1 1 auto; accent-color: var(--acc); min-width: 0; }
 
     <section class="view" id="view-demo" hidden>
       <div class="demo" id="demo-body"></div>
+    </section>
+
+    <section class="view" id="view-agent" hidden>
+      <div class="agent" id="agent-root"></div>
     </section>
 
     <section class="view" id="view-sim">
@@ -1048,6 +1204,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     zh: {
       tagline: '在线 Western blot 模拟与蛋白分析助手',
       tab_sim: '模拟器',
+      tab_agent: 'AI 助教',
       tab_demo: '演示',
       tab_assist: '蛋白助手',
       btn_random: '随机演示',
@@ -1335,6 +1492,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     en: {
       tagline: 'Online Western blot simulator & protein analysis',
       tab_sim: 'Simulator',
+      tab_agent: 'AI Tutor',
       tab_demo: 'Demo',
       tab_assist: 'Protein Assistant',
       btn_random: 'Random',
@@ -2533,6 +2691,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     showOne(document.getElementById('view-sim'), name === 'sim');
     showOne(document.getElementById('view-assist'), name === 'assist');
     showOne(document.getElementById('view-demo'), name === 'demo');
+    showOne(document.getElementById('view-agent'), name === 'agent');
     showOne(document.getElementById('view-exp'), name === 'exp');
     showOne(document.getElementById('view-reagent'), name === 'reagent');
     showOne(document.getElementById('view-disclaimer'), name === 'disclaimer');
@@ -2549,6 +2708,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     var gt = document.getElementById('tab-game'); if (gt) gt.classList.toggle('active', name === 'game');
     document.getElementById('tab-sim').classList.toggle('active', name === 'sim');
     document.getElementById('tab-demo').classList.toggle('active', name === 'demo');
+    document.getElementById('tab-agent').classList.toggle('active', name === 'agent');
     document.getElementById('tab-assist').classList.toggle('active', name === 'assist');
     document.getElementById('tab-exp').classList.toggle('active', name === 'exp');
     document.getElementById('tab-disclaimer').classList.toggle('active', name === 'disclaimer');
@@ -2560,6 +2720,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     document.getElementById('tab-ad').classList.toggle('active', name === 'ad');
     if (name === 'sim') schedule();
     if (name === 'demo') renderDemo();
+    if (name === 'agent' && window.WiseBlotAgent) window.WiseBlotAgent.onShow();
     if (name === 'disclaimer') renderDisclaimer();
     if (name === 'decision') renderDecisionPage();
     if (name === 'cost') renderCost();
@@ -2577,6 +2738,8 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
   }
   document.getElementById('tab-sim').addEventListener('click', function () { switchTab('sim'); });
   document.getElementById('tab-demo').addEventListener('click', function () { switchTab('demo'); });
+  var tabAgent = document.getElementById('tab-agent');
+  if (tabAgent) tabAgent.addEventListener('click', function () { switchTab('agent'); });
   document.getElementById('tab-assist').addEventListener('click', function () { switchTab('assist'); });
   document.getElementById('tab-exp').addEventListener('click', function () { switchTab('exp'); });
   var tabReagent = document.getElementById('tab-reagent');
@@ -2659,6 +2822,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     if (reagentListEl) { buildReagentChips(); buildReagentSteps(); renderReagents(); }
     if (document.getElementById('view-exp')) renderStepCommon();
     if (document.getElementById('view-demo')) renderDemo();
+    if (document.getElementById('view-agent') && window.WiseBlotAgent) window.WiseBlotAgent.relabel();
     if (document.getElementById('view-disclaimer')) renderDisclaimer();
     if (document.getElementById('view-decision')) renderDecisionPage();
     if (document.getElementById('view-cost')) renderCost();
@@ -5527,6 +5691,846 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     });
   }
   initGame();
+})();
+
+</script>
+<script>
+/* WiseBlot AI 助教 —— 前端组件
+ * 结构：入口门（我是学生 / 我是教师）→ 学生登记 → 对话；教师登录 → 对话 + 学生记录看板
+ * 后端：Cloudflare Worker + D1。前端不持有任何模型密钥。
+ * 隐私：只保存学号、姓名与问答记录；会话票据存于浏览器本地；教师端有独立口令。
+ */
+(function () {
+  'use strict';
+
+  /* ================== 配置 ================== */
+  // 部署 Worker 后替换为实际的 workers.dev 地址（结尾不要带斜杠）
+  var REMOTE_BASE = 'https://wiseblot-agent.wiseblot-agent.workers.dev';
+  var LOCAL_BASE = 'http://127.0.0.1:8787';
+  var IS_LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  var BASE = IS_LOCAL ? LOCAL_BASE : REMOTE_BASE;
+  var API = {
+    chat: BASE + '/api/chat',
+    health: BASE + '/api/health',
+    studentLogin: BASE + '/api/student/login',
+    teacherLogin: BASE + '/api/teacher/login',
+    students: BASE + '/api/teacher/students',
+    records: BASE + '/api/teacher/records',
+    exportCsv: BASE + '/api/teacher/export',
+    del: BASE + '/api/teacher/delete'
+  };
+  var LS_STUDENT = 'wiseblot.student';
+  var SS_TEACHER = 'wiseblot.teacher';
+
+  /* ================== 文案 ================== */
+  var T = {
+    zh: {
+      title: 'AI 助教',
+      lead: '对话式实验教学智能体：通过提问，帮你把故障范围一步步缩小。',
+      gate_lead: '请选择你的身份进入。学生端会记录你的提问，供任课教师复盘讲评。',
+      as_student: '我是学生',
+      as_teacher: '我是教师',
+      gate_note: '本智能体仅用于实验教学辅助，不生成或修改 WB 图片与条带结果，也不代替真实湿实验操作。',
+      reg_title: '学生登记',
+      reg_lead: '首次使用请填写学号与姓名。记录用于教师了解班级共性难点，不做其他用途。',
+      lbl_sid: '学号',
+      lbl_name: '姓名',
+      ph_sid: '例如 2023001',
+      ph_name: '例如 张三',
+      enter: '开始使用',
+      back: '返回',
+      t_title: '教师登录',
+      t_lead: '请输入教师端口令。登录后可查看全体学生的提问记录并导出。',
+      lbl_pw: '教师口令',
+      ph_pw: '请输入口令',
+      t_enter: '登录',
+      who_student: '学生',
+      who_teacher: '教师',
+      logout: '退出',
+      tab_chat: 'AI 助手',
+      tab_records: '学生记录',
+      records_title: '学生提问记录',
+      records_lead: '以学号归档。点击任意一行查看该生完整问答留痕。',
+      th_sid: '学号', th_name: '姓名', th_count: '提问数', th_block: '拦截数',
+      th_last: '最近活动', th_act: '操作',
+      view: '查看', export_one: '导出', del: '删除',
+      export_all: '导出全部记录 (CSV)', refresh: '刷新',
+      no_students: '还没有学生登记记录。',
+      no_records: '该学生暂无提问记录。',
+      detail_of: '的记录',
+      time: '时间', question: '提问', answer: '回答', blocked_tag: '已被合规拦截',
+      del_confirm: '确定删除该学生的全部记录吗？此操作不可恢复。',
+      del_done: '已删除',
+      exp_done: '已开始下载',
+      loading: '加载中…',
+      role_student: '学生端', role_teacher: '教师端',
+      hint_student: '描述实验现象和你已经选用的条件（上样量、曝光时间、抗体等），信息越具体，提问越有针对性。',
+      hint_teacher: '教师端：可粘贴匿名化的班级实验记录摘要，归纳共性故障并生成课堂研讨题。',
+      ph_student: '例如：第一次做 WB，上样 20 µg，曝光 30 秒后整张膜发黑，内参也很强……',
+      ph_teacher: '粘贴匿名记录，例如：12 条记录中，5 条无条带、4 条背景高、3 条杂带偏多……',
+      send: '发送', stop: '停止生成', clear: '清空对话',
+      empty: '还没有对话。可以直接描述你遇到的实验现象，或从下面的常见问题开始。',
+      examples: '常见提问', basis: '本次回答依据的知识库条目',
+      offline: 'AI 助教后端当前不可达，请稍后重试。',
+      nokey: '服务端尚未配置模型密钥，暂时无法回答。',
+      disclaimer: '本智能体仅用于实验教学辅助：不生成或修改 WB 图片与条带结果，不代替真实湿实验操作。回答中涉及的实验参数仅作教学参考，正式实验请以试剂说明书与预实验优化为准。',
+      privacy: '请勿在对话中粘贴姓名、学号、电话等个人信息。',
+      failed: '请求失败', copied: '已复制', copy: '复制', thinking: '正在思考',
+      relogin: '登录状态已失效，请重新登记。',
+      ex: [
+        '我跑出来完全没有条带，可能是什么原因？',
+        '背景太高、整张膜发黑，该怎么排查？',
+        '目标蛋白 200 kDa，转膜要注意什么？',
+        '检测磷酸化蛋白要特别留意哪些步骤？',
+        '内参应该怎么选才合适？',
+        '条带位置比预期低很多，怎么判断原因？'
+      ]
+    },
+    en: {
+      title: 'AI Tutor',
+      lead: 'A dialogic teaching agent: it narrows down the fault by asking questions.',
+      gate_lead: 'Choose your role to continue. Student questions are logged so the instructor can review them in class.',
+      as_student: 'I am a student',
+      as_teacher: 'I am an instructor',
+      gate_note: 'This agent is for teaching support only. It does not generate or alter Western blot images or band results, and does not replace real bench work.',
+      reg_title: 'Student registration',
+      reg_lead: 'Enter your student ID and name on first use. Records are used only to help the instructor see common difficulties.',
+      lbl_sid: 'Student ID',
+      lbl_name: 'Name',
+      ph_sid: 'e.g. 2023001',
+      ph_name: 'e.g. Zhang San',
+      enter: 'Start',
+      back: 'Back',
+      t_title: 'Instructor login',
+      t_lead: 'Enter the instructor password to review and export all student questions.',
+      lbl_pw: 'Password',
+      ph_pw: 'Enter password',
+      t_enter: 'Sign in',
+      who_student: 'Student',
+      who_teacher: 'Instructor',
+      logout: 'Sign out',
+      tab_chat: 'AI assistant',
+      tab_records: 'Student records',
+      records_title: 'Student question log',
+      records_lead: 'Grouped by student ID. Click any row to see the full exchange.',
+      th_sid: 'ID', th_name: 'Name', th_count: 'Questions', th_block: 'Blocked',
+      th_last: 'Last activity', th_act: 'Actions',
+      view: 'View', export_one: 'Export', del: 'Delete',
+      export_all: 'Export all records (CSV)', refresh: 'Refresh',
+      no_students: 'No students have registered yet.',
+      no_records: 'No questions from this student yet.',
+      detail_of: ' — records',
+      time: 'Time', question: 'Question', answer: 'Answer', blocked_tag: 'Blocked by compliance rule',
+      del_confirm: 'Delete all records for this student? This cannot be undone.',
+      del_done: 'Deleted',
+      exp_done: 'Download started',
+      loading: 'Loading...',
+      role_student: 'Student', role_teacher: 'Instructor',
+      hint_student: 'Describe the symptom and the conditions you already used. The more specific, the sharper the questions.',
+      hint_teacher: 'Instructor mode: paste anonymised class records to summarise common failures and generate discussion prompts.',
+      ph_student: 'e.g. First WB attempt, 20 ug loaded, 30 s exposure gave an entirely black membrane...',
+      ph_teacher: 'Paste anonymised records, e.g. Of 12 records: 5 no band, 4 high background...',
+      send: 'Send', stop: 'Stop', clear: 'Clear chat',
+      empty: 'No messages yet. Describe what you observed, or start from a common question below.',
+      examples: 'Common questions', basis: 'Knowledge-base entries used',
+      offline: 'The AI Tutor backend is unreachable. Please retry later.',
+      nokey: 'The server has no model key configured.',
+      disclaimer: 'This agent is for teaching support only: it does not generate or alter Western blot images or band results, and does not replace real bench work. Any parameters mentioned are teaching references.',
+      privacy: 'Do not paste names, student IDs, phone numbers or other personal data into the chat.',
+      failed: 'Request failed', copied: 'Copied', copy: 'Copy', thinking: 'Thinking',
+      relogin: 'Your session has expired. Please register again.',
+      ex: [
+        'I got no band at all. What could be the reason?',
+        'Background is too high and the whole membrane is dark. How do I troubleshoot?',
+        'My target is 200 kDa. What should I watch during transfer?',
+        'What is special about detecting phosphorylated proteins?',
+        'How do I choose a loading control?',
+        'The band is much lower than expected. How do I judge the cause?'
+      ]
+    }
+  };
+
+  function lang() {
+    return String(document.documentElement.lang || 'zh').toLowerCase().indexOf('en') === 0 ? 'en' : 'zh';
+  }
+  function t(k) { var d = T[lang()]; return d && d[k] != null ? d[k] : T.zh[k]; }
+
+  /* ================== 状态 ================== */
+  var st = {
+    view: 'gate',
+    student: null,
+    teacherToken: null,
+    teacherTab: 'chat',
+    msgs: [],
+    students: [],
+    current: null,
+    records: [],
+    busy: false,
+    hint: ''
+  };
+  var host = null, ctrl = null;
+
+  /* ================== 工具 ================== */
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+  function el(tag, cls, txt) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (txt != null) e.textContent = txt;
+    return e;
+  }
+  function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+  function fmt(ts) {
+    var d = new Date(Number(ts) + 8 * 3600 * 1000);
+    var p = function (n) { return String(n).padStart(2, '0'); };
+    return d.getUTCFullYear() + '-' + p(d.getUTCMonth() + 1) + '-' + p(d.getUTCDate()) +
+      ' ' + p(d.getUTCHours()) + ':' + p(d.getUTCMinutes());
+  }
+  function render(text) {
+    var lines = String(text || '').split(/\r?\n/);
+    var out = [], buf = [];
+    function flush() { if (buf.length) { out.push('<p>' + buf.join('<br>') + '</p>'); buf = []; } }
+    for (var i = 0; i < lines.length; i++) {
+      var ln = lines[i];
+      if (!ln.trim()) { flush(); continue; }
+      var m = ln.match(/^\s*(?:[-*\u2022]|\d+[.)])\s+(.*)$/);
+      if (m) { flush(); out.push('<div class="ag-li">' + inline(m[1]) + '</div>'); }
+      else buf.push(inline(ln));
+    }
+    flush();
+    return out.join('');
+  }
+  function inline(s) { return esc(s).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>'); }
+
+  function api(path, opts) {
+    opts = opts || {};
+    var headers = { 'Content-Type': 'application/json' };
+    if (opts.auth) headers.Authorization = 'Bearer ' + opts.auth;
+    return fetch(path, {
+      method: opts.method || 'GET',
+      headers: headers,
+      body: opts.body ? JSON.stringify(opts.body) : undefined
+    });
+  }
+
+  /* ================== 会话持久化 ================== */
+  function loadStudent() {
+    try {
+      var raw = localStorage.getItem(LS_STUDENT);
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    return null;
+  }
+  function saveStudent(s) {
+    try { s ? localStorage.setItem(LS_STUDENT, JSON.stringify(s)) : localStorage.removeItem(LS_STUDENT); } catch (e) {}
+  }
+  function loadTeacher() {
+    try { return sessionStorage.getItem(SS_TEACHER) || null; } catch (e) { return null; }
+  }
+  function saveTeacher(token) {
+    try { token ? sessionStorage.setItem(SS_TEACHER, token) : sessionStorage.removeItem(SS_TEACHER); } catch (e) {}
+  }
+
+  /* ================== 渲染入口 ================== */
+  function paint() {
+    if (!host) return;
+    clear(host);
+    host.appendChild(noticeBar());
+    if (st.view === 'gate') return renderGate();
+    if (st.view === 'reg') return renderReg();
+    if (st.view === 'tlogin') return renderTLogin();
+    return renderAuthed();
+  }
+
+  function noticeBar() {
+    var d = el('div', 'ag-notice');
+    d.appendChild(el('strong', null, lang() === 'zh' ? '使用边界' : 'Scope'));
+    d.appendChild(document.createTextNode(' ' + t('disclaimer')));
+    d.appendChild(el('span', 'ag-privacy', t('privacy')));
+    return d;
+  }
+
+  /* ---------------- 入口门 ---------------- */
+  function renderGate() {
+    var box = el('div', 'ag-gate');
+    box.appendChild(el('h2', 'ag-title', t('title')));
+    box.appendChild(el('p', 'ag-lead', t('gate_lead')));
+    var row = el('div', 'ag-gate-btns');
+    var b1 = el('button', 'ag-big', '');
+    b1.type = 'button';
+    b1.appendChild(el('span', 'ag-big-i', '🎓'));
+    b1.appendChild(el('span', 'ag-big-t', t('as_student')));
+    b1.addEventListener('click', function () { st.view = 'reg'; paint(); });
+    var b2 = el('button', 'ag-big ag-big-alt', '');
+    b2.type = 'button';
+    b2.appendChild(el('span', 'ag-big-i', '📋'));
+    b2.appendChild(el('span', 'ag-big-t', t('as_teacher')));
+    b2.addEventListener('click', function () { st.view = 'tlogin'; paint(); });
+    row.appendChild(b1); row.appendChild(b2);
+    box.appendChild(row);
+    var n = el('p', 'ag-hint', t('gate_note'));
+    box.appendChild(n);
+    host.appendChild(box);
+  }
+
+  /* ---------------- 学生登记 ---------------- */
+  function renderReg() {
+    var box = el('div', 'ag-form');
+    box.appendChild(el('h2', 'ag-title', t('reg_title')));
+    box.appendChild(el('p', 'ag-lead', t('reg_lead')));
+
+    var f1 = el('div', 'ag-field');
+    f1.appendChild(el('label', 'ag-lbl', t('lbl_sid')));
+    var i1 = document.createElement('input');
+    i1.className = 'ag-in'; i1.type = 'text'; i1.placeholder = t('ph_sid');
+    i1.autocomplete = 'off'; i1.maxLength = 24;
+    f1.appendChild(i1);
+    box.appendChild(f1);
+
+    var f2 = el('div', 'ag-field');
+    f2.appendChild(el('label', 'ag-lbl', t('lbl_name')));
+    var i2 = document.createElement('input');
+    i2.className = 'ag-in'; i2.type = 'text'; i2.placeholder = t('ph_name');
+    i2.autocomplete = 'off'; i2.maxLength = 24;
+    f2.appendChild(i2);
+    box.appendChild(f2);
+
+    var err = el('div', 'ag-err');
+    err.hidden = true;
+    box.appendChild(err);
+
+    var bar = el('div', 'ag-form-bar');
+    var back = el('button', 'btn', t('back'));
+    back.type = 'button';
+    back.addEventListener('click', function () { st.view = 'gate'; paint(); });
+    var go = el('button', 'btn primary', t('enter'));
+    go.type = 'button';
+    function submit() {
+      var sid = i1.value.trim(), nm = i2.value.trim();
+      if (!/^[A-Za-z0-9_-]{3,24}$/.test(sid)) {
+        err.textContent = lang() === 'zh'
+          ? '学号格式不正确：仅支持 3–24 位字母、数字、下划线或短横线'
+          : 'Invalid student ID: 3-24 letters, digits, underscore or hyphen only';
+        err.hidden = false; return;
+      }
+      if (!nm || nm.length > 24) {
+        err.textContent = lang() === 'zh' ? '请填写姓名（1–24 个字符）' : 'Please enter your name (1-24 characters)';
+        err.hidden = false; return;
+      }
+      go.disabled = true;
+      api(API.studentLogin, { method: 'POST', body: { studentId: sid, name: nm } })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          go.disabled = false;
+          if (!res.ok) { err.textContent = res.j.error || t('failed'); err.hidden = false; return; }
+          st.student = { studentId: res.j.studentId, name: res.j.name, token: res.j.token };
+          saveStudent(st.student);
+          st.view = 'app'; st.teacherToken = null; st.msgs = [];
+          paint();
+        })
+        .catch(function () { go.disabled = false; err.textContent = t('offline'); err.hidden = false; });
+    }
+    go.addEventListener('click', submit);
+    i2.addEventListener('keydown', function (e) { if (e.key === 'Enter') submit(); });
+    bar.appendChild(back); bar.appendChild(go);
+    box.appendChild(bar);
+    host.appendChild(box);
+    setTimeout(function () { i1.focus(); }, 30);
+  }
+
+  /* ---------------- 教师登录 ---------------- */
+  function renderTLogin() {
+    var box = el('div', 'ag-form');
+    box.appendChild(el('h2', 'ag-title', t('t_title')));
+    box.appendChild(el('p', 'ag-lead', t('t_lead')));
+
+    var f = el('div', 'ag-field');
+    f.appendChild(el('label', 'ag-lbl', t('lbl_pw')));
+    var i = document.createElement('input');
+    i.className = 'ag-in'; i.type = 'password'; i.placeholder = t('ph_pw');
+    f.appendChild(i);
+    box.appendChild(f);
+
+    var err = el('div', 'ag-err');
+    err.hidden = true;
+    box.appendChild(err);
+
+    var bar = el('div', 'ag-form-bar');
+    var back = el('button', 'btn', t('back'));
+    back.type = 'button';
+    back.addEventListener('click', function () { st.view = 'gate'; paint(); });
+    var go = el('button', 'btn primary', t('t_enter'));
+    go.type = 'button';
+    function submit() {
+      if (!i.value) return;
+      go.disabled = true;
+      api(API.teacherLogin, { method: 'POST', body: { password: i.value } })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          go.disabled = false; i.value = '';
+          if (!res.ok) { err.textContent = res.j.error || t('failed'); err.hidden = false; return; }
+          st.teacherToken = res.j.token;
+          saveTeacher(st.teacherToken);
+          st.view = 'app'; st.teacherTab = 'chat'; st.msgs = []; st.student = null;
+          paint();
+        })
+        .catch(function () { go.disabled = false; err.textContent = t('offline'); err.hidden = false; });
+    }
+    go.addEventListener('click', submit);
+    i.addEventListener('keydown', function (e) { if (e.key === 'Enter') submit(); });
+    bar.appendChild(back); bar.appendChild(go);
+    box.appendChild(bar);
+    host.appendChild(box);
+    setTimeout(function () { i.focus(); }, 30);
+  }
+
+  /* ---------------- 已登录界面 ---------------- */
+  function renderAuthed() {
+    var isTeacher = Boolean(st.teacherToken);
+    var wrap = el('div', 'ag-app');
+
+    var head = el('div', 'ag-head');
+    var hL = el('div', 'ag-head-l');
+    hL.appendChild(el('h2', 'ag-title', t('title')));
+    hL.appendChild(el('p', 'ag-lead', t('lead')));
+    head.appendChild(hL);
+
+    var hR = el('div', 'ag-head-r');
+    var idbar = el('div', 'ag-idbar');
+    idbar.appendChild(el('span', 'ag-idchip', isTeacher
+      ? t('who_teacher')
+      : (st.student ? st.student.studentId + ' · ' + st.student.name : t('who_student'))));
+    var out = el('button', 'btn ag-clear', t('logout'));
+    out.type = 'button';
+    out.addEventListener('click', function () {
+      if (isTeacher) { st.teacherToken = null; saveTeacher(null); }
+      else { st.student = null; saveStudent(null); }
+      st.msgs = []; st.students = []; st.records = []; st.view = 'gate';
+      paint();
+    });
+    idbar.appendChild(out);
+    hR.appendChild(idbar);
+    head.appendChild(hR);
+    wrap.appendChild(head);
+
+    if (isTeacher) {
+      var tabs = el('div', 'ag-subtabs');
+      var t1 = el('button', 'ag-subtab' + (st.teacherTab === 'chat' ? ' active' : ''), t('tab_chat'));
+      var t2 = el('button', 'ag-subtab' + (st.teacherTab === 'records' ? ' active' : ''), t('tab_records'));
+      t1.type = 'button'; t2.type = 'button';
+      t1.addEventListener('click', function () { st.teacherTab = 'chat'; paint(); });
+      t2.addEventListener('click', function () { st.teacherTab = 'records'; paint(); loadStudents(); });
+      tabs.appendChild(t1); tabs.appendChild(t2);
+      wrap.appendChild(tabs);
+    }
+
+    var statusEl = el('div', 'ag-status');
+    wrap.appendChild(statusEl);
+    checkHealth(statusEl);
+
+    if (isTeacher && st.teacherTab === 'records') {
+      wrap.appendChild(recordsPanel());
+    } else {
+      wrap.appendChild(chatPanel());
+    }
+    host.appendChild(wrap);
+  }
+
+  /* ---------------- 对话面板 ---------------- */
+  function chatPanel() {
+    var isTeacher = Boolean(st.teacherToken);
+    var box = el('div', 'ag-chat');
+
+    box.appendChild(el('p', 'ag-hint', isTeacher ? t('hint_teacher') : t('hint_student')));
+
+    var listEl = el('div', 'ag-list');
+    listEl.setAttribute('role', 'log');
+    listEl.setAttribute('aria-live', 'polite');
+    box.appendChild(listEl);
+
+    var exWrap = el('div', 'ag-ex');
+    exWrap.appendChild(el('div', 'ag-ex-t', t('examples')));
+    var chips = el('div', 'ag-chips');
+    var ex = t('ex');
+    for (var i = 0; i < ex.length; i++) {
+      (function (q) {
+        var b = el('button', 'chip-btn', q);
+        b.type = 'button';
+        b.addEventListener('click', function () { inputEl.value = q; inputEl.focus(); });
+        chips.appendChild(b);
+      })(ex[i]);
+    }
+    exWrap.appendChild(chips);
+    box.appendChild(exWrap);
+
+    var bar = el('div', 'ag-bar');
+    var inputEl = document.createElement('textarea');
+    inputEl.className = 'ag-input'; inputEl.rows = 2;
+    inputEl.placeholder = isTeacher ? t('ph_teacher') : t('ph_student');
+    bar.appendChild(inputEl);
+    var sendEl = el('button', 'btn primary ag-send', t('send'));
+    sendEl.type = 'button';
+    bar.appendChild(sendEl);
+    box.appendChild(bar);
+
+    // 渲染消息
+    clear(listEl);
+    if (!st.msgs.length) listEl.appendChild(el('div', 'ag-empty', t('empty')));
+    for (var k = 0; k < st.msgs.length; k++) listEl.appendChild(bubble(st.msgs[k]));
+
+    function submit() {
+      if (st.busy) return;
+      var text = inputEl.value.trim();
+      if (!text) return;
+      inputEl.value = '';
+      st.msgs.push({ role: 'user', content: text });
+      var reply = { role: 'assistant', content: '', sources: [] };
+      st.msgs.push(reply);
+      send(text, reply, listEl, sendEl);
+    }
+    sendEl.addEventListener('click', function () { st.busy ? abort() : submit(); });
+    inputEl.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submit(); }
+    });
+    setTimeout(function () { inputEl.focus(); }, 30);
+    return box;
+  }
+
+  function bubble(m) {
+    var wrap = el('div', 'ag-msg ag-' + m.role);
+    wrap.appendChild(el('div', 'ag-av', m.role === 'user' ? (lang() === 'zh' ? '我' : 'You') : 'AI'));
+    var bd = el('div', 'ag-body');
+    if (m.role === 'user') {
+      bd.appendChild(el('p', null, m.content));
+    } else {
+      var c = el('div', 'ag-text');
+      c.innerHTML = render(m.content || '');
+      bd.appendChild(c);
+      if (m.sources && m.sources.length) {
+        var s = el('div', 'ag-src');
+        s.appendChild(el('span', 'ag-src-t', t('basis') + ':'));
+        for (var i = 0; i < m.sources.length; i++) s.appendChild(el('span', 'ag-src-i', m.sources[i]));
+        bd.appendChild(s);
+      }
+      if (m.content) {
+        var cp = el('button', 'ag-copy', t('copy'));
+        cp.type = 'button';
+        cp.addEventListener('click', function () {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(m.content).then(function () {
+              cp.textContent = t('copied');
+              setTimeout(function () { cp.textContent = t('copy'); }, 1400);
+            }, function () {});
+          }
+        });
+        bd.appendChild(cp);
+      }
+    }
+    wrap.appendChild(bd);
+    return wrap;
+  }
+
+  function abort() {
+    if (ctrl) { try { ctrl.abort(); } catch (e) {} }
+    ctrl = null; st.busy = false;
+  }
+
+  function send(text, reply, listEl, sendEl) {
+    st.busy = true;
+    sendEl.textContent = t('stop');
+    ctrl = new AbortController();
+    repaint(listEl, reply, true);
+    listEl.scrollTop = listEl.scrollHeight;
+
+    var isTeacher = Boolean(st.teacherToken);
+    var payload = {
+      role: isTeacher ? 'teacher' : 'student',
+      messages: st.msgs.filter(function (m) { return m !== reply; }).slice(-12)
+    };
+    if (isTeacher) payload.teacherToken = st.teacherToken;
+    else payload.token = st.student ? st.student.token : '';
+
+    fetch(API.chat, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: ctrl.signal
+    })
+      .then(function (res) {
+        var ct = res.headers.get('Content-Type') || '';
+        if (ct.indexOf('text/event-stream') < 0) {
+          return res.json().then(function (j) {
+            if (res.status === 401) { st.student = null; saveStudent(null); st.view = 'reg'; paint(); return; }
+            reply.content = j.reply || j.error || t('failed');
+            reply.sources = j.sources || [];
+            done(reply, listEl, sendEl);
+          });
+        }
+        return pump(res, reply, listEl, sendEl);
+      })
+      .catch(function (err) {
+        if (err && err.name === 'AbortError') {
+          if (!reply.content) reply.content = lang() === 'zh' ? '（已停止）' : '(stopped)';
+        } else {
+          reply.content = reply.content || t('offline');
+        }
+        done(reply, listEl, sendEl);
+      });
+  }
+
+  function pump(res, reply, listEl, sendEl) {
+    var reader = res.body.getReader();
+    var dec = new TextDecoder();
+    var buf = '', started = false;
+    function step() {
+      return reader.read().then(function (r) {
+        if (r.done) { done(reply, listEl, sendEl); return; }
+        buf += dec.decode(r.value, { stream: true });
+        var parts = buf.split('\n\n');
+        buf = parts.pop();
+        for (var i = 0; i < parts.length; i++) {
+          var raw = parts[i].replace(/^data:\s?/, '').trim();
+          if (!raw) continue;
+          if (raw === '[DONE]') { done(reply, listEl, sendEl); return; }
+          var o; try { o = JSON.parse(raw); } catch (e) { continue; }
+          if (o.__sources) { reply.sources = o.__sources; continue; }
+          var piece = o.choices && o.choices[0] && o.choices[0].delta && o.choices[0].delta.content;
+          if (piece) {
+            reply.content += piece;
+            repaint(listEl, reply, started);
+            started = true;
+            listEl.scrollTop = listEl.scrollHeight;
+          }
+        }
+        return step();
+      });
+    }
+    return step();
+  }
+
+  function repaint(listEl, reply, streaming) {
+    var last = listEl.lastChild;
+    if (!last || !last.classList || !last.classList.contains('ag-assistant')) {
+      clear(listEl);
+      for (var k = 0; k < st.msgs.length; k++) listEl.appendChild(bubble(st.msgs[k]));
+      last = listEl.lastChild;
+    }
+    var txt = last.querySelector('.ag-text');
+    if (!txt) return;
+    txt.innerHTML = render(reply.content || t('thinking'));
+    if (streaming) txt.appendChild(el('span', 'ag-cursor', ''));
+  }
+
+  function done(reply, listEl, sendEl) {
+    st.busy = false; ctrl = null;
+    if (sendEl) sendEl.textContent = t('send');
+    var box = listEl.parentNode;
+    if (box && box.parentNode) {
+      var fresh = chatPanel();
+      box.parentNode.replaceChild(fresh, box);
+    }
+  }
+
+  /* ---------------- 学生记录看板 ---------------- */
+  function recordsPanel() {
+    if (st.current) return studentDetail();
+    var box = el('div', 'ag-recs');
+    box.appendChild(el('h3', 'ag-sub-title', t('records_title')));
+    box.appendChild(el('p', 'ag-lead', t('records_lead')));
+
+    var bar = el('div', 'ag-recs-bar');
+    var expAll = el('button', 'btn primary', t('export_all'));
+    expAll.type = 'button';
+    expAll.addEventListener('click', function () { downloadCsv('', expAll); });
+    var rf = el('button', 'btn', t('refresh'));
+    rf.type = 'button';
+    rf.addEventListener('click', function () { loadStudents(); });
+    bar.appendChild(expAll); bar.appendChild(rf);
+    box.appendChild(bar);
+
+    var msg = el('div', 'ag-err');
+    msg.hidden = true;
+    box.appendChild(msg);
+
+    if (!st.students.length) {
+      box.appendChild(el('div', 'ag-empty', t('no_students')));
+      return box;
+    }
+
+    var tbl = el('table', 'ag-table');
+    var thead = el('thead');
+    var tr = el('tr');
+    [t('th_sid'), t('th_name'), t('th_count'), t('th_block'), t('th_last'), t('th_act')]
+      .forEach(function (h) { tr.appendChild(el('th', null, h)); });
+    thead.appendChild(tr);
+    tbl.appendChild(thead);
+
+    var tb = el('tbody');
+    st.students.forEach(function (s) {
+      var r = el('tr', 'ag-row');
+      r.appendChild(el('td', 'ag-mono', s.studentId));
+      r.appendChild(el('td', null, s.name));
+      r.appendChild(el('td', 'ag-num', String(s.recordCount || 0)));
+      r.appendChild(el('td', 'ag-num', String(s.blockedCount || 0)));
+      r.appendChild(el('td', 'ag-dim', s.lastRecordTs ? fmt(s.lastRecordTs) : fmt(s.lastSeen)));
+      var td = el('td', 'ag-act');
+      var v = el('button', 'ag-mini', t('view'));
+      v.type = 'button';
+      v.addEventListener('click', function () { openStudent(s); });
+      var e1 = el('button', 'ag-mini', t('export_one'));
+      e1.type = 'button';
+      e1.addEventListener('click', function () { downloadCsv(s.studentId, e1); });
+      var d1 = el('button', 'ag-mini ag-mini-danger', t('del'));
+      d1.type = 'button';
+      d1.addEventListener('click', function () { removeStudent(s, d1); });
+      td.appendChild(v); td.appendChild(e1); td.appendChild(d1);
+      r.appendChild(td);
+      tb.appendChild(r);
+    });
+    tbl.appendChild(tb);
+    box.appendChild(tbl);
+    return box;
+  }
+
+  function parseSources(s) {
+    try { var a = JSON.parse(s || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; }
+  }
+
+  function studentDetail() {
+    var s = st.current;
+    var box = el('div', 'ag-recs');
+
+    var bar = el('div', 'ag-recs-bar');
+    var back = el('button', 'btn', t('back'));
+    back.type = 'button';
+    back.addEventListener('click', function () { st.current = null; st.records = []; paint(); });
+    var exp = el('button', 'btn primary', t('export_one') + ' CSV');
+    exp.type = 'button';
+    exp.addEventListener('click', function () { downloadCsv(s.studentId, exp); });
+    bar.appendChild(back); bar.appendChild(exp);
+    box.appendChild(bar);
+
+    box.appendChild(el('h3', 'ag-sub-title', s.studentId + ' · ' + s.name + t('detail_of')));
+    box.appendChild(el('p', 'ag-lead', s.recordCount + ' / ' + t('th_count') + ' · ' + s.blockedCount + ' / ' + t('th_block')));
+
+    if (!st.records.length) { box.appendChild(el('div', 'ag-empty', t('no_records'))); return box; }
+
+    st.records.forEach(function (r) {
+      var card = el('div', 'ag-rec');
+      var hd = el('div', 'ag-rec-hd');
+      hd.appendChild(el('span', 'ag-rec-time', fmt(r.ts)));
+      if (r.blocked) hd.appendChild(el('span', 'ag-tag-bad', t('blocked_tag')));
+      card.appendChild(hd);
+
+      var q = el('div', 'ag-rec-q');
+      q.appendChild(el('strong', null, t('question') + '：'));
+      q.appendChild(document.createTextNode(r.question));
+      card.appendChild(q);
+
+      var a = el('div', 'ag-rec-a');
+      a.appendChild(el('strong', null, t('answer') + '：'));
+      a.appendChild(document.createTextNode(r.answer || '—'));
+      card.appendChild(a);
+
+      var src = parseSources(r.sources);
+      if (src.length) card.appendChild(el('div', 'ag-rec-src', t('basis') + ': ' + src.join(' / ')));
+      box.appendChild(card);
+    });
+    return box;
+  }
+
+  function loadStudents() {
+    api(API.students, { auth: st.teacherToken })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        if (res.j && res.j.error) { return; }
+        st.students = (res.j && res.j.students) || [];
+        paint();
+      })
+      .catch(function () {});
+  }
+
+  function openStudent(s) {
+    api(API.records + '?studentId=' + encodeURIComponent(s.studentId), { auth: st.teacherToken })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        st.current = s;
+        st.records = (j && j.records) || [];
+        paint();
+      })
+      .catch(function () {});
+  }
+
+  function removeStudent(s, btn) {
+    if (!confirm(t('del_confirm'))) return;
+    btn.disabled = true;
+    api(API.del, { method: 'POST', auth: st.teacherToken, body: { studentId: s.studentId } })
+      .then(function () { loadStudents(); })
+      .catch(function () { btn.disabled = false; });
+  }
+
+  function downloadCsv(studentId, btn) {
+    var old = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = t('loading');
+    api(API.exportCsv + (studentId ? '?studentId=' + encodeURIComponent(studentId) : ''),
+        { auth: st.teacherToken })
+      .then(function (r) { return r.text(); })
+      .then(function (csv) {
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'wiseblot-records-' + (studentId || 'all') + '.csv';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(a.href); }, 3000);
+        btn.disabled = false; btn.textContent = old;
+      })
+      .catch(function () { btn.disabled = false; btn.textContent = old; });
+  }
+
+  /* ---------------- 健康检查 ---------------- */
+  function checkHealth(statusEl) {
+    if (!statusEl) return;
+    statusEl.className = 'ag-status ag-wait';
+    statusEl.textContent = lang() === 'zh' ? '正在检查服务状态…' : 'Checking service...';
+    fetch(API.health)
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); })
+      .then(function (j) {
+        if (j && j.keyConfigured) {
+          statusEl.className = 'ag-status ag-ok';
+          statusEl.textContent = (lang() === 'zh' ? '服务正常 · 模型 ' : 'Online · model ') + (j.model || '-') +
+            (lang() === 'zh' ? ' · 记录留痕已开启' : ' · logging on');
+        } else {
+          statusEl.className = 'ag-status ag-warn';
+          statusEl.textContent = t('nokey');
+        }
+      })
+      .catch(function () {
+        statusEl.className = 'ag-status ag-bad';
+        statusEl.textContent = t('offline');
+      });
+  }
+
+  /* ================== 初始化与对外接口 ================== */
+  function init() {
+    host = document.getElementById('agent-root') || document.getElementById('view-agent');
+    if (!host) return;
+    st.student = loadStudent();
+    st.teacherToken = loadTeacher();
+    st.view = st.teacherToken ? 'app' : (st.student ? 'app' : 'gate');
+    paint();
+  }
+
+  window.WiseBlotAgent = {
+    onShow: function () { if (host) paint(); },
+    relabel: function () { if (host) paint(); }
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 
 </script>
