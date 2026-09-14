@@ -1162,7 +1162,7 @@ input[type=range] { flex: 1 1 auto; accent-color: var(--acc); min-width: 0; }
       <p class="hint" data-i18n="game_intro">扮演实验员，用 1000 元经费、24 小时完成一次成功的 Western blot。</p>
       <div class="game-banner" id="game-banner"></div>
       <div class="game-record" id="game-record"></div>
-      <label class="game-name-label"><span data-i18n="game_name">你的昵称</span><input id="game-name" maxlength="16" placeholder="实验员123"></label>
+      <label class="game-name-label"><span data-i18n="game_name">你的昵称</span><input id="game-name" maxlength="16" placeholder="实验员123" data-i18n-ph="game_name_ph"></label>
       <label class="game-daily-label"><input type="checkbox" id="game-daily" checked> <span data-i18n="game_daily">每日挑战（同题）</span></label>
       <div class="row game-actions">
         <button class="btn primary" id="game-start" data-i18n="game_start">开始实验</button>
@@ -1461,6 +1461,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
       game_title: 'Blot Hero · WB 实验挑战',
       game_intro: '扮演实验员，用 1000 元经费、24 小时完成一次成功的 Western blot。',
       game_name: '你的昵称',
+      game_name_ph: '实验员123',
       game_daily: '每日挑战（同题）',
       game_start: '开始实验',
       game_howto: '玩法说明',
@@ -1749,6 +1750,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
       game_title: 'Blot Hero · WB Challenge',
       game_intro: 'Play a lab scientist: complete a successful Western blot within 1000 budget & 24h.',
       game_name: 'Your nickname',
+      game_name_ph: 'Scientist123',
       game_daily: 'Daily challenge (same target)',
       game_start: 'Start',
       game_howto: 'How to play',
@@ -2884,6 +2886,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     if (document.getElementById('view-plan')) renderPlan();
     if (document.getElementById('view-roadmap')) renderRoadmap();
     if (document.getElementById('view-ad')) renderAd();
+    if (document.getElementById('view-game')) { buildGameLang(); renderGame(); }
   }
   function updateChipTitles() {
     var btns = document.querySelectorAll('#a-examples .chip-btn');
@@ -5188,7 +5191,10 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
   });
 
   // ---- 蛋白题库（真实常见 WB 靶点）----
-  var G_PROTEINS = [
+  // 文案在切换语言时重建：否则 gb() 会在页面加载时被冻结成单一语言
+  var G_PROTEINS, G_STEPS;
+  function buildGameLang() {
+    G_PROTEINS = [
     { gene: 'GAPDH', name: 'GAPDH', mw: 36, type: gb('胞质内参', 'cytosolic control'), tags: ['standard', 'medium'], trap: gb('经典内参，常规条件即可跑出清晰条带。', 'Classic loading control; standard conditions suffice.') },
     { gene: 'EGFR', name: 'EGFR', mw: 134, type: gb('跨膜蛋白', 'transmembrane'), tags: ['membrane', 'large'], trap: gb('跨膜大蛋白：温和裂解、低浓度胶、长时转膜。', 'Transmembrane & large: mild lysis, low % gel, longer transfer.') },
     { gene: 'TP53', name: 'p53', mw: 53, type: gb('磷酸化核蛋白', 'phospho nuclear'), tags: ['phospho', 'nuclear', 'medium'], trap: gb('磷酸化：必须加磷酸酶抑制剂；核蛋白适合核提取。', 'Phosphorylated: add phosphatase inhibitors; nuclear: use nuclear extract.') },
@@ -5203,9 +5209,9 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     { gene: 'ACTB', name: 'β-actin', mw: 42, type: gb('胞质内参', 'cytosolic control'), tags: ['standard', 'medium'], trap: gb('内参，勿与 42 kDa 目的蛋白混淆。', 'Loading control; avoid confusion with 42 kDa target.') }
   ];
 
-  // ---- 六个决策步骤 ----
-  // 每个选项：budget(经费)、time(小时)、good/bad(命中蛋白 tag)、effect(后果)
-  var G_STEPS = [
+    // ---- 六个决策步骤 ----
+    // 每个选项：budget(经费)、time(小时)、good/bad(命中蛋白 tag)、effect(后果)
+    G_STEPS = [
     {
       id: 'lysis', zh: '裂解液与抑制剂', en: 'Lysis & Inhibitors', q: gb('用哪种裂解液？是否加抑制剂？', 'Which lysis buffer? Add inhibitors?'),
       opts: [
@@ -5278,7 +5284,9 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
         { zh: '超敏 ECL · 曝光 10min', en: 'Ultra ECL · 10min', budget: 140, time: 1, good: [], bad: ['all'], effect: { overExpose: true }, note: gb('超敏底物还曝 10 分钟，更黑。', 'Ultra sensitive + 10 min → even darker.') }
       ]
     }
-  ];
+    ];
+  }
+  buildGameLang();
 
   var gameState = null;
   var gameTimer = null;
@@ -5471,6 +5479,11 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
 
   function renderGame() {
     if (!gameState) { gameState = { stage: 'intro' }; }
+    if (gameState.protein) {
+      for (var gi = 0; gi < G_PROTEINS.length; gi++) {
+        if (G_PROTEINS[gi].gene === gameState.protein.gene) { gameState.protein = G_PROTEINS[gi]; break; }
+      }
+    }
     var intro = document.getElementById('game-intro');
     var run = document.getElementById('game-run');
     var res = document.getElementById('game-result');
@@ -5488,7 +5501,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
       ? gb('历史最佳 ' + rec.best + ' 分 · 已玩 ', 'Best ' + rec.best + ' pts · plays ') + (rec.totalPlays || 0)
       : gb('还没有记录 · 已玩 ', 'No record yet · plays ') + (rec.totalPlays || 0);
     var nameEl = document.getElementById('game-name');
-    if (nameEl && !nameEl.value) nameEl.value = rec.name || ('实验员' + Math.floor(100 + Math.random() * 900));
+    if (nameEl && !nameEl.value) nameEl.value = rec.name || (gb('实验员', 'Scientist') + Math.floor(100 + Math.random() * 900));
     if (gameState.stage === 'run') renderQ();
     if (gameState.stage === 'result') renderResult();
     if (gameState.stage === 'lb') renderLB();
@@ -5509,7 +5522,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     var ind = document.getElementById('game-step-ind');
     if (ind) ind.textContent = gb('第 ', 'Step ') + (st.step + 1) + gb(' / 8 步 · ', ' / 8 · ') + (st.daily ? gb('每日挑战', 'Daily') : gb('随机挑战', 'Random'));
     var budgetEl = document.getElementById('game-budget');
-    if (budgetEl) budgetEl.textContent = gb('经费 ', 'Budget ') + Math.round(st.budget) + ' 元';
+    if (budgetEl) budgetEl.textContent = gb('经费 ', 'Budget ') + Math.round(st.budget) + gb(' 元', ' ¥');
     var timeEl = document.getElementById('game-time');
     if (timeEl) timeEl.textContent = gb('时间 ', 'Time ') + Math.round(st.time) + ' h';
     var failEl = document.getElementById('game-fail');
@@ -5523,12 +5536,18 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     step.opts.forEach(function (o, i) {
       var b = document.createElement('button');
       b.type = 'button'; b.className = 'game-opt';
-      b.innerHTML = '<span class="go-label">' + (o.zh || o.en) + '</span><span class="go-cost">' + o.budget + gb('元', '¥') + ' · ' + o.time + 'h</span>';
+      b.innerHTML = '<span class="go-label">' + gb(o.zh, o.en) + '</span><span class="go-cost">' + o.budget + gb('元', '¥') + ' · ' + o.time + 'h</span>';
       b.addEventListener('click', function () { choose(i); });
       opts.appendChild(b);
     });
     var fb = document.getElementById('game-feedback');
     fb.innerHTML = '';
+    var prev = st.step - 1;
+    if (prev >= 0 && st.choices[prev] != null) {
+      var po = G_STEPS[prev].opts[st.choices[prev]];
+      var pbad = po.bad.some(function (t) { return t === 'all' || st.protein.tags.indexOf(t) !== -1; });
+      fb.innerHTML = '<div class="game-note' + (pbad ? ' bad' : ' ok') + '">' + po.note + '</div>';
+    }
   }
 
   function choose(i) {
@@ -5538,11 +5557,6 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     st.choices[st.step] = i;
     st.budget -= opt.budget;
     st.time -= opt.time;
-    // immediate feedback
-    var protein = st.protein;
-    var hitBad = opt.bad.some(function (t) { return t === 'all' || protein.tags.indexOf(t) !== -1; });
-    var fb = document.getElementById('game-feedback');
-    fb.innerHTML = '<div class="game-note' + (hitBad ? ' bad' : ' ok') + '">' + opt.note + '</div>';
     st.step++;
     if (st.step >= G_STEPS.length) { finish(); return; }
     renderQ();
@@ -5877,7 +5891,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     document.getElementById('game-result-title').textContent = m[0];
     document.getElementById('game-result-title').className = 'game-title game-' + m[2];
     document.getElementById('game-result-score').textContent = gb('得分 ', 'Score ') + st.score + gb(' 分', ' pts');
-    drawBandAsync(document.getElementById('game-band'), st.outcome, st.protein, st);
+    if (!st.bandDrawn) { st.bandDrawn = true; drawBandAsync(document.getElementById('game-band'), st.outcome, st.protein, st); }
     document.getElementById('game-result-meta').innerHTML =
       '<div class="gm-line">' + gb('目标 ', 'Target ') + st.protein.name + ' · ' + st.protein.mw + ' kDa · ' + st.protein.type + '</div>' +
       '<div class="gm-line">' + gb('世界/本地排名 ', 'Rank #') + '<strong>' + st.rank + '</strong> · ' + gb('称号 ', 'Title ') + '<strong>' + st.title + '</strong></div>' +
