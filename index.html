@@ -5189,17 +5189,17 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
 
   // ---- 蛋白题库（真实常见 WB 靶点）----
   var G_PROTEINS = [
-    { gene: 'GAPDH', name: 'GAPDH', mw: 36, type: gb('胞质内参', 'cytosolic control'), tags: ['standard'], trap: gb('经典内参，常规条件即可跑出清晰条带。', 'Classic loading control; standard conditions suffice.') },
+    { gene: 'GAPDH', name: 'GAPDH', mw: 36, type: gb('胞质内参', 'cytosolic control'), tags: ['standard', 'medium'], trap: gb('经典内参，常规条件即可跑出清晰条带。', 'Classic loading control; standard conditions suffice.') },
     { gene: 'EGFR', name: 'EGFR', mw: 134, type: gb('跨膜蛋白', 'transmembrane'), tags: ['membrane', 'large'], trap: gb('跨膜大蛋白：温和裂解、低浓度胶、长时转膜。', 'Transmembrane & large: mild lysis, low % gel, longer transfer.') },
-    { gene: 'TP53', name: 'p53', mw: 53, type: gb('磷酸化核蛋白', 'phospho nuclear'), tags: ['phospho', 'nuclear'], trap: gb('磷酸化：必须加磷酸酶抑制剂；核蛋白适合核提取。', 'Phosphorylated: add phosphatase inhibitors; nuclear: use nuclear extract.') },
-    { gene: 'AKT1', name: 'AKT', mw: 56, type: gb('磷酸化激酶', 'phospho kinase'), tags: ['phospho'], trap: gb('磷酸化蛋白，优先 BSA 封闭并加磷酸酶抑制剂。', 'Phospho-protein: prefer BSA blocking + phosphatase inhibitors.') },
-    { gene: 'MAPK1', name: 'ERK1/2', mw: 44, type: gb('磷酸化蛋白', 'phospho protein'), tags: ['phospho'], trap: gb('磷酸化，注意抑制剂与冰上操作。', 'Phosphorylated; keep on ice, add phosphatase inhibitors.') },
+    { gene: 'TP53', name: 'p53', mw: 53, type: gb('磷酸化核蛋白', 'phospho nuclear'), tags: ['phospho', 'nuclear', 'medium'], trap: gb('磷酸化：必须加磷酸酶抑制剂；核蛋白适合核提取。', 'Phosphorylated: add phosphatase inhibitors; nuclear: use nuclear extract.') },
+    { gene: 'AKT1', name: 'AKT', mw: 56, type: gb('磷酸化激酶', 'phospho kinase'), tags: ['phospho', 'medium'], trap: gb('磷酸化蛋白，优先 BSA 封闭并加磷酸酶抑制剂。', 'Phospho-protein: prefer BSA blocking + phosphatase inhibitors.') },
+    { gene: 'MAPK1', name: 'ERK1/2', mw: 44, type: gb('磷酸化蛋白', 'phospho protein'), tags: ['phospho', 'medium'], trap: gb('磷酸化，注意抑制剂与冰上操作。', 'Phosphorylated; keep on ice, add phosphatase inhibitors.') },
     { gene: 'H3C1', name: 'Histone H3', mw: 17, type: gb('核小蛋白', 'nuclear small'), tags: ['nuclear', 'small'], trap: gb('小蛋白 17 kDa：用高浓度或梯度胶，缩短电泳/转膜。', 'Small (17 kDa): higher % gel, shorter run/transfer.') },
     { gene: 'HIF1A', name: 'HIF-1α', mw: 120, type: gb('不稳定蛋白', 'unstable'), tags: ['unstable', 'large'], trap: gb('极易降解：全程冰上、加蛋白酶抑制剂。', 'Very unstable: keep on ice, add protease inhibitors.') },
-    { gene: 'VIM', name: 'Vimentin', mw: 57, type: gb('细胞骨架', 'cytoskeletal'), tags: ['structural', 'standard'], trap: gb('中等分子量，常规条件即可。', 'Mid MW; standard conditions.') },
+    { gene: 'VIM', name: 'Vimentin', mw: 57, type: gb('细胞骨架', 'cytoskeletal'), tags: ['structural', 'standard', 'medium'], trap: gb('中等分子量，常规条件即可。', 'Mid MW; standard conditions.') },
     { gene: 'LC3B', name: 'LC3B', mw: 17, type: gb('自噬小蛋白', 'autophagic small'), tags: ['small'], trap: gb('17 kDa 小蛋白：梯度胶 + 短转膜。', 'Small (17 kDa): gradient gel + short transfer.') },
     { gene: 'COX4I1', name: 'COX IV', mw: 17, type: gb('线粒体蛋白', 'mitochondrial'), tags: ['small', 'mito'], trap: gb('线粒体小蛋白，宜先富集线粒体。', 'Mitochondrial small protein; enrich mitochondria first.') },
-    { gene: 'ALB', name: 'Albumin', mw: 66, type: gb('分泌蛋白', 'secreted'), tags: ['secreted', 'standard'], trap: gb('分泌蛋白：注意检测上清，常规条件。', 'Secreted: consider supernatant; standard conditions.') },
+    { gene: 'ALB', name: 'Albumin', mw: 66, type: gb('分泌蛋白', 'secreted'), tags: ['secreted', 'standard', 'medium'], trap: gb('分泌蛋白：注意检测上清，常规条件。', 'Secreted: consider supernatant; standard conditions.') },
     { gene: 'ACTB', name: 'β-actin', mw: 42, type: gb('胞质内参', 'cytosolic control'), tags: ['standard', 'medium'], trap: gb('内参，勿与 42 kDa 目的蛋白混淆。', 'Loading control; avoid confusion with 42 kDa target.') }
   ];
 
