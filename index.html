@@ -405,6 +405,9 @@ input[type=range] { flex: 1 1 auto; accent-color: var(--acc); min-width: 0; }
 @keyframes gbp-rotate { to { transform: rotate(360deg); } }
 .game-meta { font-size: 13px; color: var(--ink); line-height: 1.8; margin-bottom: 8px; }
 .gm-line { margin: 2px 0; }
+.gm-title { text-align: center; margin: 12px 0 8px; line-height: 1.25; }
+.gm-title-label { display: block; font-size: 13px; font-weight: 700; color: var(--mut); margin-bottom: 2px; letter-spacing: .02em; }
+.gm-title-name { font-size: 26px; font-weight: 800; color: var(--acc); vertical-align: middle; }
 .game-diagnosis { margin: 10px 0 4px; text-align: left; background: #f6f8fb; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
 .gd-title { font-size: 13.5px; font-weight: 800; color: var(--acc); margin-bottom: 8px; }
 .gd-block { margin: 6px 0; }
@@ -5894,7 +5897,8 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     if (!st.bandDrawn) { st.bandDrawn = true; drawBandAsync(document.getElementById('game-band'), st.outcome, st.protein, st); }
     document.getElementById('game-result-meta').innerHTML =
       '<div class="gm-line">' + gb('目标 ', 'Target ') + st.protein.name + ' · ' + st.protein.mw + ' kDa · ' + st.protein.type + '</div>' +
-      '<div class="gm-line">' + gb('世界/本地排名 ', 'Rank #') + '<strong>' + st.rank + '</strong> · ' + gb('称号 ', 'Title ') + '<strong>' + st.title + '</strong></div>' +
+      '<div class="gm-line">' + gb('世界/本地排名 ', 'Rank #') + '<strong>' + st.rank + '</strong></div>' +
+      '<div class="gm-title"><span class="gm-title-label">' + gb('称号', 'Title') + '</span><span class="gm-title-name">' + st.title + '</span></div>' +
       '<div class="gm-line">' + gb('用时 ', 'Time used ') + Math.round(24 - st.time) + gb(' h', ' h') + ' · ' + gb('经费剩余 ', 'Budget left ') + Math.round(st.budget) + gb(' 元', ' ¥') + ' · ' + gb('错误 ', 'Errors ') + st.failCount + '</div>';
     var diag = document.getElementById('game-diagnosis');
     if (diag) diag.innerHTML = buildGameDiag(st);
