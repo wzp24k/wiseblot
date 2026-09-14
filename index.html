@@ -687,7 +687,7 @@ input[type=range] { flex: 1 1 auto; accent-color: var(--acc); min-width: 0; }
   #app { padding: 12px; }
   .ag-big { width: 100%; }
   .ag-table { font-size: 12px; }
-  .ag-table th:nth-child(5), .ag-table td:nth-child(5) { display: none; }
+  .ag-table th:nth-child(6), .ag-table td:nth-child(6) { display: none; }
   .tabs { gap: 5px; margin-bottom: 12px; }
   .tab { padding: 6px 11px; font-size: 12.5px; border-radius: 8px; }
   .ag-head-l { min-width: 0; }
@@ -715,6 +715,8 @@ input[type=range] { flex: 1 1 auto; accent-color: var(--acc); min-width: 0; }
 @media (max-width: 720px) {
   .ag-soc-step { font-size: 11px; padding: 2px 8px; }
 }
+.ag-stage-dist { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 11.5px; margin: 2px 0 6px; }
+.ag-stage-chip { display: inline-block; background: var(--info-bg); border: 1px solid var(--info-line); color: var(--acc); border-radius: 999px; padding: 2px 9px; font-size: 11px; font-weight: 600; white-space: nowrap; }
 
 </style>
 </head>
@@ -5744,6 +5746,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     studentLogin: BASE + '/api/student/login',
     teacherLogin: BASE + '/api/teacher/login',
     students: BASE + '/api/teacher/students',
+    stages: BASE + '/api/teacher/stages',
     records: BASE + '/api/teacher/records',
     exportCsv: BASE + '/api/teacher/export',
     del: BASE + '/api/teacher/delete'
@@ -5780,8 +5783,10 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
       tab_records: '学生记录',
       records_title: '学生提问记录',
       records_lead: '以学号归档。点击任意一行查看该生完整问答留痕。',
-      th_sid: '学号', th_name: '姓名', th_count: '提问数', th_block: '拦截数',
+      th_sid: '学号', th_name: '姓名', th_count: '提问数', th_stage: '闭环阶段', th_block: '拦截数',
       th_last: '最近活动', th_act: '操作',
+      stage_dist: '班级卡点分布',
+      stage_hint: '按每位学生最近一次提问所处的闭环阶段统计',
       view: '查看', export_one: '导出', del: '删除',
       export_all: '导出全部记录 (CSV)', refresh: '刷新',
       no_students: '还没有学生登记记录。',
@@ -5842,8 +5847,10 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
       tab_records: 'Student records',
       records_title: 'Student question log',
       records_lead: 'Grouped by student ID. Click any row to see the full exchange.',
-      th_sid: 'ID', th_name: 'Name', th_count: 'Questions', th_block: 'Blocked',
+      th_sid: 'ID', th_name: 'Name', th_count: 'Questions', th_stage: 'Loop stage', th_block: 'Blocked',
       th_last: 'Last activity', th_act: 'Actions',
+      stage_dist: 'Class stage distribution',
+      stage_hint: 'Based on each student\u2019s most recent question',
       view: 'View', export_one: 'Export', del: 'Delete',
       export_all: 'Export all records (CSV)', refresh: 'Refresh',
       no_students: 'No students have registered yet.',
@@ -5896,7 +5903,8 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     records: [],
     busy: false,
     hint: '',
-    soc: null
+    soc: null,
+    stages: null
   };
   var host = null, ctrl = null;
 
@@ -6138,7 +6146,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     out.addEventListener('click', function () {
       if (isTeacher) { st.teacherToken = null; saveTeacher(null); }
       else { st.student = null; saveStudent(null); }
-      st.msgs = []; st.students = []; st.records = []; st.view = 'gate'; st.soc = null;
+      st.msgs = []; st.students = []; st.records = []; st.view = 'gate'; st.soc = null; st.stages = null;
       paint();
     });
     idbar.appendChild(out);
@@ -6431,6 +6439,17 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     bar.appendChild(expAll); bar.appendChild(rf);
     box.appendChild(bar);
 
+    if (st.stages && st.stages.length) {
+      var dist = el('div', 'ag-stage-dist');
+      dist.appendChild(el('span', 'ag-soc-k', t('stage_dist') + '：'));
+      st.stages.forEach(function (x) {
+        dist.appendChild(el('span', 'ag-stage-chip', stageLabel(x.id) + ' ×' + x.n));
+      });
+      box.appendChild(dist);
+    } else if (st.stages === null && st.teacherToken) {
+      loadStages();
+    }
+
     var msg = el('div', 'ag-err');
     msg.hidden = true;
     box.appendChild(msg);
@@ -6443,7 +6462,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     var tbl = el('table', 'ag-table');
     var thead = el('thead');
     var tr = el('tr');
-    [t('th_sid'), t('th_name'), t('th_count'), t('th_block'), t('th_last'), t('th_act')]
+    [t('th_sid'), t('th_name'), t('th_count'), t('th_stage'), t('th_block'), t('th_last'), t('th_act')]
       .forEach(function (h) { tr.appendChild(el('th', null, h)); });
     thead.appendChild(tr);
     tbl.appendChild(thead);
@@ -6454,6 +6473,10 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
       r.appendChild(el('td', 'ag-mono', s.studentId));
       r.appendChild(el('td', null, s.name));
       r.appendChild(el('td', 'ag-num', String(s.recordCount || 0)));
+      var stageTd = el('td');
+      if (s.lastStage) stageTd.appendChild(el('span', 'ag-stage-chip', stageLabel(s.lastStage)));
+      else stageTd.appendChild(el('span', 'ag-dim', '—'));
+      r.appendChild(stageTd);
       r.appendChild(el('td', 'ag-num', String(s.blockedCount || 0)));
       r.appendChild(el('td', 'ag-dim', s.lastRecordTs ? fmt(s.lastRecordTs) : fmt(s.lastSeen)));
       var td = el('td', 'ag-act');
@@ -6473,6 +6496,20 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     tbl.appendChild(tb);
     box.appendChild(tbl);
     return box;
+  }
+
+  function stageLabel(id) {
+    if (!id) return '';
+    var n = parseInt(String(id).slice(1), 10);
+    var s = SOC_STAGES[n];
+    return id + ' ' + (s ? (lang() === 'zh' ? s.zh : s.en) : '');
+  }
+
+  function loadStages() {
+    fetch(API.stages, { headers: { Authorization: 'Bearer ' + st.teacherToken } })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { st.stages = (j && j.stages) || []; paint(); })
+      .catch(function () { st.stages = []; });
   }
 
   function parseSources(s) {
@@ -6503,6 +6540,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
       var hd = el('div', 'ag-rec-hd');
       hd.appendChild(el('span', 'ag-rec-time', fmt(r.ts)));
       if (r.blocked) hd.appendChild(el('span', 'ag-tag-bad', t('blocked_tag')));
+      if (r.stage) hd.appendChild(el('span', 'ag-stage-chip', stageLabel(r.stage)));
       card.appendChild(hd);
 
       var q = el('div', 'ag-rec-q');
