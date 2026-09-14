@@ -723,6 +723,24 @@ input[type=range] { flex: 1 1 auto; accent-color: var(--acc); min-width: 0; }
 .ag-mode:hover { color: var(--acc); }
 .ag-mode.on { background: var(--acc); color: #fff; font-weight: 700; }
 
+/* ---- 收尾卡 · 存为个人实验笔记 ---- */
+.ag-note { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ag-note-btn { appearance: none; border: 1px solid var(--line); background: #fff; color: var(--mut); border-radius: 7px; padding: 3px 12px; font-size: 11.5px; font-family: inherit; cursor: pointer; }
+.ag-note-btn:hover { border-color: var(--acc); color: var(--acc); }
+.ag-note-btn.primary { background: var(--acc); border-color: var(--acc); color: #fff; font-weight: 600; }
+.ag-note-btn.primary:hover { color: #fff; opacity: .9; }
+.ag-note-btn:disabled { opacity: .6; cursor: default; }
+.ag-note-form { width: 100%; border: 1px solid var(--line); background: var(--card); border-radius: 10px; padding: 10px 12px; }
+.ag-note-h { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.ag-note-hint { font-size: 11.5px; color: var(--mut); margin-bottom: 8px; line-height: 1.6; }
+.ag-note-f { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; color: var(--mut); }
+.ag-note-f > span { min-width: 96px; }
+.ag-note-in { flex: 1; appearance: none; border: 1px solid var(--line); border-radius: 7px; padding: 5px 9px; font-size: 12.5px; font-family: inherit; color: var(--ink); background: #fff; }
+.ag-note-in:focus { outline: none; border-color: var(--acc); }
+.ag-note-row { display: flex; gap: 6px; margin-top: 6px; }
+.ag-note-msg { width: 100%; font-size: 11.5px; color: var(--mut); margin-top: 4px; }
+.ag-note-msg.ok { color: #1a7f37; font-weight: 600; }
+
 </style>
 </head>
 <body>
@@ -3920,6 +3938,10 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
         if (t.id === 'pl-add') addPlan();
         else if (t.classList && t.classList.contains('pl-del')) delPlan(parseInt(t.getAttribute('data-i'), 10));
         else if (t.id === 'pl-export') exportPlan();
+        else if (t.id === 'pl-cloud-refresh') loadCloudNotes(true);
+        else if (t.id === 'pl-cloud-export') exportCloudNotes();
+        else if (t.classList && t.classList.contains('pl-cldel')) delCloudNote(t);
+        else if (t.classList && t.classList.contains('pl-clplan')) cloudToPlan(t);
         else if (t.id === 'lit-search') litSearch();
         else if (t.classList && t.classList.contains('lit-open')) litOpen(t);
         else if (t.classList && t.classList.contains('lit-extract')) litExtract(t);
@@ -3939,6 +3961,11 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
       '<div class="row"><button class="btn primary" id="pl-add">' + gb('保存方案', 'Save') + '</button></div>' +
       '<div id="pl-list" style="margin-top:8px"></div>' +
       '<div class="row"><button class="btn" id="pl-export">' + gb('导出 JSON', 'Export JSON') + '</button></div></div>' +
+      '<div class="decision-sec" style="margin-top:8px"><h4>☁️ ' + gb('我的实验笔记（云端同步）', 'My lab notes (cloud)') + '</h4>' +
+      '<p class="hint">' + gb('在「AI 助手」里走到收尾阶段（P4 预习卡 / S5 排查记录卡 / D5 复盘卡）时，点「存为实验笔记」即会汇到这里，换设备也能看到。', 'Wrap-up cards (P4 pre-lab / S5 troubleshooting / D5 debrief) saved from the AI Tutor appear here and stay across devices.') + '</p>' +
+      '<div class="row"><button class="btn" id="pl-cloud-refresh">' + gb('刷新', 'Refresh') + '</button>' +
+      '<button class="btn" id="pl-cloud-export">' + gb('导出 JSON', 'Export JSON') + '</button></div>' +
+      '<div id="pl-cloud-list" style="margin-top:8px"></div></div>' +
       '<div class="decision-sec" style="margin-top:8px"><h4>🔍 ' + gb('文献结构化检索（PMC + UniProt）', 'Structured literature (PMC + UniProt)') + '</h4>' +
       '<div class="d-controls">' +
         '<label>' + gb('目标 / 基因 / UniProt ID', 'Target / gene / UniProt ID') + ' <input type="text" id="lit-query" placeholder="GAPDH / P04406 / TP53"></label>' +
@@ -3951,6 +3978,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
       '<div id="lit-list" style="margin-top:8px"></div>' +
       '<div id="lit-extract-box" style="margin-top:8px"></div></div></div>';
     renderPlanList();
+    loadCloudNotes(false);
   }
   function litSearch() {
     var qEl = document.getElementById('lit-query');
@@ -4099,6 +4127,130 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     list.unshift({ name: ex.title, target: '', note: ex.snips.join(' | '), source: 'pmc', pmcid: ex.pmcid, link: 'https://pmc.ncbi.nlm.nih.gov/articles/' + ex.pmcid + '/', ts: Date.now() });
     savePlans(list); renderPlan(); toast(gb('已保存', 'Saved'));
   }
+  /* ---- 个人方案库 · 云端实验笔记（来自 AI 助教收尾卡）----
+   * 身份沿用学生端登记票据（localStorage: wiseblot.student），只读取本人笔记。 */
+  var WB_API_BASE = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
+    ? 'http://127.0.0.1:8787'
+    : 'https://wiseblot-agent.wiseblot-agent.workers.dev';
+  var LS_STUDENT_KEY = 'wiseblot.student';
+  function wbStudent() {
+    try { return JSON.parse(localStorage.getItem(LS_STUDENT_KEY) || 'null'); } catch (e) { return null; }
+  }
+  function cloudState() {
+    if (!window.__wbCloud) window.__wbCloud = { notes: null, busy: false, err: '' };
+    return window.__wbCloud;
+  }
+  function scenShort(id) {
+    if (id === 'prelab') return gb('预习', 'Pre-lab');
+    if (id === 'debrief') return gb('复盘', 'Debrief');
+    if (id === 'troubleshoot') return gb('排错', 'Troubleshoot');
+    return gb('手动', 'Manual');
+  }
+  function loadCloudNotes(force) {
+    var box = document.getElementById('pl-cloud-list');
+    if (!box) return;
+    var cs = cloudState(), me = wbStudent();
+    if (!me || !me.token) {
+      cs.notes = null;
+      box.innerHTML = '<p class="hint">' + gb('尚未完成学生登记。请先到「AI 助手」标签登记学号姓名，收尾卡才能保存到云端。', 'Not registered yet. Register as a student in the AI Tutor tab first; wrap-up cards are then saved to the cloud.') + '</p>';
+      return;
+    }
+    if (cs.notes && !force) { renderCloudNotes(); return; }
+    if (cs.busy) return;
+    cs.busy = true; cs.err = '';
+    box.innerHTML = '<p class="hint">' + gb('加载中…', 'Loading...') + '</p>';
+    fetch(WB_API_BASE + '/api/student/notes?token=' + encodeURIComponent(me.token))
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        cs.busy = false;
+        if (!j || !j.ok) { cs.err = (j && j.error) || 'failed'; cs.notes = null; }
+        else cs.notes = j.notes || [];
+        renderCloudNotes();
+      })
+      .catch(function (e) {
+        cs.busy = false; cs.err = (e && e.message) || 'network'; cs.notes = null;
+        renderCloudNotes();
+      });
+  }
+  function renderCloudNotes() {
+    var box = document.getElementById('pl-cloud-list');
+    if (!box) return;
+    var cs = cloudState();
+    if (cs.err) {
+      box.innerHTML = '<p class="hint">' + gb('读取失败：', 'Load failed: ') + htmlAttr(cs.err) + '</p>';
+      return;
+    }
+    var list = cs.notes || [];
+    if (!list.length) {
+      box.innerHTML = '<p class="hint">' + gb('还没有云端笔记。在「AI 助手」里走到收尾阶段时，点「存为实验笔记」即可。', 'No cloud notes yet. Reach a wrap-up stage in the AI Tutor and click "Save as lab note".') + '</p>';
+      return;
+    }
+    var html = '';
+    for (var i = 0; i < list.length; i++) {
+      var n = list[i];
+      var tags = (n.tags && n.tags.length) ? ' · ' + htmlAttr(n.tags.join(' / ')) : '';
+      html += '<div class="d-out" style="margin-top:6px">' +
+        '<span class="src-tag self">' + htmlAttr(scenShort(n.scenario)) + (n.stage ? ' ' + htmlAttr(n.stage) : '') + '</span> ' +
+        '<b>' + htmlAttr(n.title) + '</b>' +
+        (n.target ? ' · ' + htmlAttr(n.target) : '') +
+        '<div style="color:var(--mut);font-size:12px;white-space:pre-wrap;max-height:120px;overflow:auto;margin-top:4px">' + htmlAttr((n.content || '').slice(0, 600)) + '</div>' +
+        '<small>' + htmlAttr(noteTime(n.ts)) + tags + '</small>' +
+        '<div class="row" style="margin-top:6px">' +
+        '<button class="btn pl-clplan" style="padding:2px 8px;font-size:12px" data-id="' + n.id + '">' + gb('复制为个人方案', 'Copy to my protocols') + '</button> ' +
+        '<button class="btn pl-cldel" style="padding:2px 8px;font-size:12px" data-id="' + n.id + '">' + gb('删除', 'Delete') + '</button>' +
+        '</div></div>';
+    }
+    box.innerHTML = html;
+  }
+  function noteTime(ts) {
+    try { return new Date(Number(ts)).toLocaleString(); } catch (e) { return ''; }
+  }
+  function delCloudNote(btn) {
+    var me = wbStudent();
+    if (!me || !me.token) { toast(gb('登录已失效', 'Session expired')); return; }
+    if (!window.confirm(gb('确定删除这条笔记吗？', 'Delete this note?'))) return;
+    var id = parseInt(btn.getAttribute('data-id'), 10);
+    fetch(WB_API_BASE + '/api/student/notes/delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: me.token, id: id })
+    }).then(function (r) { return r.json(); }).then(function (j) {
+      if (j && j.ok) { toast(gb('已删除', 'Deleted')); loadCloudNotes(true); }
+      else toast(gb('删除失败', 'Delete failed'));
+    }).catch(function () { toast(gb('删除失败', 'Delete failed')); });
+  }
+  function cloudToPlan(btn) {
+    var cs = cloudState();
+    var list = cs.notes || [];
+    var id = parseInt(btn.getAttribute('data-id'), 10);
+    var hit = null;
+    for (var i = 0; i < list.length; i++) if (Number(list[i].id) === id) hit = list[i];
+    if (!hit) return;
+    var mine = getPlans();
+    mine.unshift({
+      name: hit.title,
+      target: hit.target || '',
+      note: (hit.content || '').slice(0, 1500),
+      source: 'note',
+      scenario: hit.scenario || '',
+      stage: hit.stage || '',
+      tags: hit.tags || [],
+      ts: Date.now()
+    });
+    savePlans(mine);
+    renderPlan();
+    toast(gb('已复制到个人方案', 'Copied to my protocols'));
+  }
+  function exportCloudNotes() {
+    var cs = cloudState();
+    var txt = JSON.stringify(cs.notes || [], null, 2);
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(function () { toast(gb('已导出到剪贴板', 'Exported to clipboard')); });
+      } else { toast(gb('复制失败', 'Copy failed')); }
+    } catch (e) {}
+  }
+
   function addPlan() {
     var name = document.getElementById('pl-name'), target = document.getElementById('pl-target'), note = document.getElementById('pl-note');
     if (!name) return;
@@ -5726,6 +5878,12 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
       try { navigator.clipboard.writeText(txt).then(function () { toast(gb('已复制分享文案', 'Copied')); }); } catch (e) { toast(txt); }
     });
   }
+  // 支持通过地址栏 hash 切换标签（例如 AI 助手的「去方案库查看」按钮）
+  window.addEventListener('hashchange', function () {
+    var m = (location.hash || '').match(/#(sim|assist|exp|reagent|game|demo|disclaimer|ad|decision|cost|quiz|plan|roadmap)/);
+    if (m) switchTab(m[1]);
+  });
+
   initGame();
 })();
 
@@ -5754,7 +5912,10 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     stages: BASE + '/api/teacher/stages',
     records: BASE + '/api/teacher/records',
     exportCsv: BASE + '/api/teacher/export',
-    del: BASE + '/api/teacher/delete'
+    del: BASE + '/api/teacher/delete',
+    notes: BASE + '/api/student/notes',
+    noteUpdate: BASE + '/api/student/notes/update',
+    noteDelete: BASE + '/api/student/notes/delete'
   };
   var LS_STUDENT = 'wiseblot.student';
   var SS_TEACHER = 'wiseblot.teacher';
@@ -5816,6 +5977,18 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
       privacy: '请勿在对话中粘贴姓名、学号、电话等个人信息。',
       failed: '请求失败', copied: '已复制', copy: '复制', thinking: '正在思考',
       relogin: '登录状态已失效，请重新登记。',
+      save_note: '存为实验笔记',
+      save_note_title: '保存到我的个人方案库',
+      save_note_hint: '收尾卡会连同本链路的阶段一起存入云端，仅你与任课教师可见。',
+      f_title: '笔记标题', f_target: '目标蛋白 / 基因', f_tags: '标签（逗号分隔）',
+      note_ph_title: '如：p53 无条带排查记录',
+      note_ph_target: 'TP53 / p53',
+      note_ph_tags: '排错, 无信号, 转膜',
+      note_saving: '保存中…', note_saved: '已保存到你的个人方案库',
+      note_fail: '保存失败：', note_title_req: '请先填写笔记标题',
+      note_need_login: '尚未完成学生登记，无法存入个人方案库。',
+      save_again: '再存一份', go_plan: '去方案库查看',
+      save: '保存', cancel: '取消',
       ex: [
         '我跑出来完全没有条带，可能是什么原因？',
         '背景太高、整张膜发黑，该怎么排查？',
@@ -5880,6 +6053,18 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
       privacy: 'Do not paste names, student IDs, phone numbers or other personal data into the chat.',
       failed: 'Request failed', copied: 'Copied', copy: 'Copy', thinking: 'Thinking',
       relogin: 'Your session has expired. Please register again.',
+      save_note: 'Save as lab note',
+      save_note_title: 'Save to my protocol library',
+      save_note_hint: 'The wrap-up card is stored in the cloud with its loop stage; only you and your instructor can see it.',
+      f_title: 'Note title', f_target: 'Target / gene', f_tags: 'Tags (comma separated)',
+      note_ph_title: 'e.g. p53 no-band troubleshooting',
+      note_ph_target: 'TP53 / p53',
+      note_ph_tags: 'troubleshoot, no signal, transfer',
+      note_saving: 'Saving...', note_saved: 'Saved to your protocol library',
+      note_fail: 'Save failed: ', note_title_req: 'Please enter a note title',
+      note_need_login: 'You are not registered as a student yet, so notes cannot be saved.',
+      save_again: 'Save again', go_plan: 'Open library',
+      save: 'Save', cancel: 'Cancel',
       ex: [
         'I got no band at all. What could be the reason?',
         'Background is too high and the whole membrane is dark. How do I troubleshoot?',
@@ -6358,9 +6543,140 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
         });
         bd.appendChild(cp);
       }
+      if (m.content && !st.teacherToken && isClosingTurn(m.meta)) bd.appendChild(noteBlock(m));
     }
     wrap.appendChild(bd);
     return wrap;
+  }
+
+  /* ---- 收尾卡沉淀：预习卡 P4 / 排查记录卡 S5 / 复盘卡 D5 存为个人实验笔记 ---- */
+  function stageNameOf(scenario, id) {
+    var tb = STAGE_TABLE[scenario] || [];
+    for (var i = 0; i < tb.length; i++) if (tb[i][0] === id) return lang() === 'zh' ? tb[i][1] : tb[i][2];
+    return id || '';
+  }
+  function isClosingTurn(meta) {
+    if (!meta || !meta.stages || !meta.stages.length) return false;
+    return meta.stage === meta.stages[meta.stages.length - 1].id;
+  }
+  function noteBlock(m) {
+    var box = el('div', 'ag-note');
+    noteIdle(box, m);
+    return box;
+  }
+  function noteIdle(box, m) {
+    clear(box);
+    var b = el('button', 'ag-note-btn', '📌 ' + t('save_note'));
+    b.type = 'button';
+    b.addEventListener('click', function () { noteForm(box, m); });
+    box.appendChild(b);
+  }
+  function noteMsg(box, m, text, withBack) {
+    clear(box);
+    box.appendChild(el('div', 'ag-note-msg', text));
+    if (withBack) {
+      var b = el('button', 'ag-note-btn', t('back'));
+      b.type = 'button';
+      b.addEventListener('click', function () { noteIdle(box, m); });
+      box.appendChild(b);
+    }
+  }
+  function noteField(labelText, input) {
+    var w = el('label', 'ag-note-f');
+    w.appendChild(el('span', null, labelText));
+    w.appendChild(input);
+    return w;
+  }
+  function defaultNoteTitle(m) {
+    var scen = (m.meta && m.meta.scenario) || st.scenario;
+    var d = new Date();
+    var p = function (n) { return String(n).padStart(2, '0'); };
+    var day = d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+    return scenarioLabel(scen) + '·' + stageNameOf(scen, m.meta && m.meta.stage) + ' ' + day;
+  }
+  function noteForm(box, m) {
+    clear(box);
+    if (!st.student) { noteMsg(box, m, t('note_need_login'), true); return; }
+
+    var f = el('div', 'ag-note-form');
+    var hd = el('div', 'ag-note-h', t('save_note_title'));
+    f.appendChild(hd);
+    f.appendChild(el('div', 'ag-note-hint', t('save_note_hint')));
+
+    var iTitle = el('input', 'ag-note-in');
+    iTitle.type = 'text'; iTitle.value = defaultNoteTitle(m); iTitle.placeholder = t('note_ph_title');
+    var iTarget = el('input', 'ag-note-in');
+    iTarget.type = 'text'; iTarget.placeholder = t('note_ph_target');
+    var iTags = el('input', 'ag-note-in');
+    iTags.type = 'text'; iTags.placeholder = t('note_ph_tags');
+    f.appendChild(noteField(t('f_title'), iTitle));
+    f.appendChild(noteField(t('f_target'), iTarget));
+    f.appendChild(noteField(t('f_tags'), iTags));
+
+    var msg = el('div', 'ag-note-msg', '');
+    var row = el('div', 'ag-note-row');
+    var ok = el('button', 'ag-note-btn primary', t('save'));
+    ok.type = 'button';
+    var cancel = el('button', 'ag-note-btn', t('cancel'));
+    cancel.type = 'button';
+    cancel.addEventListener('click', function () { noteIdle(box, m); });
+    row.appendChild(ok); row.appendChild(cancel);
+    f.appendChild(row);
+    f.appendChild(msg);
+    box.appendChild(f);
+    iTitle.focus();
+
+    ok.addEventListener('click', function () {
+      var title = iTitle.value.trim();
+      if (!title) { msg.textContent = t('note_title_req'); return; }
+      ok.disabled = true;
+      msg.textContent = t('note_saving');
+      var scen = (m.meta && m.meta.scenario) || st.scenario;
+      api(API.notes, {
+        method: 'POST',
+        body: {
+          token: st.student.token,
+          title: title,
+          target: iTarget.value.trim(),
+          tags: iTags.value.trim(),
+          scenario: scen,
+          stage: (m.meta && m.meta.stage) || '',
+          kind: scen + '_card',
+          content: m.content || ''
+        }
+      }).then(function (res) {
+        if (res.status === 401) {
+          st.student = null; saveStudent(null);
+          noteMsg(box, m, t('relogin'), false);
+          return null;
+        }
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      }).then(function (j) {
+        if (!j) return;
+        if (!j.ok) throw new Error(j.error || 'failed');
+        noteSaved(box, m);
+      }).catch(function (err) {
+        ok.disabled = false;
+        msg.textContent = t('note_fail') + (err && err.message ? err.message : '');
+      });
+    });
+  }
+  function noteSaved(box, m) {
+    clear(box);
+    var s = el('div', 'ag-note-msg ok', '✓ ' + t('note_saved'));
+    box.appendChild(s);
+    var go = el('button', 'ag-note-btn primary', t('go_plan'));
+    go.type = 'button';
+    go.addEventListener('click', function () {
+      if (typeof window.switchTab === 'function') window.switchTab('plan');
+      else location.hash = '#plan';
+    });
+    box.appendChild(go);
+    var again = el('button', 'ag-note-btn', t('save_again'));
+    again.type = 'button';
+    again.addEventListener('click', function () { noteForm(box, m); });
+    box.appendChild(again);
   }
 
   function abort() {
@@ -6428,7 +6744,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
           var o; try { o = JSON.parse(raw); } catch (e) { continue; }
           if (o.__sources || o.__meta) {
             if (o.__sources) reply.sources = o.__sources;
-            if (o.__meta) st.soc = o.__meta;
+            if (o.__meta) { st.soc = o.__meta; reply.meta = o.__meta; }
             continue;
           }
           var piece = o.choices && o.choices[0] && o.choices[0].delta && o.choices[0].delta.content;
