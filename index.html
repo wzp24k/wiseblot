@@ -717,6 +717,11 @@ input[type=range] { flex: 1 1 auto; accent-color: var(--acc); min-width: 0; }
 }
 .ag-stage-dist { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 11.5px; margin: 2px 0 6px; }
 .ag-stage-chip { display: inline-block; background: var(--info-bg); border: 1px solid var(--info-line); color: var(--acc); border-radius: 999px; padding: 2px 9px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.ag-modes { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--card); align-self: flex-start; }
+.ag-mode { appearance: none; border: 0; background: transparent; color: var(--mut); padding: 6px 16px; font-size: 13px; font-family: inherit; cursor: pointer; }
+.ag-mode + .ag-mode { border-left: 1px solid var(--line); }
+.ag-mode:hover { color: var(--acc); }
+.ag-mode.on { background: var(--acc); color: #fff; font-weight: 700; }
 
 </style>
 </head>
@@ -5904,7 +5909,8 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     busy: false,
     hint: '',
     soc: null,
-    stages: null
+    stages: null,
+    scenario: 'troubleshoot'
   };
   var host = null, ctrl = null;
 
@@ -6066,7 +6072,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
           if (!res.ok) { err.textContent = res.j.error || t('failed'); err.hidden = false; return; }
           st.student = { studentId: res.j.studentId, name: res.j.name, token: res.j.token };
           saveStudent(st.student);
-          st.view = 'app'; st.teacherToken = null; st.msgs = []; st.soc = null;
+          st.view = 'app'; st.teacherToken = null; st.msgs = []; st.soc = null; st.scenario = 'troubleshoot';
           paint();
         })
         .catch(function () { go.disabled = false; err.textContent = t('offline'); err.hidden = false; });
@@ -6178,31 +6184,68 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
   }
 
   /* ---------------- 排错闭环状态条 ---------------- */
-  // 六个阶段由后端确定性判定（src/socratic.js），前端只负责显示。
-  var SOC_STAGES = [
-    { zh: '现象登记', en: 'Symptom' },
-    { zh: '条件澄清', en: 'Context' },
-    { zh: '假设分叉', en: 'Hypotheses' },
-    { zh: '鉴别实验', en: 'Test design' },
-    { zh: '结果回读', en: 'Read-out' },
-    { zh: '复盘沉淀', en: 'Debrief' }
-  ];
+  // 三种教学场景的阶段由后端确定性判定（src/socratic.js），前端只负责显示。
+  var SCENARIO_LIST = ['prelab', 'troubleshoot', 'debrief'];
+  var SCENARIO_LABEL = {
+    prelab: { zh: '预习', en: 'Pre-lab' },
+    troubleshoot: { zh: '排错', en: 'Troubleshoot' },
+    debrief: { zh: '复盘', en: 'Debrief' }
+  };
+  var STAGE_TABLE = {
+    prelab: [
+      ['P0', '目标澄清', 'Goal'], ['P1', '原理预测', 'Predict'], ['P2', '变量与对照', 'Controls'],
+      ['P3', '风险预判', 'Risks'], ['P4', '预习就绪', 'Ready']
+    ],
+    troubleshoot: [
+      ['S0', '现象登记', 'Symptom'], ['S1', '条件澄清', 'Context'], ['S2', '假设分叉', 'Hypotheses'],
+      ['S3', '鉴别实验', 'Test design'], ['S4', '结果回读', 'Read-out'], ['S5', '复盘沉淀', 'Debrief']
+    ],
+    debrief: [
+      ['D0', '结果陈述', 'Result'], ['D1', '预期对比', 'Compare'], ['D2', '数据判读', 'Read-out'],
+      ['D3', '偏差归因', 'Explain'], ['D4', '经验提炼', 'Lessons'], ['D5', '复盘完成', 'Wrap-up']
+    ]
+  };
+  var SCENARIO_OF_PREFIX = { P: 'prelab', S: 'troubleshoot', D: 'debrief' };
+
+  function scenarioLabel(id) {
+    var l = SCENARIO_LABEL[id] || SCENARIO_LABEL.troubleshoot;
+    return lang() === 'zh' ? l.zh : l.en;
+  }
+
+  function modeBar() {
+    var box = el('div', 'ag-modes');
+    SCENARIO_LIST.forEach(function (id) {
+      var b = el('button', 'ag-mode' + (st.scenario === id ? ' on' : ''), scenarioLabel(id));
+      b.type = 'button';
+      b.setAttribute('data-scenario', id);
+      b.addEventListener('click', function () {
+        if (st.scenario === id) return;
+        st.scenario = id;
+        st.soc = null;
+        if (st.msgs.length) st.msgs = [];   // 场景不同，上下文不通用，切换即开新一轮
+        paint();
+      });
+      box.appendChild(b);
+    });
+    return box;
+  }
 
   function socBar() {
     var m = st.soc;
     var box = el('div', 'ag-soc');
     var head = el('div', 'ag-soc-head');
-    head.appendChild(el('span', 'ag-soc-t', lang() === 'zh' ? '排错闭环' : 'Troubleshooting loop'));
+    head.appendChild(el('span', 'ag-soc-t', (lang() === 'zh' ? '教学闭环' : 'Learning loop') + ' · ' + scenarioLabel(st.scenario)));
     if (m && m.phenotype) head.appendChild(el('span', 'ag-soc-pheno', m.phenotype));
     box.appendChild(head);
 
+    var table = STAGE_TABLE[st.scenario] || STAGE_TABLE.troubleshoot;
     var track = el('div', 'ag-soc-track');
     var cur = m ? m.stageIndex : 0;
-    for (var i = 0; i < SOC_STAGES.length; i++) {
+    for (var i = 0; i < table.length; i++) {
       var cls = 'ag-soc-step';
       if (m && i < cur) cls += ' done';
       if (m && i === cur) cls += ' on';
-      track.appendChild(el('span', cls, (i + 1) + '. ' + (lang() === 'zh' ? SOC_STAGES[i].zh : SOC_STAGES[i].en)));
+      track.appendChild(el('span', cls, (i + 1) + '. ' + (lang() === 'zh' ? table[i][1] : table[i][2])));
     }
     box.appendChild(track);
 
@@ -6228,7 +6271,10 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     var box = el('div', 'ag-chat');
 
     box.appendChild(el('p', 'ag-hint', isTeacher ? t('hint_teacher') : t('hint_student')));
-    if (!isTeacher) box.appendChild(socBar());
+    if (!isTeacher) {
+      box.appendChild(modeBar());
+      box.appendChild(socBar());
+    }
 
     var listEl = el('div', 'ag-list');
     listEl.setAttribute('role', 'log');
@@ -6335,7 +6381,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
       messages: st.msgs.filter(function (m) { return m !== reply; }).slice(-12)
     };
     if (isTeacher) payload.teacherToken = st.teacherToken;
-    else payload.token = st.student ? st.student.token : '';
+    else { payload.token = st.student ? st.student.token : ''; payload.scenario = st.scenario; }
 
     fetch(API.chat, {
       method: 'POST',
@@ -6500,9 +6546,12 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
 
   function stageLabel(id) {
     if (!id) return '';
-    var n = parseInt(String(id).slice(1), 10);
-    var s = SOC_STAGES[n];
-    return id + ' ' + (s ? (lang() === 'zh' ? s.zh : s.en) : '');
+    var sid = String(id);
+    var table = STAGE_TABLE[SCENARIO_OF_PREFIX[sid.charAt(0)] || 'troubleshoot'];
+    for (var i = 0; i < table.length; i++) {
+      if (table[i][0] === sid) return sid + ' ' + (lang() === 'zh' ? table[i][1] : table[i][2]);
+    }
+    return sid;
   }
 
   function loadStages() {
