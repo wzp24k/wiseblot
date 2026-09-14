@@ -697,6 +697,25 @@ input[type=range] { flex: 1 1 auto; accent-color: var(--acc); min-width: 0; }
   .row, .ep-row { flex-wrap: wrap; }
 }
 
+/* ---------- AI 助教：排错闭环状态条 ---------- */
+.ag-soc { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 11px 13px; display: flex; flex-direction: column; gap: 8px; }
+.ag-soc-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ag-soc-t { font-size: 12.5px; font-weight: 700; color: var(--ink); }
+.ag-soc-pheno { font-size: 11.5px; background: var(--warn-bg); border: 1px solid var(--warn-line); color: #8a4b1a; border-radius: 999px; padding: 1px 9px; }
+.ag-soc-track { display: flex; flex-wrap: wrap; gap: 5px; }
+.ag-soc-step { font-size: 11.5px; border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; color: var(--mut); background: #fff; }
+.ag-soc-step.done { color: #2ea043; border-color: #b9e6c4; background: #f2fbf5; }
+.ag-soc-step.on { color: #fff; background: var(--acc); border-color: var(--acc); font-weight: 700; }
+.ag-soc-meta { display: flex; flex-direction: column; gap: 3px; }
+.ag-soc-line { font-size: 11.5px; line-height: 1.6; }
+.ag-soc-k { color: var(--mut); }
+.ag-soc-v { color: #33414f; }
+.ag-soc-v.warn { color: #a2560f; }
+
+@media (max-width: 720px) {
+  .ag-soc-step { font-size: 11px; padding: 2px 8px; }
+}
+
 </style>
 </head>
 <body>
@@ -5876,7 +5895,8 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     current: null,
     records: [],
     busy: false,
-    hint: ''
+    hint: '',
+    soc: null
   };
   var host = null, ctrl = null;
 
@@ -6038,7 +6058,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
           if (!res.ok) { err.textContent = res.j.error || t('failed'); err.hidden = false; return; }
           st.student = { studentId: res.j.studentId, name: res.j.name, token: res.j.token };
           saveStudent(st.student);
-          st.view = 'app'; st.teacherToken = null; st.msgs = [];
+          st.view = 'app'; st.teacherToken = null; st.msgs = []; st.soc = null;
           paint();
         })
         .catch(function () { go.disabled = false; err.textContent = t('offline'); err.hidden = false; });
@@ -6084,7 +6104,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
           if (!res.ok) { err.textContent = res.j.error || t('failed'); err.hidden = false; return; }
           st.teacherToken = res.j.token;
           saveTeacher(st.teacherToken);
-          st.view = 'app'; st.teacherTab = 'chat'; st.msgs = []; st.student = null;
+          st.view = 'app'; st.teacherTab = 'chat'; st.msgs = []; st.student = null; st.soc = null;
           paint();
         })
         .catch(function () { go.disabled = false; err.textContent = t('offline'); err.hidden = false; });
@@ -6118,7 +6138,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     out.addEventListener('click', function () {
       if (isTeacher) { st.teacherToken = null; saveTeacher(null); }
       else { st.student = null; saveStudent(null); }
-      st.msgs = []; st.students = []; st.records = []; st.view = 'gate';
+      st.msgs = []; st.students = []; st.records = []; st.view = 'gate'; st.soc = null;
       paint();
     });
     idbar.appendChild(out);
@@ -6149,12 +6169,58 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     host.appendChild(wrap);
   }
 
+  /* ---------------- 排错闭环状态条 ---------------- */
+  // 六个阶段由后端确定性判定（src/socratic.js），前端只负责显示。
+  var SOC_STAGES = [
+    { zh: '现象登记', en: 'Symptom' },
+    { zh: '条件澄清', en: 'Context' },
+    { zh: '假设分叉', en: 'Hypotheses' },
+    { zh: '鉴别实验', en: 'Test design' },
+    { zh: '结果回读', en: 'Read-out' },
+    { zh: '复盘沉淀', en: 'Debrief' }
+  ];
+
+  function socBar() {
+    var m = st.soc;
+    var box = el('div', 'ag-soc');
+    var head = el('div', 'ag-soc-head');
+    head.appendChild(el('span', 'ag-soc-t', lang() === 'zh' ? '排错闭环' : 'Troubleshooting loop'));
+    if (m && m.phenotype) head.appendChild(el('span', 'ag-soc-pheno', m.phenotype));
+    box.appendChild(head);
+
+    var track = el('div', 'ag-soc-track');
+    var cur = m ? m.stageIndex : 0;
+    for (var i = 0; i < SOC_STAGES.length; i++) {
+      var cls = 'ag-soc-step';
+      if (m && i < cur) cls += ' done';
+      if (m && i === cur) cls += ' on';
+      track.appendChild(el('span', cls, (i + 1) + '. ' + (lang() === 'zh' ? SOC_STAGES[i].zh : SOC_STAGES[i].en)));
+    }
+    box.appendChild(track);
+
+    if (m) {
+      var meta = el('div', 'ag-soc-meta');
+      var k = el('div', 'ag-soc-line');
+      k.appendChild(el('span', 'ag-soc-k', lang() === 'zh' ? '已交代：' : 'Provided: '));
+      k.appendChild(el('span', 'ag-soc-v', (m.known && m.known.length) ? m.known.join('、') : (lang() === 'zh' ? '（暂无）' : '(none)')));
+      meta.appendChild(k);
+      var q = el('div', 'ag-soc-line');
+      q.appendChild(el('span', 'ag-soc-k', lang() === 'zh' ? '仍缺：' : 'Missing: '));
+      var miss = (m.missing && m.missing.length) ? m.missing.join('、') : (lang() === 'zh' ? '关键条件已齐备' : 'All key conditions covered');
+      q.appendChild(el('span', 'ag-soc-v' + ((m.missing && m.missing.length) ? ' warn' : ''), miss));
+      meta.appendChild(q);
+      box.appendChild(meta);
+    }
+    return box;
+  }
+
   /* ---------------- 对话面板 ---------------- */
   function chatPanel() {
     var isTeacher = Boolean(st.teacherToken);
     var box = el('div', 'ag-chat');
 
     box.appendChild(el('p', 'ag-hint', isTeacher ? t('hint_teacher') : t('hint_student')));
+    if (!isTeacher) box.appendChild(socBar());
 
     var listEl = el('div', 'ag-list');
     listEl.setAttribute('role', 'log');
@@ -6306,7 +6372,11 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
           if (!raw) continue;
           if (raw === '[DONE]') { done(reply, listEl, sendEl); return; }
           var o; try { o = JSON.parse(raw); } catch (e) { continue; }
-          if (o.__sources) { reply.sources = o.__sources; continue; }
+          if (o.__sources || o.__meta) {
+            if (o.__sources) reply.sources = o.__sources;
+            if (o.__meta) st.soc = o.__meta;
+            continue;
+          }
           var piece = o.choices && o.choices[0] && o.choices[0].delta && o.choices[0].delta.content;
           if (piece) {
             reply.content += piece;
