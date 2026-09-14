@@ -4129,9 +4129,14 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
   }
   /* ---- 个人方案库 · 云端实验笔记（来自 AI 助教收尾卡）----
    * 身份沿用学生端登记票据（localStorage: wiseblot.student），只读取本人笔记。 */
-  var WB_API_BASE = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
-    ? 'http://127.0.0.1:8787'
-    : 'https://wiseblot-agent.wiseblot-agent.workers.dev';
+  // 授课模式：由讲台电脑提供页面时，后端在同一台机器的 8787 端口（与 AI 助手保持一致）
+  function wbApiBase() {
+    if (window.WB_API_BASE) return window.WB_API_BASE;
+    if (/^(localhost|127\.0\.0\.1|10\.|192\.168\.|172\.(1[6-9]|2[0-9]|3[01])\.)/.test(location.hostname)) {
+      return location.protocol + '//' + location.hostname + ':8787';
+    }
+    return 'https://wiseblot-agent.wiseblot-agent.workers.dev';
+  }
   var LS_STUDENT_KEY = 'wiseblot.student';
   function wbStudent() {
     try { return JSON.parse(localStorage.getItem(LS_STUDENT_KEY) || 'null'); } catch (e) { return null; }
@@ -4159,7 +4164,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     if (cs.busy) return;
     cs.busy = true; cs.err = '';
     box.innerHTML = '<p class="hint">' + gb('加载中…', 'Loading...') + '</p>';
-    fetch(WB_API_BASE + '/api/student/notes?token=' + encodeURIComponent(me.token))
+    fetch(wbApiBase() + '/api/student/notes?token=' + encodeURIComponent(me.token))
       .then(function (r) { return r.json(); })
       .then(function (j) {
         cs.busy = false;
@@ -4210,7 +4215,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     if (!me || !me.token) { toast(gb('登录已失效', 'Session expired')); return; }
     if (!window.confirm(gb('确定删除这条笔记吗？', 'Delete this note?'))) return;
     var id = parseInt(btn.getAttribute('data-id'), 10);
-    fetch(WB_API_BASE + '/api/student/notes/delete', {
+    fetch(wbApiBase() + '/api/student/notes/delete', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token: me.token, id: id })
@@ -5900,23 +5905,43 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
   /* ================== 配置 ================== */
   // 部署 Worker 后替换为实际的 workers.dev 地址（结尾不要带斜杠）
   var REMOTE_BASE = 'https://wiseblot-agent.wiseblot-agent.workers.dev';
-  var LOCAL_BASE = 'http://127.0.0.1:8787';
-  var IS_LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
-  var BASE = IS_LOCAL ? LOCAL_BASE : REMOTE_BASE;
-  var API = {
-    chat: BASE + '/api/chat',
-    health: BASE + '/api/health',
-    studentLogin: BASE + '/api/student/login',
-    teacherLogin: BASE + '/api/teacher/login',
-    students: BASE + '/api/teacher/students',
-    stages: BASE + '/api/teacher/stages',
-    records: BASE + '/api/teacher/records',
-    exportCsv: BASE + '/api/teacher/export',
-    del: BASE + '/api/teacher/delete',
-    notes: BASE + '/api/student/notes',
-    noteUpdate: BASE + '/api/student/notes/update',
-    noteDelete: BASE + '/api/student/notes/delete'
-  };
+  // 授课模式：页面由讲台电脑（局域网 IP）提供时，后端就在同一台机器的 8787 端口。
+  // 启动时探测一次，探测不通则自动回退到公网后端，保证同一份代码在任何环境都能用。
+  var PRIVATE_HOST = /^(localhost|127\.0\.0\.1|10\.|192\.168\.|172\.(1[6-9]|2[0-9]|3[01])\.)/.test(location.hostname);
+  var LOCAL_BASE = PRIVATE_HOST ? (location.protocol + '//' + location.hostname + ':8787') : '';
+  var BASE = LOCAL_BASE || REMOTE_BASE;
+  function buildApi(b) {
+    return {
+      chat: b + '/api/chat',
+      health: b + '/api/health',
+      studentLogin: b + '/api/student/login',
+      teacherLogin: b + '/api/teacher/login',
+      students: b + '/api/teacher/students',
+      stages: b + '/api/teacher/stages',
+      records: b + '/api/teacher/records',
+      exportCsv: b + '/api/teacher/export',
+      del: b + '/api/teacher/delete',
+      notes: b + '/api/student/notes',
+      noteUpdate: b + '/api/student/notes/update',
+      noteDelete: b + '/api/student/notes/delete',
+      survey: b + '/api/student/survey'
+    };
+  }
+  var API = buildApi(BASE);
+  window.WB_API_BASE = BASE;
+  function setBase(b) {
+    BASE = b;
+    var next = buildApi(b);
+    for (var k in next) if (Object.prototype.hasOwnProperty.call(next, k)) API[k] = next[k];
+    window.WB_API_BASE = b;
+  }
+  function probeBase() {
+    if (!LOCAL_BASE) return Promise.resolve(BASE);
+    return fetch(API.health, { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { if (!j || !j.ok) setBase(REMOTE_BASE); return BASE; })
+      .catch(function () { setBase(REMOTE_BASE); return BASE; });
+  }
   var LS_STUDENT = 'wiseblot.student';
   var SS_TEACHER = 'wiseblot.teacher';
 
@@ -7004,7 +7029,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     st.student = loadStudent();
     st.teacherToken = loadTeacher();
     st.view = st.teacherToken ? 'app' : (st.student ? 'app' : 'gate');
-    paint();
+    probeBase().then(paint);
   }
 
   window.WiseBlotAgent = {
