@@ -5196,7 +5196,7 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     { gene: 'LC3B', name: 'LC3B', mw: 17, type: gb('自噬小蛋白', 'autophagic small'), tags: ['small'], trap: gb('17 kDa 小蛋白：梯度胶 + 短转膜。', 'Small (17 kDa): gradient gel + short transfer.') },
     { gene: 'COX4I1', name: 'COX IV', mw: 17, type: gb('线粒体蛋白', 'mitochondrial'), tags: ['small', 'mito'], trap: gb('线粒体小蛋白，宜先富集线粒体。', 'Mitochondrial small protein; enrich mitochondria first.') },
     { gene: 'ALB', name: 'Albumin', mw: 66, type: gb('分泌蛋白', 'secreted'), tags: ['secreted', 'standard'], trap: gb('分泌蛋白：注意检测上清，常规条件。', 'Secreted: consider supernatant; standard conditions.') },
-    { gene: 'ACTB', name: 'β-actin', mw: 42, type: gb('胞质内参', 'cytosolic control'), tags: ['standard'], trap: gb('内参，勿与 42 kDa 目的蛋白混淆。', 'Loading control; avoid confusion with 42 kDa target.') }
+    { gene: 'ACTB', name: 'β-actin', mw: 42, type: gb('胞质内参', 'cytosolic control'), tags: ['standard', 'medium'], trap: gb('内参，勿与 42 kDa 目的蛋白混淆。', 'Loading control; avoid confusion with 42 kDa target.') }
   ];
 
   // ---- 六个决策步骤 ----
@@ -5412,13 +5412,58 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     ctx.fillText(gb('Marker', 'Marker'), pad, H - 12);
   }
 
-  function computeScore(outcome, g, protein, choices) {
-    var rp = outcome === 'success' ? 50 : (outcome === 'weak' || outcome === 'partial' || outcome === 'smear' || outcome === 'highbg' || outcome === 'nonspecific' || outcome === 'wrongpos' ? 25 : 8);
-    var budgetBonus = Math.min(20, Math.floor(Math.max(0, g.budget) / 50));
-    var timeBonus = Math.min(20, Math.max(0, Math.round(g.time)));
-    var noFail = (g.failCount === 0 && outcome === 'success') ? 10 : 0;
-    return Math.min(100, rp + budgetBonus + timeBonus + noFail);
+  // 该靶标“零失误”选法集合里的经费/时间极值，用于相对化评分
+  var G_SAFE_CACHE = {};
+  function gameSafeStats(protein) {
+    if (G_SAFE_CACHE[protein.gene]) return G_SAFE_CACHE[protein.gene];
+    var total = 1, i;
+    for (i = 0; i < G_STEPS.length; i++) total *= G_STEPS[i].opts.length;
+    var best = null;
+    for (var code = 0; code < total; code++) {
+      var c = code, spend = 0, use = 0, ok = true;
+      for (i = 0; i < G_STEPS.length; i++) {
+        var opts = G_STEPS[i].opts;
+        var o = opts[c % opts.length];
+        c = Math.floor(c / opts.length);
+        spend += o.budget; use += o.time;
+        if (ok) {
+          for (var t = 0; t < o.bad.length; t++) {
+            var bt = o.bad[t];
+            if (bt === 'all' || protein.tags.indexOf(bt) !== -1) { ok = false; break; }
+          }
+        }
+      }
+      if (!ok) continue;
+      if (!best) best = { minSpend: spend, maxSpend: spend, minTime: use, maxTime: use };
+      else {
+        if (spend < best.minSpend) best.minSpend = spend;
+        if (spend > best.maxSpend) best.maxSpend = spend;
+        if (use < best.minTime) best.minTime = use;
+        if (use > best.maxTime) best.maxTime = use;
+      }
+    }
+    if (!best) best = { minSpend: 635, maxSpend: 865, minTime: 23, maxTime: 27 };
+    G_SAFE_CACHE[protein.gene] = best;
+    return best;
   }
+
+  // 100 分制：成功且零失误 = 85 基础分；经费/时间按该靶标最省/最快的正确方案相对给分
+  function scoreParts(outcome, g) {
+    var safe = gameSafeStats(g.protein);
+    if (outcome !== 'success') {
+      var failPts = (outcome === 'black' || outcome === 'noband') ? 5 : 20;
+      return { safe: safe, fail: true, base: failPts, b: 0, t: 0, br: 0, tr: 0,
+               spent: Math.round(1000 - g.budget), used: Math.round((24 - g.time) * 10) / 10, total: failPts };
+    }
+    var spent = 1000 - g.budget, used = 24 - g.time;
+    var br = Math.min(1, Math.max(0, (safe.maxSpend - spent) / Math.max(1, safe.maxSpend - safe.minSpend)));
+    var tr = Math.min(1, Math.max(0, (safe.maxTime - used) / Math.max(0.5, safe.maxTime - safe.minTime)));
+    var b = Math.round(10 * br), t = Math.round(5 * tr);
+    return { safe: safe, fail: false, base: 85, b: b, t: t, br: br, tr: tr,
+             spent: spent, used: used, total: Math.max(0, Math.min(100, 85 + b + t)) };
+  }
+
+  function computeScore(outcome, g, protein, choices) { return scoreParts(outcome, g).total; }
 
   function renderGame() {
     if (!gameState) { gameState = { stage: 'intro' }; }
@@ -5500,7 +5545,9 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
   function finish() {
     var st = gameState;
     var outcome = outcomeOf(st.protein, st.choices, st);
-    var score = computeScore(outcome, st, st.protein, st.choices);
+    var parts = scoreParts(outcome, st);
+    var score = parts.total;
+    st.parts = parts;
     // leaderboard
     var lb = readLB();
     var name = (document.getElementById('game-name') || {}).value || gb('匿名实验员', 'Anonymous');
@@ -5514,14 +5561,17 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     // achievements
     var unlocked = [];
     var achv = readAchv();
+    var prevPlays = (readGame().totalPlays || 0);
+    var safe = parts.safe;
     function unlock(id, zh, en) {
       if (achv.indexOf(id) === -1) { achv.push(id); unlocked.push({ id: id, zh: zh, en: en }); }
     }
-    if (outcome === 'success' && st.failCount === 0) unlock('perfect', gb('一次成功', 'Perfect Run'), gb('零失误跑出特异性条带', 'Flawless specific band'));
-    if (st.budget >= 800) unlock('budget', gb('经费管理大师', 'Budget Master'), gb('剩余经费 ≥ 800 元', 'Left ≥ 800'));
-    if (st.time >= 18 && outcome === 'success') unlock('speed', gb('闪电侠', 'Flash'), gb('省时且成功', 'Fast & successful'));
-    if (outcome === 'black') unlock('flash', gb('曝光狂魔', 'Exposure Addict'), gb('把膜曝成了黑板', 'Blackend the membrane'));
-    if (st.protein.tags.indexOf('membrane') !== -1 && G_STEPS[0].opts[st.choices[0]].bad.indexOf('membrane') !== -1) unlock('mem', gb('跨膜之痛', 'Transmembrane Pain'), gb('跨膜蛋白用错裂解液', 'Wrong lysis for membrane'));
+    if (outcome === 'success' && prevPlays === 0) unlock('first', gb('首战告捷', 'First Try Clear'), gb('第一次挑战就跑出特异性条带', 'Specific band on your first run'));
+    if (score >= 100) unlock('perfect100', gb('满分条带', 'Perfect Blot'), gb('100 分：成功 + 零失误 + 最省 + 最快', '100 pts: clean success, cheapest & fastest'));
+    if (outcome === 'success' && parts.spent <= safe.minSpend) unlock('budget', gb('精打细算', 'Budget Master'), gb('用本靶标最省的正确方案成功（' + safe.minSpend + ' 元）', 'Succeeded with the cheapest valid protocol (' + safe.minSpend + ' yuan)'));
+    if (outcome === 'success' && parts.used <= safe.minTime + 0.01) unlock('speed', gb('极速通关', 'Speed Runner'), gb('用本靶标最快的正确方案成功（' + safe.minTime + ' h）', 'Succeeded with the fastest valid protocol (' + safe.minTime + ' h)'));
+    if (outcome === 'black') unlock('flash', gb('曝光狂魔', 'Exposure Addict'), gb('把膜曝成了黑板', 'Blackened the membrane'));
+    if (st.protein.tags.indexOf('membrane') !== -1 && G_STEPS[0].opts[st.choices[0]].bad.indexOf('membrane') !== -1) unlock('mem', gb('跨膜之痛', 'Transmembrane Pain'), gb('跨膜蛋白用错裂解液', 'Wrong lysis for membrane protein'));
     writeAchv(achv);
     st.unlocked = unlocked;
     st.outcome = outcome; st.score = score; st.rank = rank; st.title = rec.title;
@@ -5788,16 +5838,15 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
       });
       html += '</div>';
     }
-    var rp = out === 'success' ? 50 : (out === 'weak' || out === 'partial' || out === 'smear' || out === 'highbg' || out === 'nonspecific' || out === 'wrongpos' ? 25 : 8);
-    var bb = Math.min(20, Math.floor(Math.max(0, st.budget) / 50));
-    var tb = Math.min(20, Math.max(0, Math.round(st.time)));
-    var nf = (st.failCount === 0 && out === 'success') ? 10 : 0;
-    html += '<div class="gd-block"><div class="gd-head">' + gb('评分说明', 'Score') + '</div><ul>';
-    html += '<li>' + gb('结局基础分 ' + rp + ' 分', 'Base ' + rp + ' pts for outcome') + '</li>';
-    html += '<li>' + gb('经费剩余 ' + Math.round(st.budget) + ' 元，奖励 ' + bb + ' 分', 'Budget left ' + Math.round(st.budget) + ' ¥ → +' + bb + ' pts') + '</li>';
-    html += '<li>' + gb('剩余时间 ' + Math.round(st.time) + ' h，奖励 ' + tb + ' 分', 'Time left ' + Math.round(st.time) + ' h → +' + tb + ' pts') + '</li>';
-    if (nf) html += '<li>' + gb('零失误成功，额外 ' + nf + ' 分', 'No-mistake success → +' + nf + ' pts') + '</li>';
-    else if (st.failCount > 0) html += '<li>' + gb('共犯错 ' + st.failCount + ' 次，未获零失误奖励', st.failCount + ' mistakes; no clean-run bonus') + '</li>';
+    var sp = st.parts || scoreParts(out, st);
+    html += '<div class="gd-block"><div class="gd-head">' + gb('评分说明（满分 100）', 'Score (max 100)') + '</div><ul>';
+    if (sp.fail) {
+      html += '<li>' + gb('实验未成功，只得结局分 ' + sp.base + ' 分；成功且零失误可得 85 分基础分。', 'Run failed: ' + sp.base + ' pts only. A clean success is worth 85.') + '</li>';
+    } else {
+      html += '<li>' + gb('成功且零失误：基础分 85', 'Clean success: base 85') + '</li>';
+      html += '<li>' + gb('花费 ' + Math.round(sp.spent) + ' 元（本靶标最省正确方案 ' + sp.safe.minSpend + ' 元）：+' + sp.b + ' 分', 'Spent ' + Math.round(sp.spent) + ' yuan (cheapest valid: ' + sp.safe.minSpend + ' yuan): +' + sp.b) + '</li>';
+      html += '<li>' + gb('总用时 ' + sp.used + ' h（本靶标最快正确方案 ' + sp.safe.minTime + ' h）：+' + sp.t + ' 分', 'Time used ' + sp.used + ' h (fastest valid: ' + sp.safe.minTime + ' h): +' + sp.t) + '</li>';
+    }
     html += '</ul></div>';
     html += '<div class="gd-block"><div class="gd-head gd-fix">' + gb('✅ 改正方法', '✅ How to fix') + '</div><ul>';
     info.fix.forEach(function (f) { html += '<li>' + gb(f.zh, f.en) + '</li>'; });
@@ -5860,7 +5909,9 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     if (!box) return;
     box.hidden = !box.hidden;
     if (!box.hidden) box.innerHTML = '<div class="howto-item">' + gb('🧪 目标：用 1000 元经费、24 小时，为随机/每日蛋白跑出清晰特异性条带。', 'Target: within 1000 budget & 24h, get a clean specific band.') + '</div>' +
-      '<div class="howto-item">' + gb('🪙 经费/时间：每步选择消耗经费与时间；剩余越多得分越高。', 'Budget/time: each choice costs; more left = higher score.') + '</div>' +
+      '<div class="howto-item">' + gb('🪙 评分（满分 100）：成功且零失误 85 分；再按“是否用了该靶标最省/最快的正确方案”加最多 15 分。', 'Scoring (max 100): clean success = 85; up to 15 more for the cheapest/fastest valid protocol.') +
+      '</div>' +
+      '<div class="howto-item">' + gb('⚠️ 失败只有 20 分（全黑/无带 5 分），省钱不救场。', 'A failed run scores only 20 (5 for black/no band); being cheap will not save it.') + '</div>' +
       '<div class="howto-item">' + gb('🧬 参考蛋白提示：注意跨膜/磷酸化/小分子/不稳定等特性。', 'Check protein traits: membrane/phospho/small/unstable.') + '</div>' +
       '<div class="howto-item">' + gb('🏆 结束生成模拟条带图 + 得分 + 称号 + 成就，成绩存本机。', 'End: simulated band image, score, title, achievements (local).') + '</div>';
   }
