@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WiseBlot 课堂测验</title>
+<style>
+  :root { --acc:#2563eb; --ink:#111827; --mut:#6b7280; --line:#e5e7eb; --bg:#f6f7f9; --card:#fff; --ok:#12805c; --bad:#b42318; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 18px 16px 60px; }
+  header { padding: 14px 0 6px; }
+  h1 { font-size: 20px; margin: 0 0 6px; }
+  .sub { color: var(--mut); font-size: 13px; }
+  .badge { display:inline-block; background:var(--acc); color:#fff; border-radius:999px; padding:2px 12px; font-size:12px; font-weight:700; vertical-align:2px; margin-left:6px; }
+  .badge.post { background: var(--ok); }
+  .card { background: var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 16px 18px; margin-top:14px; }
+  label.f { display:block; margin: 10px 0 4px; font-size:13px; color:var(--mut); }
+  input[type=text] { width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px; font-size:15px; font-family:inherit; }
+  input[type=text]:focus { outline:none; border-color:var(--acc); }
+  .row { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; align-items:center; }
+  button { appearance:none; border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:10px; padding:10px 18px; font-size:14px; font-family:inherit; cursor:pointer; }
+  button.primary { background:var(--acc); border-color:var(--acc); color:#fff; font-weight:700; }
+  button:disabled { opacity:.55; cursor:default; }
+  .q { border-top:1px solid var(--line); padding:14px 0 6px; }
+  .q:first-of-type { border-top:0; padding-top:4px; }
+  .qt { font-weight:600; margin-bottom:8px; }
+  .qno { color:var(--acc); font-weight:700; margin-right:6px; }
+  .opt { display:flex; gap:10px; align-items:flex-start; border:1px solid var(--line); border-radius:10px; padding:9px 12px; margin:6px 0; cursor:pointer; }
+  .opt:hover { border-color: var(--acc); }
+  .opt input { margin-top:4px; }
+  .opt.on { border-color: var(--acc); background:#eff5ff; }
+  .like { display:flex; gap:8px; flex-wrap:wrap; margin:6px 0 2px; }
+  .like button { padding:8px 14px; }
+  .like button.on { background:var(--acc); border-color:var(--acc); color:#fff; font-weight:700; }
+  textarea { width:100%; min-height:64px; border:1px solid var(--line); border-radius:10px; padding:9px 12px; font:inherit; }
+  textarea:focus { outline:none; border-color:var(--acc); }
+  .msg { margin-top:12px; font-size:14px; }
+  .msg.bad { color: var(--bad); }
+  .msg.ok { color: var(--ok); }
+  .done { text-align:center; padding: 8px 0 4px; }
+  .score { font-size: 40px; font-weight: 800; color: var(--acc); }
+  .score small { font-size:16px; color:var(--mut); font-weight:400; }
+  .hint { color:var(--mut); font-size:12.5px; margin-top:10px; }
+  a.go { display:inline-block; margin-top:14px; background:var(--acc); color:#fff; text-decoration:none; border-radius:10px; padding:11px 20px; font-weight:700; }
+  .hide { display:none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>WiseBlot 课堂测验 <span class="badge" id="phaseBadge">前测</span></h1>
+    <div class="sub">Western Blot 原理与智能体辅助实操 · 课堂前后测（不记名以外的个人信息，仅用于教学效果评估）</div>
+  </header>
+
+  <div class="card" id="regCard">
+    <div style="font-weight:700">第 1 步 · 登记</div>
+    <div class="sub">用于把前后测配对比较，并避免重复提交。不需要邮箱或手机号。</div>
+    <label class="f">学号</label>
+    <input type="text" id="sid" placeholder="例如 2023001" autocomplete="off" maxlength="24">
+    <label class="f">姓名</label>
+    <input type="text" id="sname" placeholder="例如 张三" autocomplete="off" maxlength="24">
+    <div class="row"><button class="primary" id="regBtn">开始答题</button><span class="msg bad" id="regMsg"></span></div>
+  </div>
+
+  <div class="card hide" id="quizCard">
+    <div style="font-weight:700" id="quizTitle">第 2 步 · 答题</div>
+    <div class="sub">共 <span id="totalNum">10</span> 题，全部为单选。提交后本题不可修改。</div>
+    <div id="qs"></div>
+    <div id="fbWrap" class="hide">
+      <div class="q"><div class="qt"><span class="qno">反馈</span>这套智能体对我理解 WB 原理与排查思路有帮助</div>
+        <div class="like" data-k="useful"></div></div>
+      <div class="q"><div class="qt"><span class="qno">反馈</span>使用起来容易上手</div>
+        <div class="like" data-k="easy"></div></div>
+      <div class="q"><div class="qt"><span class="qno">反馈</span>我愿意在以后的实验课中继续使用</div>
+        <div class="like" data-k="willing"></div></div>
+      <div class="q"><div class="qt"><span class="qno">反馈</span>你觉得最有用的一个功能是？（选填）</div>
+        <textarea id="fbBest" placeholder="例如：闭环状态条让我知道自己还缺哪些条件没说"></textarea></div>
+      <div class="q"><div class="qt"><span class="qno">反馈</span>你认为最需要改进的地方是？（选填）</div>
+        <textarea id="fbImprove" placeholder="例如：希望增加抗体选择建议"></textarea></div>
+    </div>
+    <div class="row"><button class="primary" id="subBtn">提交</button><span class="msg" id="subMsg"></span></div>
+  </div>
+
+  <div class="card hide" id="doneCard">
+    <div class="done">
+      <div style="color:var(--mut)">本次得分</div>
+      <div class="score" id="scoreNum">—<small id="scoreOf"> / 10</small></div>
+      <div class="msg ok" id="doneMsg"></div>
+      <div id="doneTip" class="hint"></div>
+      <a class="go hide" id="goMain" href="index.html#assist">打开 WiseBlot 主站 →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var qs = new URLSearchParams(location.search);
+  var PHASE = (qs.get('phase') === 'post') ? 'post' : 'pre';
+  var PRIVATE = /^(localhost|127\.0\.0\.1|10\.|192\.168\.|172\.(1[6-9]|2[0-9]|3[01])\.)/.test(location.hostname);
+  var REMOTE = 'https://wiseblot-agent.wiseblot-agent.workers.dev';
+  var BASE = PRIVATE ? (location.protocol + '//' + location.hostname + ':8787') : REMOTE;
+  var token = '', student = null, answers = {}, likes = {};
+
+  function probe() {
+    return fetch(BASE + '/api/health', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { if (!j || !j.ok) BASE = REMOTE; })
+      .catch(function () { BASE = REMOTE; });
+  }
+
+  var QUESTIONS = [
+    { id: 'q1', t: 'SDS-PAGE 中，蛋白在凝胶里的迁移速率主要取决于：',
+      o: ['蛋白的等电点', '蛋白的分子量大小', '蛋白的疏水性', '上样缓冲液的颜色'], a: 1 },
+    { id: 'q2', t: '转膜时间明显不足时，最可能出现：',
+      o: ['整张膜背景偏高', '目标条带信号偏弱甚至无信号', '条带位置整体上移', '内参条带变粗'], a: 1 },
+    { id: 'q3', t: 'WB 中「封闭」这一步的主要作用是：',
+      o: ['把蛋白从凝胶转移到膜上', '封闭膜上未结合蛋白的位点，降低非特异结合', '让抗体与抗原结合', '把蛋白固定在膜上防止脱落'], a: 1 },
+    { id: 'q4', t: '关于内参（如 GAPDH、β-actin），下列说法正确的是：',
+      o: ['内参越强说明目标蛋白表达越高', '内参用于判断上样量一致性与转膜均匀性', '内参可以替代阳性对照', '内参在任何处理条件下都稳定不变'], a: 1 },
+    { id: 'q5', t: '曝光时间过长，最典型的现象是：',
+      o: ['条带变细变锐', '整张膜发黑、背景过高', '分子量标记位置改变', '条带数量减少'], a: 1 },
+    { id: 'q6', t: '检测磷酸化蛋白时，裂解液中除了蛋白酶抑制剂还必须加入：',
+      o: ['DNA 酶', '磷酸酶抑制剂，并注意取样后尽快处理', '还原剂', '核酸染料'], a: 1 },
+    { id: 'q7', t: '目标蛋白为膜蛋白时，裂解策略应当：',
+      o: ['用温和去垢剂（如 Triton X-100、NP-40），避免剧烈处理', '一律用最强变性条件反复煮沸', '只用纯水裂解即可', '必须先做核质分离'], a: 0 },
+    { id: 'q8', t: '条带出现在比预期低很多的分子量位置，以下最不可能的原因是：',
+      o: ['蛋白发生降解', '存在剪接变体', '抗体识别了非目标蛋白', '转膜时间过短'], a: 3 },
+    { id: 'q9', t: '出现「完全无条带」时，最高效的第一步排查是：',
+      o: ['立刻更换一支新抗体', '先看内参与阳性对照，判断是体系问题还是目标蛋白问题', '把曝光时间直接延长到 30 分钟', '重新采集一批样本重做'], a: 1 },
+    { id: 'q10', t: '使用 AI 助教排查 WB 故障时，最有效的方式是：',
+      o: ['直接问「我的 WB 为什么没条带，告诉我怎么改」', '提供现象与关键条件（上样量、转膜、抗体、曝光、内参），并自己先给出候选原因', '让 AI 给一套固定参数照着做', '让 AI 生成一张理想条带图作参考'], a: 1 }
+  ];
+
+  var LIKE_LABELS = ['1 完全不同意', '2 不同意', '3 一般', '4 同意', '5 完全同意'];
+
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+
+  function renderQuestions() {
+    var host = document.getElementById('qs');
+    host.innerHTML = '';
+    QUESTIONS.forEach(function (q, i) {
+      var box = el('div', 'q');
+      var t = el('div', 'qt');
+      t.appendChild(el('span', 'qno', '第 ' + (i + 1) + ' 题'));
+      t.appendChild(document.createTextNode(q.t));
+      box.appendChild(t);
+      q.o.forEach(function (label, k) {
+        var lab = el('label', 'opt');
+        var input = document.createElement('input');
+        input.type = 'radio'; input.name = q.id; input.value = String(k);
+        input.addEventListener('change', function () {
+          answers[q.id] = k;
+          var all = box.querySelectorAll('.opt');
+          for (var m = 0; m < all.length; m++) all[m].classList.remove('on');
+          lab.classList.add('on');
+        });
+        lab.appendChild(input);
+        lab.appendChild(el('span', null, label));
+        box.appendChild(lab);
+      });
+      host.appendChild(box);
+    });
+  }
+
+  function renderLikes() {
+    var boxes = document.querySelectorAll('.like');
+    for (var i = 0; i < boxes.length; i++) {
+      (function (boxEl) {
+        var key = boxEl.getAttribute('data-k');
+        for (var v = 1; v <= 5; v++) {
+          (function (v) {
+            var b = el('button', null, LIKE_LABELS[v - 1]);
+            b.type = 'button';
+            b.addEventListener('click', function () {
+              likes[key] = v;
+              var sibs = boxEl.children;
+              for (var m = 0; m < sibs.length; m++) sibs[m].classList.remove('on');
+              b.classList.add('on');
+            });
+            boxEl.appendChild(b);
+          })(v);
+        }
+      })(boxes[i]);
+    }
+  }
+
+  function post(path, body) {
+    return fetch(BASE + path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+  }
+
+  function register() {
+    var sid = document.getElementById('sid').value.trim();
+    var nm = document.getElementById('sname').value.trim();
+    var msg = document.getElementById('regMsg');
+    if (!/^[A-Za-z0-9_-]{3,24}$/.test(sid)) { msg.textContent = '学号格式：3–24 位字母、数字、下划线或短横线'; return; }
+    if (!nm) { msg.textContent = '请填写姓名'; return; }
+    msg.textContent = '登记中…';
+    post('/api/student/login', { studentId: sid, name: nm }).then(function (r) {
+      return r.json().then(function (j) { return { ok: r.ok, j: j }; });
+    }).then(function (res) {
+      if (!res.ok || !res.j || !res.j.token) throw new Error((res.j && res.j.error) || ('HTTP ' + res.j));
+      token = res.j.token; student = res.j;
+      msg.textContent = '';
+      document.getElementById('regCard').classList.add('hide');
+      document.getElementById('quizCard').classList.remove('hide');
+      window.scrollTo(0, 0);
+    }).catch(function (e) {
+      msg.textContent = '登记失败：' + (e && e.message ? e.message : e) + '（请确认已连接课堂网络）';
+    });
+  }
+
+  function submit() {
+    var msg = document.getElementById('subMsg');
+    var missing = [];
+    for (var i = 0; i < QUESTIONS.length; i++) if (answers[QUESTIONS[i].id] == null) missing.push(i + 1);
+    if (missing.length) { msg.className = 'msg bad'; msg.textContent = '还有第 ' + missing.join('、') + ' 题未作答'; return; }
+    if (PHASE === 'post') {
+      var lk = ['useful', 'easy', 'willing'];
+      for (var k = 0; k < lk.length; k++) {
+        if (likes[lk[k]] == null) { msg.className = 'msg bad'; msg.textContent = '请完成三道评分题（1–5 分）'; return; }
+      }
+    }
+    var score = 0;
+    for (var q = 0; q < QUESTIONS.length; q++) if (answers[QUESTIONS[q].id] === QUESTIONS[q].a) score++;
+
+    var btn = document.getElementById('subBtn');
+    btn.disabled = true;
+    msg.className = 'msg'; msg.textContent = '提交中…';
+
+    var feedback = { useful: likes.useful, easy: likes.easy, willing: likes.willing,
+      best: (document.getElementById('fbBest') || {}).value || '',
+      improve: (document.getElementById('fbImprove') || {}).value || '' };
+
+    post('/api/student/survey', {
+      token: token, phase: PHASE, score: score, total: QUESTIONS.length,
+      answers: answers, feedback: feedback, source: 'lecture-2026'
+    }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        if (!res.ok || !res.j || !res.j.ok) throw new Error((res.j && res.j.error) || 'HTTP error');
+        showDone(score);
+      })
+      .catch(function (e) {
+        btn.disabled = false;
+        msg.className = 'msg bad';
+        msg.textContent = '提交失败：' + (e && e.message ? e.message : e) + '，请举手示意老师';
+      });
+  }
+
+  function showDone(score) {
+    document.getElementById('quizCard').classList.add('hide');
+    var done = document.getElementById('doneCard');
+    done.classList.remove('hide');
+    document.getElementById('scoreNum').innerHTML = score + '<small> / ' + QUESTIONS.length + '</small>';
+    document.getElementById('doneMsg').textContent = '已记录（' + (student ? student.name : '') + ' · ' + (PHASE === 'pre' ? '前测' : '后测') + '）';
+    var tip = document.getElementById('doneTip');
+    var go = document.getElementById('goMain');
+    if (PHASE === 'pre') {
+      tip.textContent = '接下来请打开主站，跟着老师一起操作智能体；讲座结束前请回到本页完成「后测」。';
+      go.classList.remove('hide');
+    } else {
+      tip.textContent = '感谢参与。你的答题与使用记录仅用于教学效果评估。';
+      go.classList.remove('hide');
+    }
+    window.scrollTo(0, 0);
+  }
+
+  function boot() {
+    if (PHASE === 'post') {
+      document.getElementById('phaseBadge').textContent = '后测';
+      document.getElementById('phaseBadge').className = 'badge post';
+      document.getElementById('fbWrap').classList.remove('hide');
+      document.getElementById('quizTitle').textContent = '第 2 步 · 后测与反馈';
+      document.title = 'WiseBlot 课堂后测';
+    }
+    document.getElementById('totalNum').textContent = String(QUESTIONS.length);
+    renderQuestions();
+    renderLikes();
+    document.getElementById('regBtn').addEventListener('click', register);
+    document.getElementById('subBtn').addEventListener('click', submit);
+    document.getElementById('sname').addEventListener('keydown', function (e) { if (e.key === 'Enter') register(); });
+    probe();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
+</body>
+</html>
