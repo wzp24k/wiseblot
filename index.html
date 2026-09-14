@@ -5179,9 +5179,13 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     var ex = document.getElementById('demo-exp'); if (ex) ex.addEventListener('click', function () { switchTab('exp'); });
   }
 
-  var GAME_KEY = 'wb_blothero';
-  var GAME_LB_KEY = 'wb_blothero_lb';
-  var GAME_ACHV_KEY = 'wb_blothero_achv';
+  // v2：计分改为 100 分制，旧键（50 分制成绩）作废并在启动时清理
+  var GAME_KEY = 'wb_blothero2';
+  var GAME_LB_KEY = 'wb_blothero2_lb';
+  var GAME_ACHV_KEY = 'wb_blothero2_achv';
+  ['wb_blothero', 'wb_blothero_lb', 'wb_blothero_achv'].forEach(function (k) {
+    try { localStorage.removeItem(k); } catch (e) {}
+  });
 
   // ---- 蛋白题库（真实常见 WB 靶点）----
   var G_PROTEINS = [
@@ -5480,7 +5484,9 @@ var REAGENTS = [{"id":"r-lysis-ripa","name":"RIPA Lysis Buffer","zh":"RIPA 裂�
     var bannerEl = document.getElementById('game-banner');
     if (bannerEl) bannerEl.textContent = gb('今日挑战：检测 ', 'Daily challenge: detect ') + (G_PROTEINS[daySeed()].gene) + ' · ' + G_PROTEINS[daySeed()].mw + ' kDa';
     var recordEl = document.getElementById('game-record');
-    if (recordEl) recordEl.textContent = gb('历史最佳 ', 'Best ') + (rec.best != null ? rec.best : '—') + gb(' 分 · 已玩 ', ' pts · plays ') + (rec.totalPlays || 0);
+    if (recordEl) recordEl.textContent = (rec.best != null)
+      ? gb('历史最佳 ' + rec.best + ' 分 · 已玩 ', 'Best ' + rec.best + ' pts · plays ') + (rec.totalPlays || 0)
+      : gb('还没有记录 · 已玩 ', 'No record yet · plays ') + (rec.totalPlays || 0);
     var nameEl = document.getElementById('game-name');
     if (nameEl && !nameEl.value) nameEl.value = rec.name || ('实验员' + Math.floor(100 + Math.random() * 900));
     if (gameState.stage === 'run') renderQ();
